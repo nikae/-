@@ -11,6 +11,9 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
+import UserNotifications
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-               
+        
+        
         FIRApp.configure()
+        
+        let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
+        let notificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+        application.registerForRemoteNotifications()
+        application.registerUserNotificationSettings(notificationSettings)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         
         
                 if FIRAuth.auth()?.currentUser != nil {
@@ -44,11 +56,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
        }
     
+    @available(iOS 10.0, *)
+    func userNotificationCenet(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, wihCompiletionHandler compilationHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        compilationHandler(.alert)
+        
+    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let handler = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation:options[UIApplicationOpenURLOptionsKey.annotation])
         return handler
     }
+    
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print(userInfo)
+        print("Message")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("TTT: \(token)")
+    }
+
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -73,5 +103,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func tokenRefreshNotification(notification: NSNotification) {
+        let refreshToken = FIRInstanceID.instanceID().token()
+        print("Instance ID: \(String(describing: refreshToken))")
+        conectToFMC()
+    }
+    
+    func conectToFMC(){
+        FIRMessaging.messaging().connect { (error) in
+            if error != nil {
+                print("Mesiging system error: \(String(describing: error))")
+            } else {
+                print("Message connect succes")
+            }
+        }
+    }
+    
 }
 

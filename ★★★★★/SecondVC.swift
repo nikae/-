@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 import AVFoundation
-
+import Alamofire
+import UserNotifications
 
 
 class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
@@ -306,6 +307,9 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
+        
+        
+    
     }
     
 //    func checkForDate(str: String) -> Bool {

@@ -75,6 +75,9 @@ class FirstVC: UIViewController {
     }
     
     
+    
+    
+    
     func calcRating( ratings: [Double] ) -> Double {
         var sum: Double = 0
         
