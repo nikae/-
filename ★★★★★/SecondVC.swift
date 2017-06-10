@@ -38,6 +38,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 let createdAt = value?["createdAt"] as? String ?? ""
                 let rating = value?["rating"] as? Double ?? 5.0
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
+                let token = value?["token"] as? String ?? ""
               
                 var rArray = [Rating]()
                 
@@ -49,7 +50,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                 }
                 
-                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, token: token))
+                
                 self.tableview.reloadData()
             }) { (error) in
                 print(error.localizedDescription)
@@ -159,7 +161,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     if (sender.tag == 201) {
                         rateStar(value: 0.2, ratee: self.users[(indexPath?.row)!].userId)
                         calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!)
+                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                             b1.setTitle("☆", for: .normal)
@@ -176,7 +178,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     } else if (sender.tag == 202) {
                         rateStar(value: 0.4, ratee: self.users[(indexPath?.row)!].userId)
                         calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!)
+                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                             b1.setTitle("☆", for: .normal)
@@ -198,7 +200,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     } else if (sender.tag == 203) {
                         rateStar(value: 0.6, ratee: self.users[(indexPath?.row)!].userId)
                         calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!)
+                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                             b1.setTitle("☆", for: .normal)
@@ -225,7 +227,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     } else  if (sender.tag == 204) {
                         rateStar(value: 0.8, ratee: self.users[(indexPath?.row)!].userId)
                         calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!)
+                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                             b1.setTitle("☆", for: .normal)
@@ -258,7 +260,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     } else {
                         rateStar(value: 1, ratee: self.users[(indexPath?.row)!].userId)
                         calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!)
+                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                             b1.setTitle("☆", for: .normal)
@@ -302,14 +304,18 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 b5.setTitle("☆", for: .normal)
                 AudioServicesPlaySystemSound (self.sendID)
             })
+            
+            
+            
+            
         }
         
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
-        
-        
-    
+
+       
+
     }
     
 //    func checkForDate(str: String) -> Bool {
@@ -332,7 +338,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 //        return false
 //    }
     
-    func updateRatingOnCell(atIndex: Int) {
+    func updateRatingOnCell(atIndex: Int, star: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             
             let databaseRef = FIRDatabase.database().reference()
@@ -343,6 +349,29 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 let rating = value?["rating"] as? Double
                 
                 self.users[atIndex].rating = rating
+                
+                let ratingStr = String(format: "%.01f", rating!)
+                
+                var headers: HTTPHeaders? = HTTPHeaders()
+                let token = self.users[atIndex].token
+                let urlstring = "https://fcm.googleapis.com/fcm/send"
+                
+                headers = [
+                    "Content-Type" : "application/json",
+                    "Authorization" : "key=AIzaSyC7YP48PanbkiMa4-HNaASvt_47puMMjek"
+                ]
+                
+                let notification: Parameters? = [
+                    "to" : "\(token!)",
+                    "notification" : [
+                        "body" : "You've been rated \(star)★, your current rating is \(String(describing: ratingStr))★",
+                        "title" : "Your rating update!",
+                        "sound" : "default"
+                    ]
+                ]
+                
+                
+                _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in print(" resp \(resp)") })
                 
                 
                 self.tableview.reloadData()
