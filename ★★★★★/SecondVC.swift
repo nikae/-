@@ -38,7 +38,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 let createdAt = value?["createdAt"] as? String ?? ""
                 let rating = value?["rating"] as? Double ?? 5.0
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-                let token = value?["token"] as? String ?? ""
+                //let token = value?["token"] as? String ?? ""
               
                 var rArray = [Rating]()
                 
@@ -50,7 +50,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                 }
                 
-                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, token: token))
+                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
                 
                 self.tableview.reloadData()
             }) { (error) in
@@ -93,34 +93,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         cell.backGroundView!.layer.shadowRadius = 5
         cell.backGroundView!.layer.masksToBounds = false
         
-        
-//        let r = users[indexPath.row].ratings
-//        
-//        for i in r! {
-//            if i.creator! == uid {
-//                if i.value! == 0.2 {
-//                    cell.star1.setTitle("★", for: .normal)
-//                } else if i.value! == 0.4 {
-//                    cell.star1.setTitle("★", for: .normal)
-//                    cell.star2.setTitle("★", for: .normal)
-//                } else if i.value! == 0.6 {
-//                    cell.star1.setTitle("★", for: .normal)
-//                    cell.star2.setTitle("★", for: .normal)
-//                    cell.star3.setTitle("★", for: .normal)
-//                } else if i.value! == 0.8 {
-//                    cell.star1.setTitle("★", for: .normal)
-//                    cell.star2.setTitle("★", for: .normal)
-//                    cell.star3.setTitle("★", for: .normal)
-//                    cell.star4.setTitle("★", for: .normal)
-//                } else if i.value! == 1 {
-//                    cell.star1.setTitle("★", for: .normal)
-//                    cell.star2.setTitle("★", for: .normal)
-//                    cell.star3.setTitle("★", for: .normal)
-//                    cell.star4.setTitle("★", for: .normal)
-//                    cell.star5.setTitle("★", for: .normal)
-//                }
-//            }
-//        }
         
         cell.star1.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star2.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
@@ -346,14 +318,16 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 
                 let value = snapshot.value as? NSDictionary
                 
-                let rating = value?["rating"] as? Double
+                let rating = value?["rating"] as? Double ?? 0
+                let token = value?["token"] as? String ?? ""
+                print(token)
                 
                 self.users[atIndex].rating = rating
                 
-                let ratingStr = String(format: "%.01f", rating!)
+                let ratingStr = String(format: "%.01f", rating)
                 
                 var headers: HTTPHeaders? = HTTPHeaders()
-                let token = self.users[atIndex].token
+                //let token = self.users[atIndex].token
                 let urlstring = "https://fcm.googleapis.com/fcm/send"
                 
                 headers = [
@@ -362,7 +336,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 ]
                 
                 let notification: Parameters? = [
-                    "to" : "\(token!)",
+                    "to" : "\(token)",
                     "notification" : [
                         "body" : "You've been rated \(star)★, your current rating is \(String(describing: ratingStr))★",
                         "title" : "Your rating update!",

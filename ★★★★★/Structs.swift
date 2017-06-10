@@ -21,6 +21,6 @@ struct User {
     var createdAt: String!
     var ratings: [Rating]!
     var rating: Double!
-    var token: String!
+   // var token: String!
 }
 
