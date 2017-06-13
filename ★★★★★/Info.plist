@@ -64,5 +64,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>&quot;TEST STRING&gt;&gt;&gt; NEEDS TO BE CHANGED&quot;</string>
 </dict>
 </plist>

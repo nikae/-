@@ -19,6 +19,7 @@
 		247AD3EA1E92CE1800BB3AA4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AD3E91E92CE1800BB3AA4 /* TableViewCell.swift */; };
 		247AD3EC1E92D5D900BB3AA4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247AD3EB1E92D5D900BB3AA4 /* Media.xcassets */; };
 		24829AA11EB90ED20037FF42 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24829AA01EB90ED20037FF42 /* Structs.swift */; };
+		24E5EC651EEF67BB00659341 /* LocationMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E5EC641EEF67BB00659341 /* LocationMethods.swift */; };
 		24FD71691EE7240A007A3E6B /* RatingMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FD71681EE7240A007A3E6B /* RatingMethods.swift */; };
 		A622C858DD7317CF6211E320 /* Pods______.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC6714C40B4E4AF8EB72E46 /* Pods______.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		247AD3E91E92CE1800BB3AA4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = ../TableViewCell.swift; sourceTree = "<group>"; };
 		247AD3EB1E92D5D900BB3AA4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		24829AA01EB90ED20037FF42 /* Structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		24E5EC641EEF67BB00659341 /* LocationMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMethods.swift; sourceTree = "<group>"; };
 		24FD71681EE7240A007A3E6B /* RatingMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingMethods.swift; sourceTree = "<group>"; };
 		32B413E966701F4D0BE51EAB /* Pods-★★★★★.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-★★★★★.debug.xcconfig"; path = "Pods/Target Support Files/Pods-★★★★★/Pods-★★★★★.debug.xcconfig"; sourceTree = "<group>"; };
 		AAC6714C40B4E4AF8EB72E46 /* Pods______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 			children = (
 				24017F041EAEE5DC0071E526 /* ★★★★★.entitlements */,
 				247AD3CF1E92CB3A00BB3AA4 /* AppDelegate.swift */,
+				24E5EC641EEF67BB00659341 /* LocationMethods.swift */,
 				24017F021EAEE2920071E526 /* LogInVC.swift */,
 				247AD3D11E92CB3A00BB3AA4 /* ViewController.swift */,
 				247AD3E71E92CDBD00BB3AA4 /* FirstVC.swift */,
@@ -255,6 +258,7 @@
 				247AD3EA1E92CE1800BB3AA4 /* TableViewCell.swift in Sources */,
 				247AD3D21E92CB3A00BB3AA4 /* ViewController.swift in Sources */,
 				24017F031EAEE2920071E526 /* LogInVC.swift in Sources */,
+				24E5EC651EEF67BB00659341 /* LocationMethods.swift in Sources */,
 				24829AA11EB90ED20037FF42 /* Structs.swift in Sources */,
 				247AD3E81E92CDBD00BB3AA4 /* FirstVC.swift in Sources */,
 				247AD3E61E92CD3200BB3AA4 /* SecondVC.swift in Sources */,

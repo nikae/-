@@ -12,13 +12,17 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
 import UserNotifications
+import CoreLocation
 
 var window: UIWindow?
 let gcmMessageIDKey = "gcm.message_id"
 var a = String()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    
+    let locationManager = CLLocationManager()
+    
 
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -29,15 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         FIRApp.configure()
-        
-//        let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
-//        let notificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-//        application.registerForRemoteNotifications()
-//        application.registerUserNotificationSettings(notificationSettings)
-//        
-//        
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
-        
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -61,6 +56,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     FIRAuth.auth()?.addStateDidChangeListener { auth, user in
                         if user != nil {
                             
+                            let uid = FIRAuth.auth()?.currentUser?.uid
+                            print(uid! + "11111")
+                            if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
+                                self.locationManager.requestAlwaysAuthorization()
+                            }
+                            
+                            self.locationManager.delegate = self
+                            self.locationManager.distanceFilter = 1
+                            self.locationManager.startUpdatingLocation()
+
+                            
                     self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
                             
                         } else {
@@ -69,18 +75,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             }
         }
- 
-        
+         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-    
+       
         return true
        }
     
-//    @available(iOS 10.0, *)
-//    func userNotificationCenet(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, wihCompiletionHandler compilationHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        compilationHandler(.alert)
-//        
-//    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+            break
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            break
+        case .authorizedAlways:
+            locationManager.startUpdatingLocation()
+            break
+        case .restricted:
+            locationManager.requestAlwaysAuthorization()
+            break
+        case .denied:
+            locationManager.requestAlwaysAuthorization()
+            break
+        }
+    }
+    
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let handler = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation:options[UIApplicationOpenURLOptionsKey.annotation])
@@ -128,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let token = FIRInstanceID.instanceID().token() {
             let uid = FIRAuth.auth()?.currentUser?.uid
+
             if uid != nil {
                 let databaseRef = FIRDatabase.database().reference()
                 databaseRef.child("Users/\(uid!)/token").setValue(token)
@@ -148,43 +170,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//MARK --> Figoure Out Location. (CAN BE TURNED OFF) - (Or Test well gah )
+        locationManager.delegate = self
+        locationManager.distanceFilter = 1
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        application.beginBackgroundTask{}
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        application.beginBackgroundTask{}
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        application.beginBackgroundTask{}
     }
-
-//
-//    func tokenRefreshNotification(notification: NSNotification) {
-//        let refreshToken = FIRInstanceID.instanceID().token()
-//        print("Instance ID: \(String(describing: refreshToken))")
-//        conectToFMC()
-//    }
-//    
-//    func conectToFMC(){
-//        FIRMessaging.messaging().connect { (error) in
-//            if error != nil {
-//                print("Mesiging system error: \(String(describing: error))")
-//            } else {
-//                print("Message connect succes")
-//            }
-//        }
-//    }
     
+    // MARK --> Location
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let loc = locations.first!
+        sendLocationToServer(location: loc)
+        
+        
+    }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error updating location:" + error.localizedDescription)
+    }
+    
+    func sendLocationToServer(location: CLLocation) {
+        var bgTask = UIBackgroundTaskIdentifier()
+        bgTask = UIApplication.shared.beginBackgroundTask { () -> Void in
+            UIApplication.shared.endBackgroundTask(bgTask)
+        }
+        
+        print("Update Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+             let uid = FIRAuth.auth()?.currentUser?.uid
+            let loc = ["lat" : location.coordinate.latitude, "long" : location.coordinate.longitude]
+            print("loc \(loc)")
+            let databaseRef = FIRDatabase.database().reference()
+            databaseRef.child("Users/\(uid!)/Location").setValue(loc)
+       
+ 
+        print(uid!)
+        
+        
+        if (bgTask != UIBackgroundTaskInvalid)
+        {
+            UIApplication.shared.endBackgroundTask(bgTask)
+            bgTask = UIBackgroundTaskInvalid
+        }
+    }
+    
+    //MARK --> End Location
+
 }
 
 
-// [START ios_10_message_handling]
+
+
+//MARK --> Message handling
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
@@ -223,7 +273,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         completionHandler()
     }
 }
-// [END ios_10_message_handling]
+
+//MARK --> END Message handling
 
 extension AppDelegate : FIRMessagingDelegate {
     /// The callback to handle data message received via FCM for devices running iOS 10 or above.
