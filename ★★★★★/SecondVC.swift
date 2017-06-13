@@ -14,10 +14,11 @@ import UserNotifications
 import CoreLocation
 
 
-class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
   
-        @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var tableview: UITableView!
     
+    var searchController = UISearchController(searchResultsController: nil)
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
@@ -29,6 +30,17 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
         override func viewDidLoad() {
             super.viewDidLoad()
+            
+            searchController.searchResultsUpdater = self
+            searchController.dimsBackgroundDuringPresentation = false
+            self.definesPresentationContext = true
+            tableview.tableHeaderView = searchController.searchBar
+            
+            
+            
+            if searchController.isActive && searchController.searchBar.text != "" {
+                tableview.reloadData()
+            } else {
             if coordinate1 != nil {
                 
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
@@ -55,9 +67,9 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                     let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
                     
                     
-                    if distanceInMiles <= distanceInMiles {
-                
-                
+                   // let d  = distanceInMiles
+                        if distanceInMiles < 2000 {
+                           if userID != self.uid {
                         var rArray = [Rating]()
                 
                         for i in ratings {
@@ -68,9 +80,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                             rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                         }
                         
+                        if self.users.count < 2 {
                         self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
-                        
+                        }
                         self.tableview.reloadData()
+                    }
                     }
                 }
                
@@ -78,21 +92,26 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 print(error.localizedDescription)
             }
     }
+            }
 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      
         return users.count
     }
     
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         
         cell.nameLabelCell.text = users[indexPath.row].name
-        cell.starsLabelCell.text = String(format: "%.01f", users[indexPath.row].rating)
+        cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
         if users[indexPath.row].pictureUrl != "" {
-            getImage(users[indexPath.row].pictureUrl, imageView: cell.imageViewCell)
-            getImage(users[indexPath.row].pictureUrl, imageView: cell.backgroundImmage)
+            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.imageViewCell)
+            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.backgroundImmage)
         } else {
             cell.imageViewCell.image = UIImage(named: "IMG_7101")
             cell.backgroundImmage.image = UIImage(named: "IMG_7101")
@@ -100,6 +119,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         
         cell.backgroundImmage!.layer.cornerRadius = 15
         cell.backgroundImmage!.clipsToBounds = true
+        cell.backgroundImmage!.addBlurEffect()
+        
         cell.imageViewCell!.clipsToBounds = true
         cell.imageViewCell!.isUserInteractionEnabled = true
         cell.imageViewCell!.layer.cornerRadius = cell.imageViewCell!.frame.height/2
@@ -153,8 +174,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         let ok = UIAlertAction(title: "Ok", style: .default) { (action: UIAlertAction) in
                     
                     if (sender.tag == 201) {
-                        rateStar(value: 0.2, ratee: self.users[(indexPath?.row)!].userId)
-                        calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
+                        rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
+                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                         self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -170,8 +191,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                             AudioServicesPlaySystemSound (self.systemSoundID)
                         })
                     } else if (sender.tag == 202) {
-                        rateStar(value: 0.4, ratee: self.users[(indexPath?.row)!].userId)
-                        calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
+                        rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
+                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                         self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -192,8 +213,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                             AudioServicesPlaySystemSound (self.systemSoundID)
                         })
                     } else if (sender.tag == 203) {
-                        rateStar(value: 0.6, ratee: self.users[(indexPath?.row)!].userId)
-                        calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
+                        rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
+                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                         self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -219,8 +240,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                             AudioServicesPlaySystemSound (self.systemSoundID)
                         })
                     } else  if (sender.tag == 204) {
-                        rateStar(value: 0.8, ratee: self.users[(indexPath?.row)!].userId)
-                        calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
+                        rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
+                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                         self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -252,8 +273,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                             AudioServicesPlaySystemSound (self.systemSoundID)
                         })
                     } else {
-                        rateStar(value: 1, ratee: self.users[(indexPath?.row)!].userId)
-                        calcAndUpdateRating(uId: self.users[(indexPath?.row)!].userId)
+                        rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
+                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                         self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -312,9 +333,121 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = true
+         self.users.removeAll()
+        filterUsers(userName: searchController.searchBar.text!)
+    }
+    
+   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+    
+    print("cancel")
+//
+//        users.removeAll()
+//        
+//        if coordinate1 != nil {
+//            
+//            databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                
+//                let userID = value?["userID"] as? String ?? ""
+//                let name = value?["name"] as? String ?? ""
+//                let pictureURL = value?["pictureURL"] as? String ?? ""
+//                let createdAt = value?["createdAt"] as? String ?? ""
+//                let rating = value?["rating"] as? Double ?? 5.0
+//                let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
+//                //let token = value?["token"] as? String ?? ""
+//                let locations = value?["Location"] as? [String : AnyObject] ?? [:]
+//                
+//                if locations.count != 0 {
+//                    var coordinate₀: CLLocation!
+//                    
+//                    let latitude = locations["lat"] as! CLLocationDegrees
+//                    let longitude = locations["long"] as! CLLocationDegrees
+//                    
+//                    coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
+//                    
+//                    let distanceInMeters = coordinate₀.distance(from: coordinate1) // result is in meters
+//                    let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
+//                    
+//                    
+//                    // let d  = distanceInMiles
+//                    if distanceInMiles < 2000 {
+//                        if userID != self.uid {
+//                            var rArray = [Rating]()
+//                            
+//                            for i in ratings {
+//                                let creator = i.value["creator"] as! String
+//                                let createdAt = i.value["createdAt"] as! String
+//                                let value = i.value["value"] as! Double
+//                                
+//                                rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+//                            }
+//                            
+//                            if self.users.count < 2 {
+//                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+//                            }
+//                            self.tableview.reloadData()
+//                        }
+//                    }
+//                }
+//                
+//            }) { (error) in
+//                print(error.localizedDescription)
+//            }
+//        }
+//        
+   }
+    
+    
+ 
+    
+    func filterUsers(userName: String) {
+        
+       
+        databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            let userID = value?["userID"] as? String ?? ""
+            let name = value?["name"] as? String ?? ""
+            let pictureURL = value?["pictureURL"] as? String ?? ""
+            let createdAt = value?["createdAt"] as? String ?? ""
+            let rating = value?["rating"] as? Double ?? 5.0
+            let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
+           // let locations = value?["Location"] as? [String : AnyObject] ?? [:]
+            
+                        var rArray = [Rating]()
+                        for i in ratings {
+                            let creator = i.value["creator"] as! String
+                            let createdAt = i.value["createdAt"] as! String
+                            let value = i.value["value"] as! Double
+                            
+                            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                        }
+                        
+            if name.lowercased().contains(userName.lowercased()) && name != "" {
+            
+            self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+                
+                self.tableview.reloadData()
+            } else {
+
+                self.tableview.reloadData()
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+       
+    }
+    
 //    func checkForDate(str: String) -> Bool {
-//        
-//        
+//
+//
 //        let uid = FIRAuth.auth()?.currentUser?.uid
 //        let databaseRef = FIRDatabase.database().reference()
 //        
@@ -336,7 +469,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             
             let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child("Users").child(self.users[atIndex].userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            databaseRef.child("Users").child((self.users[atIndex].userId)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 let value = snapshot.value as? NSDictionary
                 

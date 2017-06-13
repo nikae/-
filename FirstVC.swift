@@ -12,6 +12,20 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
 
+
+extension UIImageView
+{
+    func addBlurEffect()
+    {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        self.addSubview(blurEffectView)
+    }
+}
+
 class FirstVC: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
@@ -56,14 +70,18 @@ class FirstVC: UIViewController {
         imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         
         //backgroundImage.image = UIImage(named: "IMG_7101")
+       
+        backgroundImage!.addBlurEffect()
         backgroundImage!.layer.cornerRadius = 15
         backgroundImage!.clipsToBounds = true
         backgroundView!.clipsToBounds = true
         backgroundView!.isUserInteractionEnabled = true
+        
        
         
+     
+       
         backgroundView!.layer.cornerRadius = 15
-        //cell.backGroundView!.layer.borderWidth = 10
         backgroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
         backgroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         backgroundView!.layer.shadowOpacity = 1.0
