@@ -56,16 +56,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     FIRAuth.auth()?.addStateDidChangeListener { auth, user in
                         if user != nil {
                             
-                            let uid = FIRAuth.auth()?.currentUser?.uid
-                            print(uid! + "11111")
                             if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
                                 self.locationManager.requestAlwaysAuthorization()
                             }
                             
-                            self.locationManager.delegate = self
-                            self.locationManager.distanceFilter = 1
-                            self.locationManager.startUpdatingLocation()
+                            
 
+                            if CLLocationManager.locationServicesEnabled() {
+                                self.locationManager.delegate = self
+                                self.locationManager.distanceFilter = 20
+                                self.locationManager.startUpdatingLocation()
+                                coordinate1 = self.locationManager.location
+                            }
+                            
+                            
                             
                     self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
                             
@@ -75,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             }
         }
-         
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
        
         return true
@@ -172,7 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationDidEnterBackground(_ application: UIApplication) {
 //MARK --> Figoure Out Location. (CAN BE TURNED OFF) - (Or Test well gah )
         locationManager.delegate = self
-        locationManager.distanceFilter = 1
+        locationManager.distanceFilter = 20
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
     }

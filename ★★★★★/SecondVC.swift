@@ -11,6 +11,7 @@ import Firebase
 import AVFoundation
 import Alamofire
 import UserNotifications
+import CoreLocation
 
 
 class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
@@ -28,7 +29,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            if coordinate1 != nil {
+                
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
@@ -39,24 +41,46 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 let rating = value?["rating"] as? Double ?? 5.0
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 //let token = value?["token"] as? String ?? ""
-              
-                var rArray = [Rating]()
+                let locations = value?["Location"] as? [String : AnyObject] ?? [:]
                 
-                for i in ratings {
-                    let creator = i.value["creator"] as! String
-                    let createdAt = i.value["createdAt"] as! String
-                    let value = i.value["value"] as! Double
+                print(locations)
+                
+                if locations.count != 0 {
+                    var coordinate₀: CLLocation!
                     
-                    rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                    let latitude = locations["lat"] as! CLLocationDegrees
+                    let longitude = locations["long"] as! CLLocationDegrees
+                    
+                    coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
+                    
+                    let distanceInMeters = coordinate₀.distance(from: coordinate1) // result is in meters
+                    let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
+                    
+                    
+                    if distanceInMiles <= distanceInMiles {
+                
+                
+                        var rArray = [Rating]()
+                
+                        for i in ratings {
+                            let creator = i.value["creator"] as! String
+                            let createdAt = i.value["createdAt"] as! String
+                            let value = i.value["value"] as! Double
+                            
+                            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                        }
+                        
+                        self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+                        
+                        self.tableview.reloadData()
+                    }
                 }
-                
-                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
-                
-                self.tableview.reloadData()
+               
             }) { (error) in
                 print(error.localizedDescription)
             }
     }
+}
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count

@@ -10,4 +10,4 @@ import Foundation
 import CoreLocation
 
 
-
+var coordinate1: CLLocation!
