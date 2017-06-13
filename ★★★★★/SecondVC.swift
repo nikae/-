@@ -21,7 +21,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
-    
+
     let systemSoundID: SystemSoundID = 1109
     let sendID: SystemSoundID = 1055
     let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235/255.0, alpha: 0.8)
@@ -42,8 +42,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 //let token = value?["token"] as? String ?? ""
                 let locations = value?["Location"] as? [String : AnyObject] ?? [:]
-                
-                print(locations)
                 
                 if locations.count != 0 {
                     var coordinate₀: CLLocation!
@@ -344,14 +342,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
                 
                 let rating = value?["rating"] as? Double ?? 0
                 let token = value?["token"] as? String ?? ""
-                print(token)
-                
                 self.users[atIndex].rating = rating
                 
                 let ratingStr = String(format: "%.01f", rating)
                 
                 var headers: HTTPHeaders? = HTTPHeaders()
-                //let token = self.users[atIndex].token
                 let urlstring = "https://fcm.googleapis.com/fcm/send"
                 
                 headers = [
