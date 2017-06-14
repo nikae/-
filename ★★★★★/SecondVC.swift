@@ -14,11 +14,12 @@ import UserNotifications
 import CoreLocation
 
 
-class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate,UISearchBarDelegate {
+class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
   
+   
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var navigationbar: UINavigationBar!
     
-    var searchController: UISearchController!
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
@@ -26,25 +27,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     override func viewDidLoad() {
             super.viewDidLoad()
         
-        //ERRORR
-        definesPresentationContext = true
+        navigationbar.delegate = self
         
-        //MARK: --> create search controller
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self    // this controller is delegate
-        searchController!.searchResultsUpdater = self
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.searchBarStyle = .minimal
-        tableview.tableHeaderView = self.searchController.searchBar
-        
-        extendedLayoutIncludesOpaqueBars = true
-        searchController.hidesNavigationBarDuringPresentation = false
-
-            
-            if searchController.isActive && searchController.searchBar.text != "" {
-                tableview.reloadData()
-            } else {
             if coordinate1 != nil {
        //MARK: --> Get users from database
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
@@ -96,7 +80,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 print(error.localizedDescription)
             }
     }
-            }
+            
 }
     
     
@@ -352,119 +336,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
 
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        
-
-         self.users.removeAll()
-        filterUsers(userName: searchController.searchBar.text!)
-    }
-    
-   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.showsCancelButton = false
-        searchBar.endEditing(true)
-    
-    print("cancel")
-//
-//        users.removeAll()
-//        
-//        if coordinate1 != nil {
-//            
-//            databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
-//                let value = snapshot.value as? NSDictionary
-//                
-//                let userID = value?["userID"] as? String ?? ""
-//                let name = value?["name"] as? String ?? ""
-//                let pictureURL = value?["pictureURL"] as? String ?? ""
-//                let createdAt = value?["createdAt"] as? String ?? ""
-//                let rating = value?["rating"] as? Double ?? 5.0
-//                let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-//                //let token = value?["token"] as? String ?? ""
-//                let locations = value?["Location"] as? [String : AnyObject] ?? [:]
-//                
-//                if locations.count != 0 {
-//                    var coordinate₀: CLLocation!
-//                    
-//                    let latitude = locations["lat"] as! CLLocationDegrees
-//                    let longitude = locations["long"] as! CLLocationDegrees
-//                    
-//                    coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
-//                    
-//                    let distanceInMeters = coordinate₀.distance(from: coordinate1) // result is in meters
-//                    let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
-//                    
-//                    
-//                    // let d  = distanceInMiles
-//                    if distanceInMiles < 2000 {
-//                        if userID != self.uid {
-//                            var rArray = [Rating]()
-//                            
-//                            for i in ratings {
-//                                let creator = i.value["creator"] as! String
-//                                let createdAt = i.value["createdAt"] as! String
-//                                let value = i.value["value"] as! Double
-//                                
-//                                rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
-//                            }
-//                            
-//                            if self.users.count < 2 {
-//                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
-//                            }
-//                            self.tableview.reloadData()
-//                        }
-//                    }
-//                }
-//                
-//            }) { (error) in
-//                print(error.localizedDescription)
-//            }
-//        }
-//        
-   }
     
     
  
     
-    func filterUsers(userName: String) {
-        
-       
-        databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            
-            let userID = value?["userID"] as? String ?? ""
-            let name = value?["name"] as? String ?? ""
-            let pictureURL = value?["pictureURL"] as? String ?? ""
-            let createdAt = value?["createdAt"] as? String ?? ""
-            let rating = value?["rating"] as? Double ?? 5.0
-            let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-           // let locations = value?["Location"] as? [String : AnyObject] ?? [:]
-            
-                        var rArray = [Rating]()
-                        for i in ratings {
-                            let creator = i.value["creator"] as! String
-                            let createdAt = i.value["createdAt"] as! String
-                            let value = i.value["value"] as! Double
-                            
-                            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
-                        }
-                        
-            if name.lowercased().contains(userName.lowercased()) && name != "" {
-            
-            self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
-                
-                self.tableview.reloadData()
-            } else {
-
-                self.tableview.reloadData()
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-
-       
-    }
     
 //    func checkForDate(str: String) -> Bool {
 //
@@ -530,40 +405,4 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
 
     }
     
-        func getImage(_ url_str: String, imageView: UIImageView) {
-        
-        let url:URL = URL(string: url_str)!
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: url, completionHandler: {
-            (
-            data, response, error) in
-            
-            if data != nil
-            {
-                let image = UIImage(data: data!)
-                
-                if(image != nil)
-                {
-                    
-                    DispatchQueue.main.async(execute: {
-                        
-                        imageView.image = image
-                        imageView.alpha = 1
-                        
-                        UIView.animate(withDuration: 1, animations: {
-                            imageView.alpha = 1.0
-                        })
-                        
-                    })
-                    
-                }
-                
-            }
-            
-            
-        })
-        
-        task.resume()
-    }
 }

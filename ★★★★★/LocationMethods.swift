@@ -35,3 +35,41 @@ func viewShedow(view: UIView) {
     view.layer.masksToBounds = false
     // but.layer.cornerRadius = 4.0
 }
+
+func getImage(_ url_str: String, imageView: UIImageView) {
+    
+    let url:URL = URL(string: url_str)!
+    let session = URLSession.shared
+    
+    let task = session.dataTask(with: url, completionHandler: {
+        (
+        data, response, error) in
+        
+        if data != nil
+        {
+            let image = UIImage(data: data!)
+            
+            if(image != nil)
+            {
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    imageView.image = image
+                    imageView.alpha = 1
+                    
+                    UIView.animate(withDuration: 1, animations: {
+                        imageView.alpha = 1.0
+                    })
+                    
+                })
+                
+            }
+            
+        }
+        
+        
+    })
+    
+    task.resume()
+}
+

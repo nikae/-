@@ -13,14 +13,12 @@ import Firebase
 //MARK -->> :Pull Down ratings from database, calculate and push final rating back {everitime Someone rates}
 
 func calcAndUpdateRating(uId: String)  {
-    //let uId = FIRAuth.auth()?.currentUser?.uid
+    
     let databaseRef = FIRDatabase.database().reference()
     databaseRef.child("Users").child(uId).observeSingleEvent(of: .value, with: { (snapshot) in
         
         let value = snapshot.value as? NSDictionary
-        
         let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-        
         var rArray = [Rating]()
         
         for i in ratings {
