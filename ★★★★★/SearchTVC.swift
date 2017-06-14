@@ -80,8 +80,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         return cell
      }
-     
-    
     
     func buttonClicked(sender:UIButton) {
         
@@ -107,9 +105,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         let alert = UIAlertController(title: "\(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "Ok", style: .default) { (action: UIAlertAction) in
-            
-            
-            
+            self.searchController.searchBar.isUserInteractionEnabled = false
             if (sender.tag == 201) {
                 
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
@@ -122,15 +118,14 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("☆", for: .normal)
                     b4.setTitle("☆", for: .normal)
                     b5.setTitle("☆", for: .normal)
-                    //self.searchController.searchBar.isUserInteractionEnabled = true
                 })
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                     b1.setTitle("★", for: .normal)
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
-                //self.searchController.searchBar.isUserInteractionEnabled = false
             } else if (sender.tag == 202) {
+                
                 rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
@@ -141,7 +136,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("☆", for: .normal)
                     b4.setTitle("☆", for: .normal)
                     b5.setTitle("☆", for: .normal)
-                    //self.searchController.searchBar.isUserInteractionEnabled = true
                 })
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
@@ -153,8 +147,8 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b2.setTitle("★", for: .normal)
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
-                //self.searchController.searchBar.isUserInteractionEnabled = false
             } else if (sender.tag == 203) {
+                
                 rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
@@ -165,7 +159,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("☆", for: .normal)
                     b4.setTitle("☆", for: .normal)
                     b5.setTitle("☆", for: .normal)
-                    // self.searchController.searchBar.isUserInteractionEnabled = true
                 })
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
@@ -182,8 +175,8 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("★", for: .normal)
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
-                //self.searchController.searchBar.isUserInteractionEnabled = false
             } else  if (sender.tag == 204) {
+                
                 rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
@@ -194,7 +187,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("☆", for: .normal)
                     b4.setTitle("☆", for: .normal)
                     b5.setTitle("☆", for: .normal)
-                    //  self.searchController.searchBar.isUserInteractionEnabled = true
                 })
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
@@ -218,8 +210,8 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     AudioServicesPlaySystemSound (systemSoundID)
                     
                 })
-                //self.searchController.searchBar.isUserInteractionEnabled = false
             } else {
+                
                 rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
@@ -230,7 +222,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b3.setTitle("☆", for: .normal)
                     b4.setTitle("☆", for: .normal)
                     b5.setTitle("☆", for: .normal)
-                    // self.searchController.searchBar.isUserInteractionEnabled = true
                 })
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
@@ -257,8 +248,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     b5.setTitle("★", for: .normal)
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
-                
-                //  self.searchController.searchBar.isUserInteractionEnabled = false
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
@@ -268,24 +257,16 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 b4.setTitle("☆", for: .normal)
                 b5.setTitle("☆", for: .normal)
                 AudioServicesPlaySystemSound (sendID)
-                //self.searchController.searchBar.isUserInteractionEnabled = true
             })
-        
         }
         
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
-        
-        
-        
     }
-
     
     func updateRatingOnCell(atIndex: Int, star: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-
-            
             let databaseRef = FIRDatabase.database().reference()
             databaseRef.child("Users").child((self.users[atIndex].userId)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -293,6 +274,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 
                 let rating = value?["rating"] as? Double ?? 0
                 let token = value?["token"] as? String ?? ""
+                
                 self.users[atIndex].rating = rating
                 
                 let ratingStr = String(format: "%.01f", rating)
@@ -314,72 +296,59 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     ]
                 ]
                 
-                
                 _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in print(" resp \(resp)") })
                 
-                
                 self.tableView.reloadData()
-                
             }) { (error) in
                 print(error.localizedDescription)
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                self.searchController.searchBar.isUserInteractionEnabled = true
+            })
         })
-        
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
         self.users.removeAll()
         filterUsers(userName: searchController.searchBar.text!)
     }
     
-    
-    
     func filterUsers(userName: String) {
-        
         databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
-        let value = snapshot.value as? NSDictionary
-        
-        let userID = value?["userID"] as? String ?? ""
-        let name = value?["name"] as? String ?? ""
-        let pictureURL = value?["pictureURL"] as? String ?? ""
-        let createdAt = value?["createdAt"] as? String ?? ""
-        let rating = value?["rating"] as? Double ?? 5.0
-        let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-        // let locations = value?["Location"] as? [String : AnyObject] ?? [:]
-        
-        var rArray = [Rating]()
-        for i in ratings {
-            let creator = i.value["creator"] as! String
-            let createdAt = i.value["createdAt"] as! String
-            let value = i.value["value"] as! Double
+            let value = snapshot.value as? NSDictionary
             
-            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
-        }
-        
-        if name.lowercased().contains(userName.lowercased()) && name != "" {
+            let userID = value?["userID"] as? String ?? ""
+            let name = value?["name"] as? String ?? ""
+            let pictureURL = value?["pictureURL"] as? String ?? ""
+            let createdAt = value?["createdAt"] as? String ?? ""
+            let rating = value?["rating"] as? Double ?? 5.0
+            let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
             
-            self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating))
+            if userID != self.uid {
+                var rArray = [Rating]()
+                for i in ratings {
+                    let creator = i.value["creator"] as! String
+                    let createdAt = i.value["createdAt"] as! String
+                    let value = i.value["value"] as! Double
+                    
+                    rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                }
                 
-            self.tableView.reloadData()
-        } else {
-            
-            self.tableView.reloadData()
-        }
-            
-    }) { (error) in
-        print(error.localizedDescription)
+                if name.lowercased().contains(userName.lowercased()) && name != "" {
+                    self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating))
+                    
+                    self.tableView.reloadData()
+                } else {
+                    self.tableView.reloadData()
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
-    
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
-    
     
     @IBAction func dissmissHit(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-   
 }
