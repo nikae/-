@@ -14,35 +14,39 @@ import UserNotifications
 import CoreLocation
 
 
-class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
+class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate,UISearchBarDelegate {
   
     @IBOutlet weak var tableview: UITableView!
     
-    var searchController = UISearchController(searchResultsController: nil)
+    var searchController: UISearchController!
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
-
-    let systemSoundID: SystemSoundID = 1109
-    let sendID: SystemSoundID = 1055
-    let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235/255.0, alpha: 0.8)
     
-    
-        override func viewDidLoad() {
+    override func viewDidLoad() {
             super.viewDidLoad()
-            
-            searchController.searchResultsUpdater = self
-            searchController.dimsBackgroundDuringPresentation = false
-            self.definesPresentationContext = true
-            tableview.tableHeaderView = searchController.searchBar
-            
-            
+        
+        //ERRORR
+        definesPresentationContext = true
+        
+        //MARK: --> create search controller
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self    // this controller is delegate
+        searchController!.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.searchBarStyle = .minimal
+        tableview.tableHeaderView = self.searchController.searchBar
+        
+        extendedLayoutIncludesOpaqueBars = true
+        searchController.hidesNavigationBarDuringPresentation = false
+
             
             if searchController.isActive && searchController.searchBar.text != "" {
                 tableview.reloadData()
             } else {
             if coordinate1 != nil {
-                
+       //MARK: --> Get users from database
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
@@ -94,6 +98,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
             }
 }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
@@ -184,12 +190,14 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                             b3.setTitle("☆", for: .normal)
                             b4.setTitle("☆", for: .normal)
                             b5.setTitle("☆", for: .normal)
+                            //self.searchController.searchBar.isUserInteractionEnabled = true
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                             b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
+                        //self.searchController.searchBar.isUserInteractionEnabled = false
                     } else if (sender.tag == 202) {
                         rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
                         calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
@@ -201,17 +209,19 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                             b3.setTitle("☆", for: .normal)
                             b4.setTitle("☆", for: .normal)
                             b5.setTitle("☆", for: .normal)
+                            //self.searchController.searchBar.isUserInteractionEnabled = true
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                             b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
                             b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
+                        //self.searchController.searchBar.isUserInteractionEnabled = false
                     } else if (sender.tag == 203) {
                         rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
                         calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
@@ -223,22 +233,24 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                             b3.setTitle("☆", for: .normal)
                             b4.setTitle("☆", for: .normal)
                             b5.setTitle("☆", for: .normal)
+                           // self.searchController.searchBar.isUserInteractionEnabled = true
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                             b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
                             b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
                             b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
+                        //self.searchController.searchBar.isUserInteractionEnabled = false
                     } else  if (sender.tag == 204) {
                         rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
                         calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
@@ -250,28 +262,31 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                             b3.setTitle("☆", for: .normal)
                             b4.setTitle("☆", for: .normal)
                             b5.setTitle("☆", for: .normal)
+                          //  self.searchController.searchBar.isUserInteractionEnabled = true
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                             b1.setTitle("★", for: .normal)
                             
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
                             b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
                             b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
                             b4.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
+                            
                         })
+                        //self.searchController.searchBar.isUserInteractionEnabled = false
                     } else {
                         rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                         calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
@@ -283,32 +298,35 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                             b3.setTitle("☆", for: .normal)
                             b4.setTitle("☆", for: .normal)
                             b5.setTitle("☆", for: .normal)
+                           // self.searchController.searchBar.isUserInteractionEnabled = true
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                             b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
                             b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
                             b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
                             b4.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             b5.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (self.systemSoundID)
+                            AudioServicesPlaySystemSound (systemSoundID)
                         })
+                        
+                      //  self.searchController.searchBar.isUserInteractionEnabled = false
                     }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
@@ -317,7 +335,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 b3.setTitle("☆", for: .normal)
                 b4.setTitle("☆", for: .normal)
                 b5.setTitle("☆", for: .normal)
-                AudioServicesPlaySystemSound (self.sendID)
+                AudioServicesPlaySystemSound (sendID)
+                //self.searchController.searchBar.isUserInteractionEnabled = true
             })
             
             
@@ -334,7 +353,9 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        searchController.searchBar.showsCancelButton = true
+        
+        
+
          self.users.removeAll()
         filterUsers(userName: searchController.searchBar.text!)
     }

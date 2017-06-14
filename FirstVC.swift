@@ -152,17 +152,8 @@ class FirstVC: UIViewController {
     
     @IBAction func logout(_ sender: UIButton) {
         
-        if FIRAuth.auth()?.currentUser != nil {
-            do {
-                try FIRAuth.auth()?.signOut()
-                let manager = FBSDKLoginManager()
-                manager.logOut()
-                
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+            self.present(vc, animated: true, completion: nil)
     }
     
     

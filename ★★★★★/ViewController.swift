@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import AVFoundation
+import UIKit
+import CoreMotion
+import ImageIO
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-               
+        
         let V1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstVC") as! FirstVC
         let v2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondVC") as! SecondVC
         
@@ -36,7 +40,11 @@ class ViewController: UIViewController {
         
         
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
