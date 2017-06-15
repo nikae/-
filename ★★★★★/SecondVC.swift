@@ -14,11 +14,9 @@ import UserNotifications
 import CoreLocation
 
 
-class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
-  
-   
+class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableview: UITableView!
-    @IBOutlet weak var navigationbar: UINavigationBar!
     
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
@@ -27,10 +25,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     override func viewDidLoad() {
             super.viewDidLoad()
         
-        navigationbar.delegate = self
-        
-            if coordinate1 != nil {
-       //MARK: --> Get users from database
+        //MARK: --> Get users from database
+        if coordinate1 != nil {
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
@@ -40,62 +36,49 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 let createdAt = value?["createdAt"] as? String ?? ""
                 let rating = value?["rating"] as? Double ?? 5.0
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-                //let token = value?["token"] as? String ?? ""
                 let locations = value?["Location"] as? [String : AnyObject] ?? [:]
                 
                 if locations.count != 0 {
-                    var coordinate₀: CLLocation!
                     
+                    var coordinate₀: CLLocation!
                     let latitude = locations["lat"] as! CLLocationDegrees
                     let longitude = locations["long"] as! CLLocationDegrees
-                    
                     coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
                     
                     let distanceInMeters = coordinate₀.distance(from: coordinate1) // result is in meters
                     let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
                     
-                    
-                   // let d  = distanceInMiles
-                        if distanceInMiles < 2000 {
-                           if userID != self.uid {
-                        var rArray = [Rating]()
-                
-                        for i in ratings {
-                            let creator = i.value["creator"] as! String
-                            let createdAt = i.value["createdAt"] as! String
-                            let value = i.value["value"] as! Double
+                    if distanceInMiles < 2000 {
+                        if userID != self.uid {
+                            var rArray = [Rating]()
                             
-                            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                            for i in ratings {
+                                let creator = i.value["creator"] as! String
+                                let createdAt = i.value["createdAt"] as! String
+                                let value = i.value["value"] as! Double
+                                
+                                rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                            }
+                            
+                            if self.users.count < 2 {
+                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+                            }
+                            self.tableview.reloadData()
                         }
-                        
-                        if self.users.count < 2 {
-                        self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
-                        }
-                        self.tableview.reloadData()
-                    }
                     }
                 }
-               
             }) { (error) in
                 print(error.localizedDescription)
             }
+        }
     }
-            
-}
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
         return users.count
     }
     
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        
         cell.nameLabelCell.text = users[indexPath.row].name
         cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
@@ -126,7 +109,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         cell.backGroundView!.layer.shadowRadius = 5
         cell.backGroundView!.layer.masksToBounds = false
         
-        
         cell.star1.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star2.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star3.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
@@ -135,7 +117,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         return cell
     }
-    
     
     func buttonClicked(sender:UIButton) {
         
@@ -152,166 +133,152 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let b5 = cell?.viewWithTag(205) as! UIButton
         
         var star = ""
+        
         if (sender.tag == 201) { star = "★" }
         else if (sender.tag == 202) { star = "★★" }
         else if (sender.tag == 203) { star = "★★★" }
         else if (sender.tag == 204) { star = "★★★★" }
         else if (sender.tag == 205) { star = "★★★★★" }
         
-  
         let alert = UIAlertController(title: "\(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "Ok", style: .default) { (action: UIAlertAction) in
-                    
-                    if (sender.tag == 201) {
-                        rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
-                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-                            b1.setTitle("☆", for: .normal)
-                            b2.setTitle("☆", for: .normal)
-                            b3.setTitle("☆", for: .normal)
-                            b4.setTitle("☆", for: .normal)
-                            b5.setTitle("☆", for: .normal)
-                            //self.searchController.searchBar.isUserInteractionEnabled = true
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                            b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        //self.searchController.searchBar.isUserInteractionEnabled = false
-                    } else if (sender.tag == 202) {
-                        rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
-                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-                            b1.setTitle("☆", for: .normal)
-                            b2.setTitle("☆", for: .normal)
-                            b3.setTitle("☆", for: .normal)
-                            b4.setTitle("☆", for: .normal)
-                            b5.setTitle("☆", for: .normal)
-                            //self.searchController.searchBar.isUserInteractionEnabled = true
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                            b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                            b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        //self.searchController.searchBar.isUserInteractionEnabled = false
-                    } else if (sender.tag == 203) {
-                        rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
-                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-                            b1.setTitle("☆", for: .normal)
-                            b2.setTitle("☆", for: .normal)
-                            b3.setTitle("☆", for: .normal)
-                            b4.setTitle("☆", for: .normal)
-                            b5.setTitle("☆", for: .normal)
-                           // self.searchController.searchBar.isUserInteractionEnabled = true
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                            b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                            b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                            b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        //self.searchController.searchBar.isUserInteractionEnabled = false
-                    } else  if (sender.tag == 204) {
-                        rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
-                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-                            b1.setTitle("☆", for: .normal)
-                            b2.setTitle("☆", for: .normal)
-                            b3.setTitle("☆", for: .normal)
-                            b4.setTitle("☆", for: .normal)
-                            b5.setTitle("☆", for: .normal)
-                          //  self.searchController.searchBar.isUserInteractionEnabled = true
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                            b1.setTitle("★", for: .normal)
-                            
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                            b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                            b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
-                            b4.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                            
-                        })
-                        //self.searchController.searchBar.isUserInteractionEnabled = false
-                    } else {
-                        rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
-                        calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
-                        self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-                            b1.setTitle("☆", for: .normal)
-                            b2.setTitle("☆", for: .normal)
-                            b3.setTitle("☆", for: .normal)
-                            b4.setTitle("☆", for: .normal)
-                            b5.setTitle("☆", for: .normal)
-                           // self.searchController.searchBar.isUserInteractionEnabled = true
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                            b1.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                            b2.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                            b3.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
-                            b4.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            b5.setTitle("★", for: .normal)
-                            AudioServicesPlaySystemSound (systemSoundID)
-                        })
-                        
-                      //  self.searchController.searchBar.isUserInteractionEnabled = false
-                    }
+            if (sender.tag == 201) {
+                rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else if (sender.tag == 202) {
+                rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else if (sender.tag == 203) {
+                rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else  if (sender.tag == 204) {
+                rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+                    b4.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else {
+                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+                    b4.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    b5.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                 b1.setTitle("☆", for: .normal)
@@ -320,53 +287,16 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 b4.setTitle("☆", for: .normal)
                 b5.setTitle("☆", for: .normal)
                 AudioServicesPlaySystemSound (sendID)
-                //self.searchController.searchBar.isUserInteractionEnabled = true
             })
-            
-            
-            
-            
         }
-        
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
-
-       
-
     }
-    
-    
-    
- 
-    
-    
-//    func checkForDate(str: String) -> Bool {
-//
-//
-//        let uid = FIRAuth.auth()?.currentUser?.uid
-//        let databaseRef = FIRDatabase.database().reference()
-//        
-//        databaseRef.child("Users/\(str)/ratings").observe(.childAdded , with: { (snapshot) in
-//            
-//            let value = snapshot.value as? NSDictionary
-//            let creator = value!["creator"] as! String
-//            
-//            if creator != uid {
-//               return true
-//                
-//            }
-//        })
-//        
-//        return false
-//    }
     
     func updateRatingOnCell(atIndex: Int, star: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            
-            let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child("Users").child((self.users[atIndex].userId)!).observeSingleEvent(of: .value, with: { (snapshot) in
-                
+            self.databaseRef.child("Users").child((self.users[atIndex].userId)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
                 let rating = value?["rating"] as? Double ?? 0
@@ -382,7 +312,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                     "Content-Type" : "application/json",
                     "Authorization" : "key=AIzaSyC7YP48PanbkiMa4-HNaASvt_47puMMjek"
                 ]
-                
                 let notification: Parameters? = [
                     "to" : "\(token)",
                     "notification" : [
@@ -392,17 +321,12 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                     ]
                 ]
                 
-                
                 _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in print(" resp \(resp)") })
                 
-                
                 self.tableview.reloadData()
-                
             }) { (error) in
                 print(error.localizedDescription)
             }
         })
-
     }
-    
 }

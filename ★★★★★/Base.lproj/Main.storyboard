@@ -434,9 +434,6 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <connections>
-                                    <outlet property="delegate" destination="oZm-V4-xbv" id="brX-bu-Y3X"/>
-                                </connections>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -447,7 +444,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="navigationbar" destination="lq6-ao-Jfc" id="K4h-Tk-mis"/>
                         <outlet property="tableview" destination="ZYg-cP-932" id="peX-8O-crz"/>
                     </connections>
                 </viewController>
