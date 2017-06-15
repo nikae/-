@@ -27,9 +27,48 @@ class SettingsVC: UIViewController {
         viewShape(view: nightModeBtn)
         viewShape(view: logOutBtn)
         viewShape(view: desibleAccountMode)
-      
+        
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            view.backgroundColor = nightModeColor
+            nightModeBtn.setTitle("Light Mode", for: .normal)
+            launchBool = true
+        } else {
+            view.backgroundColor = .white
+            nightModeBtn.setTitle("Dark Mode", for: .normal)
+        }
+   
     }
 
+    
+    
+    
+    
+    
+    var launchBool: Bool = false {
+        didSet {
+            if launchBool == true {
+                
+                UIView.animate(withDuration: 1.5, animations: {
+                    
+                    self.nightModeBtn.setTitle("Light Mode", for: .normal)
+                    self.view.backgroundColor = nightModeColor
+                })
+                
+            nightModeDefaults.set(false, forKey: nightModeDefaults_Key)
+            } else {
+                
+                UIView.animate(withDuration: 1.5, animations: {
+                    self.nightModeBtn.setTitle("Dark Mode", for: .normal)
+                    self.view.backgroundColor = .white
+
+                })
+                
+                nightModeDefaults.set(true, forKey: nightModeDefaults_Key)
+            }
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,7 +80,7 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func nightModeHit(_ sender: UIButton) {
-        print("NightModeGoes here")
+        launchBool = !launchBool
     }
 
     @IBAction func logOutHit(_ sender: UIButton) {

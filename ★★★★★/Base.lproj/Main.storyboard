@@ -83,7 +83,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jXw-TX-l4p"/>
                                         </constraints>
-                                        <state key="normal" title="Night Mode">
+                                        <state key="normal" title="Dark Mode">
                                             <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -103,7 +103,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="675-br-WNc">
                                         <rect key="frame" x="0.0" y="140" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.080405830540000001" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Desible My Account">
+                                        <state key="normal" title="Disable My Account">
                                             <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -189,7 +189,7 @@
                                             <constraint firstAttribute="height" constant="50" id="2fg-XG-jrk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jj-a1-l7Y">
@@ -198,13 +198,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVX-be-SUb">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kds-R0-SEr">
                                                 <rect key="frame" x="50" y="0.0" width="0.0" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -304,35 +304,35 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                                     <state key="normal" title="☆">
-                                                                        <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" tag="202" contentMode="scaleToFill" restorationIdentifier="2" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdU-lw-len">
                                                                     <rect key="frame" x="49" y="0.0" width="49" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                                     <state key="normal" title="☆">
-                                                                        <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" tag="203" contentMode="scaleToFill" restorationIdentifier="3" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taX-6U-ek2">
                                                                     <rect key="frame" x="98" y="0.0" width="49" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                                     <state key="normal" title="☆">
-                                                                        <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" tag="204" contentMode="scaleToFill" restorationIdentifier="4" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3d-xE-68O">
                                                                     <rect key="frame" x="147" y="0.0" width="49" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                                     <state key="normal" title="☆">
-                                                                        <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" tag="205" contentMode="scaleToFill" restorationIdentifier="5" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPV-Ub-r1Q">
                                                                     <rect key="frame" x="196" y="0.0" width="49" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                                     <state key="normal" title="☆">
-                                                                        <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                 </button>
                                                             </subviews>
@@ -347,13 +347,13 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH5-ta-tv7">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxb-R4-DYI">
                                                                     <rect key="frame" x="26" y="0.0" width="24" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -370,7 +370,7 @@
                                                                 <constraint firstAttribute="height" constant="50" id="8b5-nO-SK9"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -444,6 +444,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationBar" destination="lq6-ao-Jfc" id="WjN-2W-TRa"/>
                         <outlet property="tableview" destination="ZYg-cP-932" id="peX-8O-crz"/>
                     </connections>
                 </viewController>
@@ -487,35 +488,35 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                             <state key="normal" title="☆">
-                                                                <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" tag="202" contentMode="scaleToFill" restorationIdentifier="2" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TsS-PH-k7C">
                                                             <rect key="frame" x="49" y="0.0" width="49" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                             <state key="normal" title="☆">
-                                                                <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" tag="203" contentMode="scaleToFill" restorationIdentifier="3" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlF-mz-pOP">
                                                             <rect key="frame" x="98" y="0.0" width="49" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                             <state key="normal" title="☆">
-                                                                <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" tag="204" contentMode="scaleToFill" restorationIdentifier="4" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opZ-5L-Rc4">
                                                             <rect key="frame" x="147" y="0.0" width="49" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                             <state key="normal" title="☆">
-                                                                <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" tag="205" contentMode="scaleToFill" restorationIdentifier="5" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-fg-o9o">
                                                             <rect key="frame" x="196" y="0.0" width="49" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                                             <state key="normal" title="☆">
-                                                                <color key="titleColor" red="0.17254902420000001" green="0.1921568662" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                     </subviews>
@@ -530,13 +531,13 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r9-kF-x1D">
                                                             <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1p-yH-547">
                                                             <rect key="frame" x="26" y="0.0" width="24" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -553,7 +554,7 @@
                                                         <constraint firstAttribute="height" constant="50" id="TZY-u1-47C"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -619,9 +620,13 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Km-hZ-8Uv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9y-fG-ibe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="L9y-fG-ibe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

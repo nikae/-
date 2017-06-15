@@ -17,13 +17,21 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     
     var searchController: UISearchController!
     
+ 
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            self.view.backgroundColor = nightModeColor
+            tableView.backgroundColor = nightModeColor
+            navigationController?.navigationBar.barTintColor = nightModeColor
+        }
+
         
         self.definesPresentationContext = true
         self.searchController = UISearchController(searchResultsController: nil)
@@ -45,6 +53,15 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         cell.nameLabelCell.text = users[indexPath.row].name
         cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            cell.backgroundColor = nightModeColor
+            cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
+            cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+        } else {
+            cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        }
+        
         if users[indexPath.row].pictureUrl != "" {
             getImage((users[indexPath.row].pictureUrl)!, imageView: cell.imageViewCell)
             getImage((users[indexPath.row].pictureUrl)!, imageView: cell.backgroundImmage)
@@ -61,7 +78,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         cell.imageViewCell!.isUserInteractionEnabled = true
         cell.imageViewCell!.layer.cornerRadius = cell.imageViewCell!.frame.height/2
         cell.imageViewCell!.layer.borderWidth = 10
-        cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        //cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         
         cell.backGroundView!.clipsToBounds = true
         cell.backGroundView!.isUserInteractionEnabled = true
@@ -310,6 +327,13 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+          
+           searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
+         
+        }
+
         self.users.removeAll()
         filterUsers(userName: searchController.searchBar.text!)
     }

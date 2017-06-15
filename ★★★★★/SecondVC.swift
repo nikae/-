@@ -17,6 +17,7 @@ import CoreLocation
 class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
@@ -24,6 +25,16 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
             super.viewDidLoad()
+        
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            self.view.backgroundColor = nightModeColor
+            tableview.backgroundColor = nightModeColor
+            navigationBar.backgroundColor = nightModeColor
+            navigationBar.tintColor = nightModeColor
+            navigationBar.barTintColor = nightModeColor
+        }
+
         
         //MARK: --> Get users from database
         if coordinate1 != nil {
@@ -79,6 +90,17 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        
+        
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            cell.backgroundColor = nightModeColor
+            cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
+            cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+        } else {
+            cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        }
+        
         cell.nameLabelCell.text = users[indexPath.row].name
         cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
@@ -98,7 +120,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.imageViewCell!.isUserInteractionEnabled = true
         cell.imageViewCell!.layer.cornerRadius = cell.imageViewCell!.frame.height/2
         cell.imageViewCell!.layer.borderWidth = 10
-        cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        
         
         cell.backGroundView!.clipsToBounds = true
         cell.backGroundView!.isUserInteractionEnabled = true

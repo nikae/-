@@ -37,6 +37,18 @@ class FirstVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            self.view.backgroundColor = nightModeColor
+            imageView.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+            backgroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
+            
+        } else {
+            //self.view.backgroundColor = .white
+            
+            imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+            
+        }
         
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()
@@ -67,7 +79,7 @@ class FirstVC: UIViewController {
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = imageView.frame.height/2
         imageView.layer.borderWidth = 10
-        imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        //imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         
         //backgroundImage.image = UIImage(named: "IMG_7101")
        
