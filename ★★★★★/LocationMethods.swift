@@ -19,7 +19,7 @@ let sendID: SystemSoundID = 1055
 
 let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235/255.0, alpha: 0.8)
 
-let nightModeColor = UIColor(colorLiteralRed: 28/255.0, green: 46/255.0, blue: 79/255.0, alpha: 1)
+let nightModeColor = UIColor(colorLiteralRed: 1/255.0, green: 35/255.0, blue: 56/255.0, alpha: 1)
 
 
 let nightModeDefaults = UserDefaults.standard

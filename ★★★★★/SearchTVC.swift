@@ -27,11 +27,15 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
+            
+            let bgView = UIView()
+            bgView.backgroundColor = nightModeColor
+            self.tableView.backgroundView = bgView
             self.view.backgroundColor = nightModeColor
             tableView.backgroundColor = nightModeColor
             navigationController?.navigationBar.barTintColor = nightModeColor
+            navigationController?.view.backgroundColor = nightModeColor
         }
-
         
         self.definesPresentationContext = true
         self.searchController = UISearchController(searchResultsController: nil)
@@ -55,6 +59,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
+            //cell.contentView.backgroundColor = nightModeColor
             cell.backgroundColor = nightModeColor
             cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
@@ -313,7 +318,9 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     ]
                 ]
                 
-                _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in print(" resp \(resp)") })
+                _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in
+                    print(" resp \(resp)")
+                })
                 
                 self.tableView.reloadData()
             }) { (error) in
@@ -329,11 +336,10 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     func updateSearchResults(for searchController: UISearchController) {
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
-          
-           searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
-         
+            let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+            textFieldInsideSearchBar?.textColor = .gray
+            searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
         }
-
         self.users.removeAll()
         filterUsers(userName: searchController.searchBar.text!)
     }
