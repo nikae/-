@@ -366,7 +366,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 }
                 
                 if name.lowercased().contains(userName.lowercased()) && name != "" {
-                    self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating))
+                    self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating, distance: 0))
                     
                     self.tableView.reloadData()
                 } else {

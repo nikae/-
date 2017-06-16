@@ -51,18 +51,21 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 if locations.count != 0 {
                     
-                    var coordinate₀: CLLocation!
+             
+                    
+                    var usersCordinate: CLLocation!
                     let latitude = locations["lat"] as! CLLocationDegrees
                     let longitude = locations["long"] as! CLLocationDegrees
-                    coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
+                    usersCordinate = CLLocation(latitude: latitude, longitude: longitude)
                     
-                    let distanceInMeters = coordinate₀.distance(from: coordinate1) // result is in meters
+                    let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
                     let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
                     
-                    if distanceInMiles < 2000 {
+                    
+                    //if distanceInMiles < 1000 {
+                        
                         if userID != self.uid {
                             var rArray = [Rating]()
-                            
                             for i in ratings {
                                 let creator = i.value["creator"] as! String
                                 let createdAt = i.value["createdAt"] as! String
@@ -71,13 +74,17 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                                 rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                             }
                             
-                            if self.users.count < 2 {
-                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating))
+                            if self.users.count < 200 {
+                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
+                                
+                                self.users = self.users.sorted(by: {$0.distance < $1.distance})
+                                
                             }
                             self.tableview.reloadData()
                         }
                     }
-                }
+                    
+                //}
             }) { (error) in
                 print(error.localizedDescription)
             }

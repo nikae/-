@@ -75,10 +75,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ia3-hG-Fhf">
-                                <rect key="frame" x="24" y="238.5" width="327" height="190"/>
+                                <rect key="frame" x="24" y="203.5" width="327" height="260"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaA-Fj-SRF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rem-6c-541">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="50"/>
+                                        <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.080405830540000001" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GAg-pN-UwQ"/>
+                                        </constraints>
+                                        <state key="normal" title="Share My ★">
+                                            <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareHit:" destination="AgY-TO-lue" eventType="touchUpInside" id="JBC-Iz-vFj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaA-Fj-SRF">
+                                        <rect key="frame" x="0.0" y="70" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.080405830536912748" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jXw-TX-l4p"/>
@@ -91,7 +104,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luj-9r-AEb">
-                                        <rect key="frame" x="0.0" y="70" width="327" height="50"/>
+                                        <rect key="frame" x="0.0" y="140" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Log Out">
                                             <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,7 +114,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="675-br-WNc">
-                                        <rect key="frame" x="0.0" y="140" width="327" height="50"/>
+                                        <rect key="frame" x="0.0" y="210" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.080405830540000001" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Disable My Account">
                                             <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,6 +160,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ShareBtn" destination="rem-6c-541" id="VJd-Ze-5lX"/>
                         <outlet property="cancelBtn" destination="KdY-Fk-Zwe" id="CUI-np-Vdw"/>
                         <outlet property="desibleAccountMode" destination="675-br-WNc" id="Gow-Bu-rGw"/>
                         <outlet property="infoBtn" destination="Wxx-Kf-NLd" id="xut-PP-1Uv"/>
@@ -620,7 +634,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Km-hZ-8Uv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="L9y-fG-ibe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9y-fG-ibe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.57141335969999996" green="0.59511225209999996" blue="0.64699154010000004" alpha="0.0" colorSpace="calibratedRGB"/>

@@ -15,6 +15,7 @@ import Firebase
 
 class SettingsVC: UIViewController {
     
+    @IBOutlet weak var ShareBtn: UIButton!
     @IBOutlet weak var nightModeBtn: UIButton!
     @IBOutlet weak var logOutBtn: UIButton!
     @IBOutlet weak var desibleAccountMode: UIButton!
@@ -24,6 +25,7 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewShape(view: ShareBtn)
         viewShape(view: nightModeBtn)
         viewShape(view: logOutBtn)
         viewShape(view: desibleAccountMode)
@@ -39,11 +41,6 @@ class SettingsVC: UIViewController {
         }
    
     }
-
-    
-    
-    
-    
     
     var launchBool: Bool = false {
         didSet {
@@ -74,6 +71,12 @@ class SettingsVC: UIViewController {
         super.didReceiveMemoryWarning()
         print("MemoryWarning")
     }
+    
+    
+    @IBAction func shareHit(_ sender: Any) {
+        print("Shere Function Goes Here")
+    }
+    
     
     @IBAction func infoHit(_ sender: UIButton) {
         print("T&C goes here")
