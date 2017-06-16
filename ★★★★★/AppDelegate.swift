@@ -162,9 +162,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func sendLocationToServer(location: CLLocation) {
-        var bgTask = UIBackgroundTaskIdentifier()
-        bgTask = UIApplication.shared.beginBackgroundTask { () -> Void in
-            UIApplication.shared.endBackgroundTask(bgTask)
+        var backgroundTask = UIBackgroundTaskIdentifier()
+        backgroundTask = UIApplication.shared.beginBackgroundTask { () -> Void in
+            UIApplication.shared.endBackgroundTask(backgroundTask)
         }
         
         let uid = FIRAuth.auth()?.currentUser?.uid
@@ -172,9 +172,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users/\(uid!)/Location").setValue(loc)
         
-        if (bgTask != UIBackgroundTaskInvalid) {
-            UIApplication.shared.endBackgroundTask(bgTask)
-            bgTask = UIBackgroundTaskInvalid
+        if (backgroundTask != UIBackgroundTaskInvalid) {
+            UIApplication.shared.endBackgroundTask(backgroundTask)
+            backgroundTask = UIBackgroundTaskInvalid
         }
     }
     

@@ -525,8 +525,11 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             let createdAt = value?["createdAt"] as? String ?? ""
             let rating = value?["rating"] as? Double ?? 5.0
             let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
+            let isActive = value?["isActive"] as? Bool
+
             
             if userID != self.uid {
+                if isActive != false {
                 var rArray = [Rating]()
                 for i in ratings {
                     let creator = i.value["creator"] as! String
@@ -544,6 +547,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     self.tableView.reloadData()
                 }
             }
+        }
         }) { (error) in
             print(error.localizedDescription)
         }

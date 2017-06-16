@@ -76,8 +76,9 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
                             
                             if snapshot.hasChild(uid!){
                                 
-                                print("true rooms exist")
-                                
+                                let uid = FIRAuth.auth()?.currentUser?.uid
+                                let databaseRef = FIRDatabase.database().reference()
+                                databaseRef.child("Users/\(uid!)/isActive").setValue(true)
                             }else{
                                 self.saveUserInDataBase()
                                 print("false room doesn't exist")
@@ -124,9 +125,10 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         let name = self.userName
         let pictureURL = self.imgURLString
         let createdAt = result
-        let rating: Double = 0
+        let rating: Double = 5
+        let isActive: Bool = true
         
-         let ratings: Dictionary<String, AnyObject> = [:]
+        let ratings: Dictionary<String, AnyObject> = [:]
         
         
         let userData: Dictionary<String, AnyObject> = ["userID" : userId as AnyObject,
@@ -134,7 +136,8 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
                                                        "pictureURL" : pictureURL as AnyObject,
                                                        "createdAt" : createdAt as AnyObject,
                                                        "ratings" : ratings as AnyObject,
-                                                       "rating" : rating as AnyObject]
+                                                       "rating" : rating as AnyObject,
+                                                       "isActive": isActive as AnyObject]
         
         databaseRef.child("Users/\(userId!)").setValue(userData)
         

@@ -48,11 +48,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let rating = value?["rating"] as? Double ?? 5.0
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 let locations = value?["Location"] as? [String : AnyObject] ?? [:]
+                let isActive = value?["isActive"] as? Bool
                 
                 if locations.count != 0 {
-                    
-             
-                    
+                    if isActive != false {
                     var usersCordinate: CLLocation!
                     let latitude = locations["lat"] as! CLLocationDegrees
                     let longitude = locations["long"] as! CLLocationDegrees
@@ -85,6 +84,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                     
                 //}
+            }
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -477,11 +477,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 b5.setTitle("☆", for: .normal)
                 AudioServicesPlaySystemSound (sendID)
             })
-
-            
-            
-            
-                    }
+        }
 
         alert.addAction(okAndShare)
         alert.addAction(ok)

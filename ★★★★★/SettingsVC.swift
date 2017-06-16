@@ -127,8 +127,28 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func desibleAccountHit(_ sender: UIButton) {
-        print("Account Desibility Goes here")
-    }
+    
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users/\(uid!)/isActive").setValue(false)
+        
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            do {
+                try FIRAuth.auth()?.signOut()
+                let manager = FBSDKLoginManager()
+                manager.logOut()
+                
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
+        present(vc, animated: true, completion: nil)
+        
+}
     
     @IBAction func dismissVIewHit(_ sender: UIButton) {
         //self.view.removeFromSuperview()
