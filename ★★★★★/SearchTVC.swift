@@ -281,10 +281,181 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 AudioServicesPlaySystemSound (sendID)
             })
         }
+        let okAndShare = UIAlertAction(title: "Ok / Share", style: .default) { (action: UIAlertAction) in
+            
+            
+            if (sender.tag == 201) {
+                rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
+                
+                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else if (sender.tag == 202) {
+                rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
+                
+                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else if (sender.tag == 203) {
+                rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
+                
+                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else  if (sender.tag == 204) {
+                rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
+                
+                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+                    b4.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            } else {
+                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
+                calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
+                self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
+                
+                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                    b1.setTitle("☆", for: .normal)
+                    b2.setTitle("☆", for: .normal)
+                    b3.setTitle("☆", for: .normal)
+                    b4.setTitle("☆", for: .normal)
+                    b5.setTitle("☆", for: .normal)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                    b1.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                    b2.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    b3.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+                    b4.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    b5.setTitle("★", for: .normal)
+                    AudioServicesPlaySystemSound (systemSoundID)
+                })
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                b1.setTitle("☆", for: .normal)
+                b2.setTitle("☆", for: .normal)
+                b3.setTitle("☆", for: .normal)
+                b4.setTitle("☆", for: .normal)
+                b5.setTitle("☆", for: .normal)
+                AudioServicesPlaySystemSound (sendID)
+            })
+            
+        }
         
+        alert.addAction(okAndShare)
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
+        }
+    
+    func share(message: String, link: String) {
+        let message = message
+        if let link = NSURL(string: link) {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
     
     func updateRatingOnCell(atIndex: Int, star: Int) {

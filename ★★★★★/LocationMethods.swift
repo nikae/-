@@ -79,3 +79,21 @@ func getImage(_ url_str: String, imageView: UIImageView) {
     task.resume()
 }
 
+
+//MARK: --> Share method
+
+func share(message: String, link: String) {
+//let saveAndShare = UIAlertAction(title: "Save and share", style: .default) { (action: UIAlertAction) in
+//    
+//    let message = "\( String(format: "%.01f", rating))★ is my rating on ★★★★★"
+//    if let link = NSURL(string: "aa")
+//    {
+//        let objectsToShare = [message,link] as [Any]
+//        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+//        self.present(activityVC, animated: true, completion: nil)
+//    }
+//}
+}
+
+

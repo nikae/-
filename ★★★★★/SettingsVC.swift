@@ -74,7 +74,30 @@ class SettingsVC: UIViewController {
     
     
     @IBAction func shareHit(_ sender: Any) {
-        print("Shere Function Goes Here")
+       
+        let uId = FIRAuth.auth()?.currentUser?.uid
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            let rating = value?["rating"] as? Double ?? 5.0
+            
+//Needs to have added link and text has to be changed
+            let message = "\( String(format: "%.01f", rating))★ is my rating on ★★★★★"
+            if let link = NSURL(string: "aa")
+            {
+                let objectsToShare = [message,link] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+                self.present(activityVC, animated: true, completion: nil)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        
+
     }
     
     
