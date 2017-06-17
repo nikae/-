@@ -484,7 +484,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     "to" : "\(token)",
                     "notification" : [
                         "body" : "You've been rated \(star)★, your current rating is \(String(describing: ratingStr))★",
-                        "title" : "Your rating update!",
+                        "title" : "\(star)",
                         "sound" : "default"
                     ]
                 ]

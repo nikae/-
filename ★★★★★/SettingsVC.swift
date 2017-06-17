@@ -127,28 +127,50 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func desibleAccountHit(_ sender: UIButton) {
-    
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        let databaseRef = FIRDatabase.database().reference()
-        databaseRef.child("Users/\(uid!)/isActive").setValue(false)
         
-        
-        if FIRAuth.auth()?.currentUser != nil {
-            do {
-                try FIRAuth.auth()?.signOut()
-                let manager = FBSDKLoginManager()
-                manager.logOut()
+        let alert = UIAlertController(title: "Do you want to disable your account?", message: "TEXT NEED HERE", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let continu = UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction) in
+            
+            let alert = UIAlertController(title: "Disebling you account", message: "we hate see you go ...", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+                let uid = FIRAuth.auth()?.currentUser?.uid
+                let databaseRef = FIRDatabase.database().reference()
+                databaseRef.child("Users/\(uid!)/isActive").setValue(false)
                 
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
+                
+                if FIRAuth.auth()?.currentUser != nil {
+                    do {
+                        try FIRAuth.auth()?.signOut()
+                        let manager = FBSDKLoginManager()
+                        manager.logOut()
+                        
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
+                self.present(vc, animated: true, completion: nil)
+                
+            })
+            
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        })
         
-        
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
-        present(vc, animated: true, completion: nil)
-        
-}
+        alert.addAction(continu)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     
     @IBAction func dismissVIewHit(_ sender: UIButton) {
         //self.view.removeFromSuperview()
