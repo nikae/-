@@ -200,10 +200,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         // Print full message.
-        print(userInfo)
+        print(notification.request.content.title)
+        recivedInt = notification.request.content.title
         
-        // Change this to your preferred presentation option
-        completionHandler([])
+        //completionHandler([UNNotificationPresentationOptions.alert,UNNotificationPresentationOptions.sound,UNNotificationPresentationOptions.badge])
+        print("Heyyyyyy")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -214,11 +216,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         // Print full message.
-        print(userInfo)
-        
-        completionHandler()
+//        print("Heyyyyyy")
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
+//        completionHandler()
     }
 }
+
+
 
 //MARK --> END Message handling
 

@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
+import AVFoundation
 
 
 extension UIImageView
@@ -34,8 +35,118 @@ class FirstVC: UIViewController {
     
     @IBOutlet weak var backgroundView: UIView!
    
+    
+    func refreshTable(notification: NSNotification) {
+        
+        if recivedInt == "1" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                //b1.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+
+        } else if recivedInt == "2" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                //b1.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                //b2.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+
+        }  else if recivedInt == "3" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                //b1.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                //b2.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                //b3.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+
+        }  else if recivedInt == "4" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                //b1.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                //b2.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                //b3.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+                // b4.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+
+        }  else if recivedInt == "5" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                //b1.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+                //b2.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                //b3.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+               // b4.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+               // b5.setTitle("★", for: .normal)
+                AudioServicesPlaySystemSound (systemSoundID)
+            })
+
+        }
+
+
+
+        
+        let uId = FIRAuth.auth()?.currentUser?.uid
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            let rating = value?["rating"] as? Double ?? 5.0
+            
+            
+            self.starsLabel.text = String(format: "%.01f", rating)
+            
+           
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable), name: NSNotification.Name(rawValue: "a"), object: nil)
+       
+       
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
@@ -105,7 +216,10 @@ class FirstVC: UIViewController {
     }
     
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver("a")
+    }
     
     
     func calcRating( ratings: [Double] ) -> Double {

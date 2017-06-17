@@ -14,6 +14,8 @@ import AVFoundation
 
 var coordinate1: CLLocation!
 
+var recivedInt: String!
+
 let systemSoundID: SystemSoundID = 1109
 let sendID: SystemSoundID = 1055
 
