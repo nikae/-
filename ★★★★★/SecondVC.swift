@@ -169,9 +169,9 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else if (sender.tag == 204) { star = "★★★★" }
         else if (sender.tag == 205) { star = "★★★★★" }
         
-        let alert = UIAlertController(title: "\(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let ok = UIAlertAction(title: "Ok", style: .default) { (action: UIAlertAction) in
+        let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
             if (sender.tag == 201) {
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
@@ -319,15 +319,15 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             })
         }
         
-        let okAndShare = UIAlertAction(title: "Ok / Share", style: .default) { (action: UIAlertAction) in
+        let okAndShare = UIAlertAction(title: "Confirm and share", style: .default) { (action: UIAlertAction) in
             
             
             if (sender.tag == 201) {
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
-                
-                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+ //MARK: need to update web "https:// .nikaeblog .wordpress .com"
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -346,7 +346,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                 
-                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -370,7 +370,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                 
-                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -399,7 +399,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                 
-                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -433,7 +433,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                 
-                self.share(message: "\(star) to \(self.users[(indexPath?.row)!].name!).", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -517,8 +517,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let notification: Parameters? = [
                     "to" : "\(token)",
                     "notification" : [
-                        "body" : "You've been rated \(star)★, your current rating is \(String(describing: ratingStr))★",
-                        "title" : "\(star)",
+                        "body" : "You were rated \(star)★. Your current rating is \(String(describing: ratingStr))★.",
+                        "title" : "New Rating!",
                         "sound" : "default"
                     ]
                 ]

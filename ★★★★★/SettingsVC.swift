@@ -83,7 +83,7 @@ class SettingsVC: UIViewController {
             let rating = value?["rating"] as? Double ?? 5.0
             
 //Needs to have added link and text has to be changed
-            let message = "\( String(format: "%.01f", rating))★ is my rating on ★★★★★"
+            let message = "My ★★★★★ rating is \( String(format: "%.01f", rating))★."
             if let link = NSURL(string: "aa")
             {
                 let objectsToShare = [message,link] as [Any]
@@ -128,15 +128,15 @@ class SettingsVC: UIViewController {
     
     @IBAction func desibleAccountHit(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Do you want to disable your account?", message: "TEXT NEED HERE", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Do you want to disable your account?", message: "Disabled accounts cannot be searched or viewed by other users.", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let continu = UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction) in
             
-            let alert = UIAlertController(title: "Disebling you account", message: "we hate see you go ...", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Disabling your account", message: "Your account will be disabled but can be reactivated by logging in.", preferredStyle: .alert)
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
-            let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+            let ok = UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction) in
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 let databaseRef = FIRDatabase.database().reference()
                 databaseRef.child("Users/\(uid!)/isActive").setValue(false)

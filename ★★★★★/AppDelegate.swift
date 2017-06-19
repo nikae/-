@@ -203,7 +203,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print(notification.request.content.title)
         recivedInt = notification.request.content.title
         
-        //completionHandler([UNNotificationPresentationOptions.alert,UNNotificationPresentationOptions.sound,UNNotificationPresentationOptions.badge])
+        completionHandler([UNNotificationPresentationOptions.alert,UNNotificationPresentationOptions.sound,UNNotificationPresentationOptions.badge])
         print("Heyyyyyy")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
     }

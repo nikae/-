@@ -43,111 +43,112 @@ class FirstVC: UIViewController {
     
     func refreshTable(notification: NSNotification) {
         
-        if recivedInt == "1" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                self.b1.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
+//        if recivedInt == "1" {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+//                self.b1.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//
+//        } else if recivedInt == "2" {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+//                self.b1.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+//                self.b2.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//
+//        }  else if recivedInt == "3" {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+//                self.b1.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+//                self.b2.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+//                self.b3.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//
+//        }  else if recivedInt == "4" {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+//                self.b1.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+//                self.b2.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+//                self.b3.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+//                self.b4.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//
+//        }  else if recivedInt == "5" {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+//                self.b1.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
+//                self.b2.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+//                self.b3.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+//               self.b4.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//               self.b5.setTitle("★", for: .normal)
+//                AudioServicesPlaySystemSound (systemSoundID)
+//            })
+//
+//        }
 
-        } else if recivedInt == "2" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                self.b1.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
+        let uId = FIRAuth.auth()?.currentUser?.uid
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                self.b2.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-
-        }  else if recivedInt == "3" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                self.b1.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
+            let value = snapshot.value as? NSDictionary
+            let rating = value?["rating"] as? Double ?? 5.0
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                self.b2.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                self.b3.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-
-        }  else if recivedInt == "4" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                self.b1.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                self.b2.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                self.b3.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
-                self.b4.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-
-        }  else if recivedInt == "5" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-                self.b1.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {
-                self.b2.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                self.b3.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
-               self.b4.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-               self.b5.setTitle("★", for: .normal)
-                AudioServicesPlaySystemSound (systemSoundID)
-            })
-
+            self.starsLabel.text = String(format: "%.01f", rating)
+        }) { (error) in
+            print(error.localizedDescription)
         }
 
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            self.b1.setTitle("", for: .normal)
-            self.b2.setTitle("", for: .normal)
-            self.b3.setTitle("", for: .normal)
-            self.b4.setTitle("", for: .normal)
-            self.b5.setTitle("", for: .normal)
-            
-            let uId = FIRAuth.auth()?.currentUser?.uid
-            let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                let value = snapshot.value as? NSDictionary
-                let rating = value?["rating"] as? Double ?? 5.0
-                
-                
-                self.starsLabel.text = String(format: "%.01f", rating)
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-
-           
-        })
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+//            self.b1.setTitle("", for: .normal)
+//            self.b2.setTitle("", for: .normal)
+//            self.b3.setTitle("", for: .normal)
+//            self.b4.setTitle("", for: .normal)
+//            self.b5.setTitle("", for: .normal)
+//            
+//            
+//           
+//        })
 
         
     }
