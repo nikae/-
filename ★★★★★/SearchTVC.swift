@@ -124,6 +124,28 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         else if (sender.tag == 204) { star = "★★★★" }
         else if (sender.tag == 205) { star = "★★★★★" }
         
+        var isRatedToday: Bool = false
+        
+        for i in self.users[(indexPath?.row)!].ratings {
+            if uid == i.creator {
+                let dateFromData = i.createdAt.components(separatedBy: " ").first!
+                let date = Date()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd.MM.yyyy"
+                let currentDate = formatter.string(from: date)
+                if dateFromData == currentDate {
+                    isRatedToday = true
+                }
+            }
+        }
+        
+        if isRatedToday != false {
+            let alert = UIAlertController(title: "Alredy Rated", message: "Chack back tommorrow", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        } else {
+        
         let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
@@ -447,6 +469,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
         }
+    }
     
     func share(message: String, link: String) {
         let message = message
@@ -466,7 +489,19 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 let value = snapshot.value as? NSDictionary
                 
                 let rating = value?["rating"] as? Double ?? 0
+                let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 let token = value?["token"] as? String ?? ""
+                
+                var rArray = [Rating]()
+                for i in ratings {
+                    let creator = i.value["creator"] as! String
+                    let createdAt = i.value["createdAt"] as! String
+                    let value = i.value["value"] as! Double
+                    
+                    rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                }
+                
+                self.users[atIndex].ratings = rArray
                 
                 self.users[atIndex].rating = rating
                 

@@ -13,7 +13,6 @@ import Alamofire
 import UserNotifications
 import CoreLocation
 
-
 class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableview: UITableView!
@@ -24,7 +23,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var users = [User]()
     
     override func viewDidLoad() {
-            super.viewDidLoad()
+        super.viewDidLoad()
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
@@ -34,7 +33,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             navigationBar.tintColor = nightModeColor
             navigationBar.barTintColor = nightModeColor
         }
-
         
         //MARK: --> Get users from database
         if coordinate1 != nil {
@@ -52,16 +50,13 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 if locations.count != 0 {
                     if isActive != false {
-                    var usersCordinate: CLLocation!
-                    let latitude = locations["lat"] as! CLLocationDegrees
-                    let longitude = locations["long"] as! CLLocationDegrees
-                    usersCordinate = CLLocation(latitude: latitude, longitude: longitude)
-                    
-                    let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
-                    let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
-                    
-                    
-                    //if distanceInMiles < 1000 {
+                        var usersCordinate: CLLocation!
+                        let latitude = locations["lat"] as! CLLocationDegrees
+                        let longitude = locations["long"] as! CLLocationDegrees
+                        usersCordinate = CLLocation(latitude: latitude, longitude: longitude)
+                        
+                        let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
+                        let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
                         
                         if userID != self.uid {
                             var rArray = [Rating]()
@@ -75,16 +70,12 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             
                             if self.users.count < 200 {
                                 self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
-                                
                                 self.users = self.users.sorted(by: {$0.distance < $1.distance})
-                                
                             }
                             self.tableview.reloadData()
                         }
                     }
-                    
-                //}
-            }
+                }
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -97,8 +88,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        
-        
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
             cell.backgroundColor = nightModeColor
@@ -168,6 +157,28 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else if (sender.tag == 203) { star = "★★★" }
         else if (sender.tag == 204) { star = "★★★★" }
         else if (sender.tag == 205) { star = "★★★★★" }
+        
+        var isRatedToday: Bool = false
+        
+        for i in self.users[(indexPath?.row)!].ratings {
+            if uid == i.creator {
+            let dateFromData = i.createdAt.components(separatedBy: " ").first!
+                let date = Date()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd.MM.yyyy"
+                let currentDate = formatter.string(from: date)
+                if dateFromData == currentDate {
+                    isRatedToday = true
+                }
+            }
+        }
+        
+        if isRatedToday != false {
+            let alert = UIAlertController(title: "Alredy Rated", message: "Chack back tommorrow", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        } else { 
         
         let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -483,6 +494,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         alert.addAction(ok)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func share(message: String, link: String) {
@@ -502,8 +514,23 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let value = snapshot.value as? NSDictionary
                 
                 let rating = value?["rating"] as? Double ?? 0
+                let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 let token = value?["token"] as? String ?? ""
+                
+                
+//HERE  
+                var rArray = [Rating]()
+                for i in ratings {
+                    let creator = i.value["creator"] as! String
+                    let createdAt = i.value["createdAt"] as! String
+                    let value = i.value["value"] as! Double
+                    
+                    rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
+                }
+                
+                self.users[atIndex].ratings = rArray
                 self.users[atIndex].rating = rating
+                
                 
                 let ratingStr = String(format: "%.01f", rating)
                 
