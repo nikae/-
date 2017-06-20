@@ -86,7 +86,7 @@ class FirstVC: UIViewController {
                 self.getImage(pictureURL, imageView: self.imageView)
                 self.getImage(pictureURL, imageView: self.backgroundImage)
             } else {
-                self.imageView.image = UIImage(named: "IMG_7101")
+                self.imageView.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
             }
             
         }) { (error) in

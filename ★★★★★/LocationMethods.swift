@@ -23,6 +23,8 @@ let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235
 
 let nightModeColor = UIColor(colorLiteralRed: 1/255.0, green: 35/255.0, blue: 56/255.0, alpha: 1)
 
+let webLink = "https://starsapp.wordpress.com"
+
 
 let nightModeDefaults = UserDefaults.standard
 let nightModeDefaults_Key = "nightModeDefaults_Key"

@@ -84,7 +84,7 @@ class SettingsVC: UIViewController {
             
 //Needs to have added link and text has to be changed
             let message = "My ★★★★★ rating is \( String(format: "%.01f", rating))★."
-            if let link = NSURL(string: "aa")
+            if let link = NSURL(string: "\(webLink)")
             {
                 let objectsToShare = [message,link] as [Any]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

@@ -17,7 +17,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     
     var searchController: UISearchController!
     
- 
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
@@ -71,8 +70,8 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             getImage((users[indexPath.row].pictureUrl)!, imageView: cell.imageViewCell)
             getImage((users[indexPath.row].pictureUrl)!, imageView: cell.backgroundImmage)
         } else {
-            cell.imageViewCell.image = UIImage(named: "IMG_7101")
-            cell.backgroundImmage.image = UIImage(named: "IMG_7101")
+            cell.imageViewCell.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
+            cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
         }
         
         cell.backgroundImmage!.layer.cornerRadius = 15
@@ -311,7 +310,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -330,7 +329,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -354,7 +353,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -383,7 +382,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -417,7 +416,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "https://nikaeblog.wordpress.com")
+                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
