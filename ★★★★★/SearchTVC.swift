@@ -139,7 +139,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         }
         
         if isRatedToday != false {
-            let alert = UIAlertController(title: "Alredy Rated", message: "Chack back tommorrow", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Already Rated", message: "You already rated \(self.users[(indexPath?.row)!].name!.capitalized) today. Check in tomorrow to rate again.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
