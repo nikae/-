@@ -19,7 +19,7 @@ let gcmMessageIDKey = "gcm.message_id"
 var a = String()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate  {
   
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -39,21 +39,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             application.registerUserNotificationSettings(settings)
         }
         
-        //!!! TEST THIS compear to pre
         application.registerForRemoteNotifications()
+        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways) {
+            self.locationManager.requestAlwaysAuthorization()
+        }
         
         if FIRAuth.auth()?.currentUser != nil {
             FIRAuth.auth()?.addStateDidChangeListener { auth, user in
                 if user != nil {
-                    if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
-                        self.locationManager.requestAlwaysAuthorization()
-                    }
-                    
                     if CLLocationManager.locationServicesEnabled() {
                         self.locationManager.delegate = self
                         self.locationManager.distanceFilter = 20
                         self.locationManager.startUpdatingLocation()
                         coordinate1 = self.locationManager.location
+                        
                     }
                     
                     self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
@@ -78,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+   
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -89,9 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
-    // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
-    // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
-    // the FCM registration token.
+
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
         if let token = FIRInstanceID.instanceID().token() {
@@ -112,13 +112,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-//!!!MARK --> Figoure Out Location. (CAN BE TURNED OFF) - (Or Test well gah )
         locationManager.delegate = self
         locationManager.distanceFilter = 20
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
     }
 
+ 
     func applicationWillEnterForeground(_ application: UIApplication) {
         application.beginBackgroundTask{}
     }

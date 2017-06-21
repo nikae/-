@@ -67,7 +67,7 @@ func getImage(_ url_str: String, imageView: UIImageView) {
                     imageView.image = image
                     imageView.alpha = 1
                     
-                    UIView.animate(withDuration: 1, animations: {
+                    UIView.animate(withDuration: 2.5, animations: {
                         imageView.alpha = 1.0
                     })
                     

@@ -9,15 +9,19 @@
 import UIKit
 import FBSDKLoginKit
 import Firebase
+import CoreLocation
 
-class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
+class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
     
     var imgURLString = ""
     var userName = ""
+    var location: [String : CLLocationDegrees]!
+    
+    var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let loginButton = FBSDKLoginButton()
         
         view.addSubview(loginButton)
@@ -25,11 +29,23 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         loginButton.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 50)
         loginButton.center = view.center
         
-        
         loginButton.delegate = self
         loginButton.readPermissions = ["email", "public_profile"]
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            
+        }
     }
-
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let loc = locations.first!
+        location = ["lat" : loc.coordinate.latitude, "long" : loc.coordinate.longitude]
+        print("LOCATION: \(location)")
+    }
+    
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         if FIRAuth.auth()?.currentUser != nil {
@@ -40,7 +56,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
                 print(error.localizedDescription)
             }
         }
-        
         print("Loged Out")
     }
     
@@ -69,21 +84,16 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
                 
                 if FIRAuth.auth()?.currentUser != nil {
                     let uid = FIRAuth.auth()?.currentUser?.uid
-                   
-                        let databaseRef = FIRDatabase.database().reference()
-                        
-                        databaseRef.child("Users").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    let databaseRef = FIRDatabase.database().reference()
+                    databaseRef.child("Users").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                        if snapshot.hasChild(uid!){
                             
-                            if snapshot.hasChild(uid!){
-                                
-                                let uid = FIRAuth.auth()?.currentUser?.uid
-                                let databaseRef = FIRDatabase.database().reference()
-                                databaseRef.child("Users/\(uid!)/isActive").setValue(true)
-                            }else{
-                                self.saveUserInDataBase()
-                                print("false room doesn't exist")
-                            }
-                        })
+                            databaseRef.child("Users/\(uid!)/isActive").setValue(true)
+                        }else{
+                            self.saveUserInDataBase()
+                            print("false room doesn't exist")
+                        }
+                    })
                 }
                 
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
@@ -109,12 +119,12 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
+
     func saveUserInDataBase() {
         
         let databaseRef = FIRDatabase.database().reference()
         
         let userID = FIRAuth.auth()?.currentUser?.uid
-        //let user = FIRAuth.auth()?.currentUser
         
         let date = Date()
         let formatter = DateFormatter()
@@ -127,6 +137,7 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         let createdAt = result
         let rating: Double = 5
         let isActive: Bool = true
+        let loc = location
         
         let ratings: Dictionary<String, AnyObject> = [:]
         
@@ -137,7 +148,8 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
                                                        "createdAt" : createdAt as AnyObject,
                                                        "ratings" : ratings as AnyObject,
                                                        "rating" : rating as AnyObject,
-                                                       "isActive": isActive as AnyObject]
+                                                       "isActive": isActive as AnyObject,
+                                                       "Location" : loc as AnyObject]
         
         databaseRef.child("Users/\(userId!)").setValue(userData)
         
