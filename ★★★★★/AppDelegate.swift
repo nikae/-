@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
         application.registerForRemoteNotifications()
+        
         if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways) {
             self.locationManager.requestAlwaysAuthorization()
         }
@@ -52,9 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                         self.locationManager.distanceFilter = 20
                         self.locationManager.startUpdatingLocation()
                         coordinate1 = self.locationManager.location
-                        
                     }
-                    
                     self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
                 } else {
                     print("No user is signed in.")
@@ -71,14 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         return handler
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-    }
-    
-   
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -89,8 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
-    
-
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
@@ -171,38 +159,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let loc = ["lat" : location.coordinate.latitude, "long" : location.coordinate.longitude]
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users/\(uid!)/Location").setValue(loc)
-        
         if (backgroundTask != UIBackgroundTaskInvalid) {
             UIApplication.shared.endBackgroundTask(backgroundTask)
             backgroundTask = UIBackgroundTaskInvalid
         }
     }
-    
     //MARK --> End Location
-
 }
-
-
-
 
 //MARK --> Message handling
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
         let userInfo = notification.request.content.userInfo
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
          FIRMessaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            print("Message ID: \(messageID)") // Print message ID.
         }
+        print(notification.request.content.title) // Print full message.
         
-        // Print full message.
-        print(notification.request.content.title)
         recivedInt = notification.request.content.title
-        
         completionHandler([UNNotificationPresentationOptions.alert,UNNotificationPresentationOptions.sound,UNNotificationPresentationOptions.badge])
         print("Heyyyyyy")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
@@ -210,21 +190,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            print("Message ID: \(messageID)") // Print message ID.
         }
-        
-        // Print full message.
-//        print("Heyyyyyy")
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
-//        completionHandler()
     }
 }
-
-
-
-//MARK --> END Message handling
 
 extension AppDelegate : FIRMessagingDelegate {
     func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
@@ -244,3 +214,4 @@ extension AppDelegate : FIRMessagingDelegate {
     }
     // [END ios_10_data_message]
 }
+//MARK --> END Message handling
