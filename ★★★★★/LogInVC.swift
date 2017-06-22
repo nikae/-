@@ -71,8 +71,11 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     func showUserInfo() {
         let accessToken = FBSDKAccessToken.current()
         guard let accessTokenString = accessToken?.tokenString else { return }
-        
         let credentials = FIRFacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        
+        
+        print("facebook log in authorized")
+        
             FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
                 if error != nil {
                     print("error with FB user:", error ?? "No error")

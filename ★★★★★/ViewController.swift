@@ -46,8 +46,6 @@ class ViewController: UIViewController {
         
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width * 2, height: self.view.frame.height)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
