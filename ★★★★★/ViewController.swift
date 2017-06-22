@@ -36,9 +36,14 @@ class ViewController: UIViewController {
         self.scrollView.addSubview(v2.view)
         self.didMove(toParentViewController: self)
         
+        V1.view.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+        v2.view.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+        
         var v2Frame: CGRect = v2.view.frame
         v2Frame.origin.x = self.view.frame.width
         v2.view.frame = v2Frame
+        
+        
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width * 2, height: self.view.frame.height)
         

@@ -44,7 +44,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         let loc = locations.first!
         location = ["lat" : loc.coordinate.latitude, "long" : loc.coordinate.longitude]
         coordinate1 = loc
-        print("LOCATION: \(location)")
     }
     
     
@@ -103,64 +102,7 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
                 }
             })
         
-//        func showNextController() {
-//            let databaseRef = FIRDatabase.database().reference()
-//            let uid = FIRAuth.auth()?.currentUser?.uid
-//            var usersToSend = [User]()
-//            //MARK: --> Get users from database
-//            if coordinate1 != nil {
-//                databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
-//                    let value = snapshot.value as? NSDictionary
-//                    
-//                    let userID = value?["userID"] as? String ?? ""
-//                    let name = value?["name"] as? String ?? ""
-//                    let pictureURL = value?["pictureURL"] as? String ?? ""
-//                    let createdAt = value?["createdAt"] as? String ?? ""
-//                    let rating = value?["rating"] as? Double ?? 5.0
-//                    let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
-//                    let locations = value?["Location"] as? [String : AnyObject] ?? [:]
-//                    let isActive = value?["isActive"] as? Bool
-//                    
-//                    if locations.count != 0 {
-//                        if isActive != false {
-//                            var usersCordinate: CLLocation!
-//                            let latitude = locations["lat"] as! CLLocationDegrees
-//                            let longitude = locations["long"] as! CLLocationDegrees
-//                            usersCordinate = CLLocation(latitude: latitude, longitude: longitude)
-//                            
-//                            let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
-//                            let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
-//                            
-//                            if userID != uid {
-//                                var rArray = [Rating]()
-//                                for i in ratings {
-//                                    let creator = i.value["creator"] as! String
-//                                    let createdAt = i.value["createdAt"] as! String
-//                                    let value = i.value["value"] as! Double
-//                                    
-//                                    rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
-//                                }
-//                                
-//                                if usersToSend.count < 200 {
-//                                    usersToSend.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
-//                                    usersToSend = usersToSend.sorted(by: {$0.distance < $1.distance})
-//                                }
-//                                
-//                                let destination = SecondVC(nibName: "SecondVC", bundle: Bundle.main)
-//                                destination.users = usersToSend
-//                                self.show(destination, sender: self)
-//                            }
-//                        }
-//                    }
-//                }) { (error) in
-//                    print(error.localizedDescription)
-//                }
-//            }
-//
-//            
-//            
-//            
-//        }
+
         
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture"]).start { (connection, result, err) in
             if err != nil {
