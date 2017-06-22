@@ -41,6 +41,16 @@ class FirstVC: UIViewController {
     @IBOutlet weak var b4: UIButton!
     @IBOutlet weak var b5: UIButton!
     
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+//        
+//        if nightBool == false {
+//            return .lightContent
+//        } else {
+//            return .default
+//        }
+//    }
+    
     func refreshTable(notification: NSNotification) {
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()

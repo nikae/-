@@ -16,6 +16,15 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        
+        if nightBool == false {
+            return .lightContent
+        } else {
+            return .default
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

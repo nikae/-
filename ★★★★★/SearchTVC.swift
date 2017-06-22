@@ -15,6 +15,16 @@ import CoreLocation
 
 class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        
+        if nightBool == false {
+            return .lightContent
+        } else {
+            return .default
+        }
+    }
+    
     var searchController: UISearchController!
     
     let databaseRef = FIRDatabase.database().reference()

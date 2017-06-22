@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import Firebase
 
 
+
 class SettingsVC: UIViewController {
     
     @IBOutlet weak var ShareBtn: UIButton!
@@ -21,7 +22,20 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var desibleAccountMode: UIButton!
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
-
+    
+    var viewIsDark = Bool()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        //let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        
+        if viewIsDark == true {
+            return .lightContent
+        } else {
+            return .default
+        }
+    }
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +49,7 @@ class SettingsVC: UIViewController {
             view.backgroundColor = nightModeColor
             nightModeBtn.setTitle("Light Mode", for: .normal)
             launchBool = true
+           
         } else {
             view.backgroundColor = .white
             nightModeBtn.setTitle("Dark Mode", for: .normal)
@@ -50,6 +65,8 @@ class SettingsVC: UIViewController {
                     
                     self.nightModeBtn.setTitle("Light Mode", for: .normal)
                     self.view.backgroundColor = nightModeColor
+                    self.viewIsDark = true
+                    self.setNeedsStatusBarAppearanceUpdate()
                 })
                 
             nightModeDefaults.set(false, forKey: nightModeDefaults_Key)
@@ -58,6 +75,8 @@ class SettingsVC: UIViewController {
                 UIView.animate(withDuration: 1.5, animations: {
                     self.nightModeBtn.setTitle("Dark Mode", for: .normal)
                     self.view.backgroundColor = .white
+                    self.viewIsDark = false
+                    self.setNeedsStatusBarAppearanceUpdate()
 
                 })
                 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		24017F031EAEE2920071E526 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24017F021EAEE2920071E526 /* LogInVC.swift */; };
+		2401F3531EFC53DA00F2CB6A /* NavigationToSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2401F3521EFC53DA00F2CB6A /* NavigationToSearch.swift */; };
 		244CC8881EB164EC00F63B70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 244CC8871EB164EC00F63B70 /* GoogleService-Info.plist */; };
 		247AD3D01E92CB3A00BB3AA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AD3CF1E92CB3A00BB3AA4 /* AppDelegate.swift */; };
 		247AD3D21E92CB3A00BB3AA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AD3D11E92CB3A00BB3AA4 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		24017F021EAEE2920071E526 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		24017F041EAEE5DC0071E526 /* ★★★★★.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "★★★★★.entitlements"; sourceTree = "<group>"; };
+		2401F3521EFC53DA00F2CB6A /* NavigationToSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationToSearch.swift; sourceTree = "<group>"; };
 		244CC8871EB164EC00F63B70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		247AD3CC1E92CB3A00BB3AA4 /* ★★★★★.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "★★★★★.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		247AD3CF1E92CB3A00BB3AA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				247AD3E51E92CD3200BB3AA4 /* SecondVC.swift */,
 				24E5EC931EF1B0E600659341 /* SettingsVC.swift */,
 				24E5EC951EF1C77E00659341 /* SearchTVC.swift */,
+				2401F3521EFC53DA00F2CB6A /* NavigationToSearch.swift */,
 				247AD3E91E92CE1800BB3AA4 /* TableViewCell.swift */,
 				24FD71681EE7240A007A3E6B /* RatingMethods.swift */,
 				24E5EC641EEF67BB00659341 /* LocationMethods.swift */,
@@ -265,6 +268,7 @@
 				247AD3D21E92CB3A00BB3AA4 /* ViewController.swift in Sources */,
 				24017F031EAEE2920071E526 /* LogInVC.swift in Sources */,
 				24E5EC651EEF67BB00659341 /* LocationMethods.swift in Sources */,
+				2401F3531EFC53DA00F2CB6A /* NavigationToSearch.swift in Sources */,
 				24829AA11EB90ED20037FF42 /* Structs.swift in Sources */,
 				247AD3E81E92CDBD00BB3AA4 /* FirstVC.swift in Sources */,
 				247AD3E61E92CD3200BB3AA4 /* SecondVC.swift in Sources */,

@@ -679,10 +679,10 @@
             </objects>
             <point key="canvasLocation" x="967" y="1636"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation To Search-->
         <scene sceneID="adT-cg-Iku">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Km-hZ-8Uv" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Km-hZ-8Uv" customClass="NavigationToSearch" customModule="_____" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9y-fG-ibe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

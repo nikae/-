@@ -18,6 +18,16 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+//        
+//        if nightBool == false {
+//            return .lightContent
+//        } else {
+//            return .default
+//        }
+//    }
+    
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
