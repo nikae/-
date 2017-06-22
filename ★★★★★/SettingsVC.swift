@@ -26,15 +26,12 @@ class SettingsVC: UIViewController {
     var viewIsDark = Bool()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        //let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
-        
         if viewIsDark == true {
             return .lightContent
         } else {
             return .default
         }
     }
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +51,6 @@ class SettingsVC: UIViewController {
             view.backgroundColor = .white
             nightModeBtn.setTitle("Dark Mode", for: .normal)
         }
-   
     }
     
     var launchBool: Bool = false {
@@ -85,7 +81,6 @@ class SettingsVC: UIViewController {
         }
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("MemoryWarning")
@@ -114,11 +109,7 @@ class SettingsVC: UIViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
-
-        
-
     }
-    
     
     @IBAction func infoHit(_ sender: UIButton) {
         print("T&C goes here")
@@ -139,7 +130,6 @@ class SettingsVC: UIViewController {
                 print(error.localizedDescription)
             }
         }
-        
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
         present(vc, animated: true, completion: nil)
@@ -186,10 +176,6 @@ class SettingsVC: UIViewController {
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
-    
-    
-    
-    
     
     @IBAction func dismissVIewHit(_ sender: UIButton) {
         //self.view.removeFromSuperview()

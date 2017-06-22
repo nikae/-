@@ -22,7 +22,7 @@ extension UIImageView
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurEffectView)
     }
 }
@@ -40,16 +40,6 @@ class FirstVC: UIViewController {
     @IBOutlet weak var b3: UIButton!
     @IBOutlet weak var b4: UIButton!
     @IBOutlet weak var b5: UIButton!
-    
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
-//        
-//        if nightBool == false {
-//            return .lightContent
-//        } else {
-//            return .default
-//        }
-//    }
     
     func refreshTable(notification: NSNotification) {
         let uId = FIRAuth.auth()?.currentUser?.uid
