@@ -61,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        FIRDatabase.database().persistenceEnabled = true
         return true
     }
     
@@ -184,7 +186,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         recivedInt = notification.request.content.title
         completionHandler([UNNotificationPresentationOptions.alert,UNNotificationPresentationOptions.sound,UNNotificationPresentationOptions.badge])
-        print("Heyyyyyy")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "a"), object: nil)
     }
     

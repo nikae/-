@@ -24,6 +24,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var refreshControl: UIRefreshControl!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

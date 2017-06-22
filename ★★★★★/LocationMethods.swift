@@ -11,7 +11,6 @@ import UIKit
 import CoreLocation
 import AVFoundation
 
-
 var coordinate1: CLLocation!
 
 var recivedInt: String!
