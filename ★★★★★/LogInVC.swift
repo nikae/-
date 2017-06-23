@@ -18,6 +18,9 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     var location: [String : CLLocationDegrees]!
     
     var locationManager = CLLocationManager()
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +68,16 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
             return
         }
         
+        loginButton.isHidden = true
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .gray
+        self.view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        
         showUserInfo()
     }
     
@@ -92,12 +105,18 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
                             print("room exist")
                             self.locationManager.stopUpdatingLocation()
                             databaseRef.child("Users/\(uid!)/isActive").setValue(true)
+                            
+                            self.activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
                             self.present(vc!, animated: true, completion: nil)
                         }else{
                             print("false room doesn't exist")
                             self.saveUserInDataBase()
                             self.locationManager.stopUpdatingLocation()
+                            
+                            self.activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
                             self.present(vc!, animated: true, completion: nil)
                         }

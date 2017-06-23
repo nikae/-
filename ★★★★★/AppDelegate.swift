@@ -102,9 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        locationManager.delegate = self
-        locationManager.distanceFilter = 20
-        locationManager.startUpdatingLocation()
+//        locationManager.delegate = self
+//        locationManager.distanceFilter = 20
+//        locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
     }
 
