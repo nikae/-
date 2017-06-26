@@ -184,24 +184,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
         }
         
-        cell.backgroundImmage!.layer.cornerRadius = 15
-        cell.backgroundImmage!.clipsToBounds = true
-        //cell.backgroundImmage!.addBlurEffect()
         
-        cell.imageViewCell!.clipsToBounds = true
-        cell.imageViewCell!.isUserInteractionEnabled = true
-        cell.imageViewCell!.layer.cornerRadius = cell.imageViewCell!.frame.height/2
-        cell.imageViewCell!.layer.borderWidth = 10
-        
-        
-        cell.backGroundView!.clipsToBounds = true
-        cell.backGroundView!.isUserInteractionEnabled = true
-        cell.backGroundView!.layer.cornerRadius = 15
-        cell.backGroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        cell.backGroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        cell.backGroundView!.layer.shadowOpacity = 1.0
-        cell.backGroundView!.layer.shadowRadius = 5
-        cell.backGroundView!.layer.masksToBounds = false
         
         cell.star1.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star2.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
@@ -211,9 +194,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
-   
     
     func buttonClicked(sender:UIButton) {
         
@@ -416,7 +396,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
- //MARK: need to update web "https:// .nikaeblog .wordpress .com"
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -429,7 +408,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                     b1.setTitle("★", for: .normal)
-                    AudioServicesPlaySystemSound (systemSoundID)
+                    AudioServicesPlaySystemSound(systemSoundID)
                 })
             } else if (sender.tag == 202) {
                 rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)

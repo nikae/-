@@ -23,8 +23,6 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     
-    
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if viewIsDark == true {
             return .lightContent
@@ -190,11 +188,6 @@ class SettingsVC: UIViewController {
     @IBAction func dismissVIewHit(_ sender: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
-        
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
-//        self.present(vc, animated: true, completion: nil)
-        
-        
     }
    
 }

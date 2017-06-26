@@ -20,7 +20,8 @@ let sendID: SystemSoundID = 1055
 
 let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235/255.0, alpha: 0.8)
 
-let nightModeColor = UIColor(colorLiteralRed: 1/255.0, green: 35/255.0, blue: 56/255.0, alpha: 1)
+//let nightModeColor = UIColor(colorLiteralRed: 1/255.0, green: 35/255.0, blue: 56/255.0, alpha: 1)
+let nightModeColor = UIColor(colorLiteralRed: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1)
 
 let webLink = "https://starsapp.wordpress.com"
 

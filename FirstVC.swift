@@ -16,8 +16,7 @@ import AVFoundation
 
 extension UIImageView
 {
-    func addBlurEffect()
-    {
+    func addBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
@@ -25,6 +24,16 @@ extension UIImageView
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurEffectView)
     }
+    
+    func addDarkBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurEffectView)
+    }
+
 }
 
 class FirstVC: UIViewController {
@@ -97,10 +106,10 @@ class FirstVC: UIViewController {
         backgroundView!.clipsToBounds = true
         backgroundView!.isUserInteractionEnabled = true
         backgroundView!.layer.cornerRadius = 15
-        backgroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        backgroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        backgroundView!.layer.shadowOpacity = 1.0
-        backgroundView!.layer.shadowRadius = 5
+       // backgroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+        //backgroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+       // backgroundView!.layer.shadowOpacity = 1.0
+      //  backgroundView!.layer.shadowRadius = 5
         backgroundView!.layer.masksToBounds = false
     }
     

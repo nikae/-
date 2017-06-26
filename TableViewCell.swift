@@ -29,7 +29,18 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundImmage.addBlurEffect()
         
-       
+        backgroundImmage!.layer.cornerRadius = 15
+        backgroundImmage!.clipsToBounds = true
+        
+        imageViewCell!.clipsToBounds = true
+        imageViewCell!.isUserInteractionEnabled = true
+        imageViewCell!.layer.cornerRadius = imageViewCell!.frame.height/2
+        imageViewCell!.layer.borderWidth = 10
+        backGroundView!.clipsToBounds = true
+        backGroundView!.isUserInteractionEnabled = true
+        backGroundView!.layer.cornerRadius = 15
+        backGroundView!.layer.masksToBounds = false
+                
     }
        
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -84,25 +84,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
         }
         
-        cell.backgroundImmage!.layer.cornerRadius = 15
-        cell.backgroundImmage!.clipsToBounds = true
-        //cell.backgroundImmage!.addBlurEffect()
-        
-        cell.imageViewCell!.clipsToBounds = true
-        cell.imageViewCell!.isUserInteractionEnabled = true
-        cell.imageViewCell!.layer.cornerRadius = cell.imageViewCell!.frame.height/2
-        cell.imageViewCell!.layer.borderWidth = 10
-        //cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
-        
-        cell.backGroundView!.clipsToBounds = true
-        cell.backGroundView!.isUserInteractionEnabled = true
-        cell.backGroundView!.layer.cornerRadius = 15
-        cell.backGroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        cell.backGroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        cell.backGroundView!.layer.shadowOpacity = 1.0
-        cell.backGroundView!.layer.shadowRadius = 5
-        cell.backGroundView!.layer.masksToBounds = false
-        
         cell.star1.addTarget(self, action: #selector(SearchTVC.buttonClicked), for: .touchUpInside)
         cell.star2.addTarget(self, action: #selector(SearchTVC.buttonClicked), for: .touchUpInside)
         cell.star3.addTarget(self, action: #selector(SearchTVC.buttonClicked), for: .touchUpInside)
@@ -570,7 +551,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             let rating = value?["rating"] as? Double ?? 5.0
             let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
             let isActive = value?["isActive"] as? Bool
-
             
             if userID != self.uid {
                 if isActive != false {
