@@ -86,7 +86,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         cell.backgroundImmage!.layer.cornerRadius = 15
         cell.backgroundImmage!.clipsToBounds = true
-        cell.backgroundImmage!.addBlurEffect()
+        //cell.backgroundImmage!.addBlurEffect()
         
         cell.imageViewCell!.clipsToBounds = true
         cell.imageViewCell!.isUserInteractionEnabled = true

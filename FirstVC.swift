@@ -59,15 +59,6 @@ class FirstVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable), name: NSNotification.Name(rawValue: "a"), object: nil)
         
-        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
-        if nightBool == false {
-            
-            self.view.backgroundColor = nightModeColor
-            imageView.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
-            backgroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
-        } else {
-            imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
-        }
         
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()
@@ -116,6 +107,22 @@ class FirstVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver("a")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            
+            self.view.backgroundColor = nightModeColor
+            imageView.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+            backgroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
+        } else {
+            self.view.backgroundColor = .white
+            imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+            backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        }
+
     }
     
     func calcRating( ratings: [Double] ) -> Double {

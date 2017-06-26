@@ -12,7 +12,7 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
 
-
+var viewIsDark = Bool()
 
 class SettingsVC: UIViewController {
     
@@ -23,7 +23,7 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     
-    var viewIsDark = Bool()
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if viewIsDark == true {
@@ -61,7 +61,7 @@ class SettingsVC: UIViewController {
                     
                     self.nightModeBtn.setTitle("Light Mode", for: .normal)
                     self.view.backgroundColor = nightModeColor
-                    self.viewIsDark = true
+                    viewIsDark = true
                     self.setNeedsStatusBarAppearanceUpdate()
                 })
                 
@@ -71,7 +71,7 @@ class SettingsVC: UIViewController {
                 UIView.animate(withDuration: 1.5, animations: {
                     self.nightModeBtn.setTitle("Dark Mode", for: .normal)
                     self.view.backgroundColor = .white
-                    self.viewIsDark = false
+                    viewIsDark = false
                     self.setNeedsStatusBarAppearanceUpdate()
 
                 })
@@ -120,6 +120,10 @@ class SettingsVC: UIViewController {
     }
 
     @IBAction func logOutHit(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Log Out", message: "Do you want to log out?", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
+        
         if FIRAuth.auth()?.currentUser != nil {
             do {
                 try FIRAuth.auth()?.signOut()
@@ -132,7 +136,14 @@ class SettingsVC: UIViewController {
         }
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
-        present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
+            
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func desibleAccountHit(_ sender: UIButton) {
@@ -149,7 +160,6 @@ class SettingsVC: UIViewController {
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 let databaseRef = FIRDatabase.database().reference()
                 databaseRef.child("Users/\(uid!)/isActive").setValue(false)
-                
                 
                 if FIRAuth.auth()?.currentUser != nil {
                     do {
@@ -178,9 +188,13 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func dismissVIewHit(_ sender: UIButton) {
-        //self.view.removeFromSuperview()
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
-        present(vc, animated: true, completion: nil)
+        
+        self.dismiss(animated: true, completion: nil)
+        
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//        self.present(vc, animated: true, completion: nil)
+        
+        
     }
    
 }

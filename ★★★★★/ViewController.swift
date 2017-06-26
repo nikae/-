@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         
-        if nightBool == false {
+        if nightBool == false  {
             return .lightContent
         } else {
             return .default
@@ -29,10 +29,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
-        if nightBool == false {
-            self.view.backgroundColor = nightModeColor
-        }
+        
+
                 
         let V1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstVC") as! FirstVC
         let v2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondVC") as! SecondVC
@@ -59,6 +57,12 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            self.view.backgroundColor = nightModeColor
+        } else {
+            self.view.backgroundColor = .white
+        }
     }
     
     override func didReceiveMemoryWarning() {

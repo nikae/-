@@ -37,17 +37,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             tableview.addSubview(refreshControl)
         }
         
-        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
-        if nightBool == false {
-            self.view.backgroundColor = nightModeColor
-            tableview.backgroundColor = nightModeColor
-            navigationBar.backgroundColor = nightModeColor
-            navigationBar.tintColor = nightModeColor
-            navigationBar.barTintColor = nightModeColor
-        }
-        
-        
-        
         //MARK: --> Get users from database
         if coordinate1 != nil {
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
@@ -94,6 +83,26 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        if nightBool == false {
+            self.view.backgroundColor = nightModeColor
+            tableview.backgroundColor = nightModeColor
+            navigationBar.backgroundColor = nightModeColor
+            navigationBar.tintColor = nightModeColor
+            navigationBar.barTintColor = nightModeColor
+        } else {
+            self.view.backgroundColor = .white
+            tableview.backgroundColor = .white
+            navigationBar.backgroundColor = .white
+            navigationBar.tintColor = .white
+            navigationBar.barTintColor = .white
+            
+        }
+        tableview.reloadData()
     }
     
     func refresh(sender:AnyObject) {
@@ -146,24 +155,24 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
             cell.backgroundColor = nightModeColor
             cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
         } else {
+            cell.backgroundColor = .white
+            cell.backGroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         }
-        
+                
         cell.nameLabelCell.text = users[indexPath.row].name
         cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
@@ -177,7 +186,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundImmage!.layer.cornerRadius = 15
         cell.backgroundImmage!.clipsToBounds = true
-        cell.backgroundImmage!.addBlurEffect()
+        //cell.backgroundImmage!.addBlurEffect()
         
         cell.imageViewCell!.clipsToBounds = true
         cell.imageViewCell!.isUserInteractionEnabled = true
@@ -202,6 +211,9 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    
+   
     
     func buttonClicked(sender:UIButton) {
         
