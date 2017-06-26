@@ -43,10 +43,7 @@ func calcAndUpdateRating(uId: String)  {
     }) { (error) in
         print(error.localizedDescription)
     }
-    
-    
 }
-
 
 //MARK -->> :Calculate ratings sum
 func calcRating( ratings: [Double] ) -> Double {
@@ -60,7 +57,6 @@ func calcRating( ratings: [Double] ) -> Double {
     
     return sum / Double(count)
 }
-
 
 func rateStar(value: Double, ratee: String) {
     let databaseRef = FIRDatabase.database().reference()

@@ -49,7 +49,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         coordinate1 = loc
     }
     
-    
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         if FIRAuth.auth()?.currentUser != nil {
             do {
@@ -77,7 +76,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        
         showUserInfo()
     }
     
@@ -86,8 +84,7 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         guard let accessTokenString = accessToken?.tokenString else { return }
         let credentials = FIRFacebookAuthProvider.credential(withAccessToken: accessTokenString)
         
-        
-        print("facebook log in authorized")
+         print("facebook log in authorized")
         
             FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
                 if error != nil {
@@ -144,7 +141,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         }
     }
     
-
     func saveUserInDataBase() {
         
         let databaseRef = FIRDatabase.database().reference()

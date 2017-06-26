@@ -28,6 +28,9 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        nameLabelCell.adjustsFontSizeToFitWidth = true
+        
         backgroundImmage.addBlurEffect()
         
         backgroundImmage!.layer.cornerRadius = 15
