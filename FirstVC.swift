@@ -37,11 +37,14 @@ extension UIImageView
 }
 
 class FirstVC: UIViewController {
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var starStarLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     
+    @IBOutlet weak var meniuBtn: UIButton!
     @IBOutlet weak var backgroundView: UIView!
    
     @IBOutlet weak var b1: UIButton!
@@ -106,10 +109,6 @@ class FirstVC: UIViewController {
         backgroundView!.clipsToBounds = true
         backgroundView!.isUserInteractionEnabled = true
         backgroundView!.layer.cornerRadius = 15
-       // backgroundView!.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        //backgroundView!.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-       // backgroundView!.layer.shadowOpacity = 1.0
-      //  backgroundView!.layer.shadowRadius = 5
         backgroundView!.layer.masksToBounds = false
     }
     
@@ -126,10 +125,21 @@ class FirstVC: UIViewController {
             self.view.backgroundColor = nightModeColor
             imageView.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
             backgroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
+            
+            nameLabel.textColor = .white
+            starsLabel.textColor = .white
+            starStarLabel.textColor = .white
+            meniuBtn.setTitleColor(.gray, for: .normal)
+            
         } else {
             self.view.backgroundColor = .white
             imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
             backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            
+            nameLabel.textColor = buttonTextColorDark
+            starsLabel.textColor = buttonTextColorDark
+            starStarLabel.textColor = buttonTextColorDark
+            meniuBtn.setTitleColor(buttonTextColorDark, for: .normal)
         }
 
     }

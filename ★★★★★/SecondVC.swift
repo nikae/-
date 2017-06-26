@@ -18,6 +18,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var serchAction: UIBarButtonItem!
     
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
@@ -94,12 +95,15 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             navigationBar.backgroundColor = nightModeColor
             navigationBar.tintColor = nightModeColor
             navigationBar.barTintColor = nightModeColor
+            serchAction.tintColor = .white
+            
         } else {
             self.view.backgroundColor = .white
             tableview.backgroundColor = .white
             navigationBar.backgroundColor = .white
             navigationBar.tintColor = .white
             navigationBar.barTintColor = .white
+            serchAction.tintColor = buttonTextColorDark
             
         }
         tableview.reloadData()
@@ -167,10 +171,30 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = nightModeColor
             cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+            
+            cell.nameLabelCell.textColor = .white
+            cell.starsLabelCell.textColor = .white
+            cell.starStarLabel.textColor = .white
+            
+            cell.star1.setTitleColor(.white, for: .normal)
+            cell.star2.setTitleColor(.white, for: .normal)
+            cell.star3.setTitleColor(.white, for: .normal)
+            cell.star4.setTitleColor(.white, for: .normal)
+            cell.star5.setTitleColor(.white, for: .normal)
         } else {
             cell.backgroundColor = .white
             cell.backGroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+            
+            cell.nameLabelCell.textColor = buttonTextColorDark
+            cell.starsLabelCell.textColor = buttonTextColorDark
+            cell.starStarLabel.textColor = buttonTextColorDark
+            
+            cell.star1.setTitleColor(buttonTextColorDark, for: .normal)
+            cell.star2.setTitleColor(buttonTextColorDark, for: .normal)
+            cell.star3.setTitleColor(buttonTextColorDark, for: .normal)
+            cell.star4.setTitleColor(buttonTextColorDark, for: .normal)
+            cell.star5.setTitleColor(buttonTextColorDark, for: .normal)
         }
                 
         cell.nameLabelCell.text = users[indexPath.row].name

@@ -15,6 +15,8 @@ import CoreLocation
 
 class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var dismissbtn: UIBarButtonItem!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         
@@ -44,6 +46,10 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             tableView.backgroundColor = nightModeColor
             navigationController?.navigationBar.barTintColor = nightModeColor
             navigationController?.view.backgroundColor = nightModeColor
+            let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
+            navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
+            dismissbtn.tintColor = .white
+            
         }
         
         self.definesPresentationContext = true
@@ -72,6 +78,16 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             cell.backgroundColor = nightModeColor
             cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
+            
+            cell.nameLabelCell.textColor = .white
+            cell.starsLabelCell.textColor = .white
+            cell.starStarLabel?.textColor = .white
+            
+            cell.star1.setTitleColor(.white, for: .normal)
+            cell.star2.setTitleColor(.white, for: .normal)
+            cell.star3.setTitleColor(.white, for: .normal)
+            cell.star4.setTitleColor(.white, for: .normal)
+            cell.star5.setTitleColor(.white, for: .normal)
         } else {
             cell.imageViewCell!.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         }

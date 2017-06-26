@@ -44,6 +44,12 @@ class SettingsVC: UIViewController {
             view.backgroundColor = nightModeColor
             nightModeBtn.setTitle("Light Mode", for: .normal)
             launchBool = true
+            nightModeBtn.setTitleColor(.white, for: .normal)
+            infoBtn.setTitleColor(.white, for: .normal)
+            ShareBtn.setTitleColor(.white, for: .normal)
+            logOutBtn.setTitleColor(.white, for: .normal)
+            desibleAccountMode.setTitleColor(.white, for: .normal)
+            cancelBtn.setTitleColor(.white, for: .normal)
            
         } else {
             view.backgroundColor = .white
@@ -58,6 +64,13 @@ class SettingsVC: UIViewController {
                 UIView.animate(withDuration: 1.5, animations: {
                     
                     self.nightModeBtn.setTitle("Light Mode", for: .normal)
+                    self.nightModeBtn.setTitleColor(.white, for: .normal)
+                    self.infoBtn.setTitleColor(.white, for: .normal)
+                    self.ShareBtn.setTitleColor(.white, for: .normal)
+                    self.logOutBtn.setTitleColor(.white, for: .normal)
+                    self.desibleAccountMode.setTitleColor(.white, for: .normal)
+                    self.cancelBtn.setTitleColor(.white, for: .normal)
+                    
                     self.view.backgroundColor = nightModeColor
                     viewIsDark = true
                     self.setNeedsStatusBarAppearanceUpdate()
@@ -69,6 +82,12 @@ class SettingsVC: UIViewController {
                 UIView.animate(withDuration: 1.5, animations: {
                     self.nightModeBtn.setTitle("Dark Mode", for: .normal)
                     self.view.backgroundColor = .white
+                    self.nightModeBtn.setTitleColor(buttonTextColorDark, for: .normal)
+                    self.infoBtn.setTitleColor(buttonTextColorDark, for: .normal)
+                    self.ShareBtn.setTitleColor(buttonTextColorDark, for: .normal)
+                    self.logOutBtn.setTitleColor(buttonTextColorDark, for: .normal)
+                    self.desibleAccountMode.setTitleColor(buttonTextColorDark, for: .normal)
+                    self.cancelBtn.setTitleColor(buttonTextColorDark, for: .normal)
                     viewIsDark = false
                     self.setNeedsStatusBarAppearanceUpdate()
 

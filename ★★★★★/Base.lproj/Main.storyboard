@@ -316,7 +316,9 @@
                         <outlet property="backgroundImage" destination="BaA-dq-OG4" id="J6v-h5-8vc"/>
                         <outlet property="backgroundView" destination="mnC-0O-VHk" id="Qo4-1m-0OF"/>
                         <outlet property="imageView" destination="Jbb-Nd-sic" id="f2J-H8-HqN"/>
+                        <outlet property="meniuBtn" destination="w2p-Je-kCm" id="IPQ-jk-R6L"/>
                         <outlet property="nameLabel" destination="Z2m-B3-Yal" id="reo-dh-z1A"/>
+                        <outlet property="starStarLabel" destination="kds-R0-SEr" id="Qgp-P6-N9K"/>
                         <outlet property="starsLabel" destination="wVX-be-SUb" id="gej-Cp-k46"/>
                     </connections>
                 </viewController>
@@ -473,6 +475,7 @@
                                             <outlet property="star3" destination="taX-6U-ek2" id="5rL-Ip-eof"/>
                                             <outlet property="star4" destination="T3d-xE-68O" id="ZPA-d0-Uxv"/>
                                             <outlet property="star5" destination="zPV-Ub-r1Q" id="CQu-l7-hzK"/>
+                                            <outlet property="starStarLabel" destination="lxb-R4-DYI" id="qmB-Cv-U1i"/>
                                             <outlet property="starsLabelCell" destination="TH5-ta-tv7" id="e7D-UK-FoG"/>
                                         </connections>
                                     </tableViewCell>
@@ -509,12 +512,13 @@
                     </view>
                     <connections>
                         <outlet property="navigationBar" destination="lq6-ao-Jfc" id="WjN-2W-TRa"/>
+                        <outlet property="serchAction" destination="u1z-fo-MiS" id="cNP-L1-zTW"/>
                         <outlet property="tableview" destination="ZYg-cP-932" id="peX-8O-crz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X2e-FQ-2e0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="622" y="820"/>
+            <point key="canvasLocation" x="575" y="820"/>
         </scene>
         <!--Find by name-->
         <scene sceneID="WvM-fd-r3k">
@@ -674,6 +678,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dismissbtn" destination="6Os-YG-vFr" id="y0G-hZ-ykF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ez-dj-5HJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
