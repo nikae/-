@@ -58,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     print("No user is signed in.")
                 }
             }
+        } else {
+            self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "LogInVC")
         }
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
