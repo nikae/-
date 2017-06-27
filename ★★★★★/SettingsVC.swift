@@ -129,7 +129,7 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func infoHit(_ sender: UIButton) {
-        print("T&C goes here")
+        UIApplication.shared.openURL(NSURL(string: webLink)! as URL)
     }
     
     @IBAction func nightModeHit(_ sender: UIButton) {

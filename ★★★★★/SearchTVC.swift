@@ -12,6 +12,7 @@ import AVFoundation
 import Alamofire
 import UserNotifications
 import CoreLocation
+import SDWebImage
 
 class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
@@ -81,7 +82,7 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             
             cell.nameLabelCell.textColor = .white
             cell.starsLabelCell.textColor = .white
-            cell.starStarLabel?.textColor = .white
+            cell.starStarLabel.textColor = .white
             
             cell.star1.setTitleColor(.white, for: .normal)
             cell.star2.setTitleColor(.white, for: .normal)
@@ -93,8 +94,11 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         }
         
         if users[indexPath.row].pictureUrl != "" {
-            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.imageViewCell)
-            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.backgroundImmage)
+            cell.imageViewCell.sd_setImage(with: URL(string: (users[indexPath.row].pictureUrl)!), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+            cell.imageViewCell.setShowActivityIndicator(true)
+            cell.imageViewCell.setIndicatorStyle(.gray)
+            
+            cell.backgroundImmage.sd_setImage(with: URL(string: (users[indexPath.row].pictureUrl)!), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
         } else {
             cell.imageViewCell.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
             cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")

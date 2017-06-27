@@ -18,4 +18,6 @@ pod 'Firebase/Storage'
 pod 'Firebase/Messaging’
 pod 'Alamofire'
 
+pod 'SDWebImage', '~>3.8'
+
 end

@@ -12,6 +12,7 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
 import AVFoundation
+import SDWebImage
 
 
 extension UIImageView
@@ -86,8 +87,11 @@ class FirstVC: UIViewController {
             self.starsLabel.text = String(format: "%.01f", rating)
             
             if pictureURL != "" {
-                self.getImage(pictureURL, imageView: self.imageView)
-                self.getImage(pictureURL, imageView: self.backgroundImage)
+                    self.imageView.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+                    self.backgroundImage.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+                self.imageView.setShowActivityIndicator(true)
+                self.imageView.setIndicatorStyle(.gray)
+                
             } else {
                 self.imageView.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
             }

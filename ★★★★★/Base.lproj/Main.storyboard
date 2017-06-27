@@ -55,12 +55,25 @@
                     <view key="view" contentMode="scaleToFill" id="O8g-el-WMo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen Shot 2017-06-15 at 9.35.49 AM" translatesAutoresizingMaskIntoConstraints="NO" id="G5n-CT-BZP">
+                                <rect key="frame" x="112" y="70" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="vBO-qd-puj"/>
+                                    <constraint firstAttribute="width" constant="150" id="zzx-KB-3Rp"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G5n-CT-BZP" firstAttribute="top" secondItem="13Y-Nb-x1x" secondAttribute="bottom" constant="50" id="AZK-ur-yCR"/>
+                            <constraint firstItem="G5n-CT-BZP" firstAttribute="centerX" secondItem="O8g-el-WMo" secondAttribute="centerX" id="f0Q-uU-kTE"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrj-Rl-VGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-653" y="91"/>
+            <point key="canvasLocation" x="-653.60000000000002" y="90.404797601199405"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="ceQ-hI-e8A">
@@ -661,6 +674,7 @@
                                     <outlet property="star3" destination="SlF-mz-pOP" id="cCO-1I-5qZ"/>
                                     <outlet property="star4" destination="opZ-5L-Rc4" id="v0e-nT-ZAX"/>
                                     <outlet property="star5" destination="Mvw-fg-o9o" id="3Vf-Ad-4Cb"/>
+                                    <outlet property="starStarLabel" destination="G1p-yH-547" id="em2-gx-iBZ"/>
                                     <outlet property="starsLabelCell" destination="9r9-kF-x1D" id="jC1-Uy-qiv"/>
                                 </connections>
                             </tableViewCell>
@@ -709,4 +723,7 @@
             <point key="canvasLocation" x="189" y="1636"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Screen Shot 2017-06-15 at 9.35.49 AM" width="1098" height="1048"/>
+    </resources>
 </document>

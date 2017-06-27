@@ -12,6 +12,7 @@ import AVFoundation
 import Alamofire
 import UserNotifications
 import CoreLocation
+import SDWebImage
 
 class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -201,8 +202,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
         
         if users[indexPath.row].pictureUrl != "" {
-            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.imageViewCell)
-            getImage((users[indexPath.row].pictureUrl)!, imageView: cell.backgroundImmage)
+            cell.imageViewCell.sd_setImage(with: URL(string: (users[indexPath.row].pictureUrl)!), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+            cell.imageViewCell.setShowActivityIndicator(true)
+            cell.imageViewCell.setIndicatorStyle(.gray)
+           cell.backgroundImmage.sd_setImage(with: URL(string: (users[indexPath.row].pictureUrl)!), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
         } else {
             cell.imageViewCell.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
             cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
@@ -281,6 +284,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
                     b1.setTitle("★", for: .normal)
+                    
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 202) {
@@ -414,7 +418,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         let okAndShare = UIAlertAction(title: "Confirm and share", style: .default) { (action: UIAlertAction) in
-            
             
             if (sender.tag == 201) {
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
