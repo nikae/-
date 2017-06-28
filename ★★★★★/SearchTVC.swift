@@ -473,11 +473,10 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             })
             
         }
-        
-        alert.addAction(okAndShare)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+            alert.addAction(okAndShare)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

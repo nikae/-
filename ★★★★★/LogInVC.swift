@@ -18,7 +18,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     var location: [String : CLLocationDegrees]!
     
     var locationManager = CLLocationManager()
-    
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
 
@@ -26,7 +25,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         super.viewDidLoad()
         
         let loginButton = FBSDKLoginButton()
-        
         view.addSubview(loginButton)
         
         loginButton.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 50)
@@ -161,7 +159,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         let loc = location
         
         let ratings: Dictionary<String, AnyObject> = [:]
-        
         
         let userData: Dictionary<String, AnyObject> = ["userID" : userId as AnyObject,
                                                        "name" : name as AnyObject,

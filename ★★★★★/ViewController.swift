@@ -47,8 +47,6 @@ class ViewController: UIViewController {
         v2Frame.origin.x = self.view.frame.width
         v2.view.frame = v2Frame
         
-        
-        
         self.scrollView.contentSize = CGSize(width: self.view.frame.width * 2, height: self.view.frame.height)
     }
     

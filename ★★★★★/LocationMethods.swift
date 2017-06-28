@@ -24,17 +24,14 @@ let borderColor = UIColor(colorLiteralRed: 63/255.0, green: 186/255.0, blue: 235
 let nightModeColor = UIColor(colorLiteralRed: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1)
 let buttonTextColorDark = UIColor(colorLiteralRed: 72/255.0, green: 68/255.0, blue: 75/255.0, alpha: 1)
 
-let webLink = "https://starsapp.wordpress.com"
-
+let webLink = "https://5starsapp.com"
 
 let nightModeDefaults = UserDefaults.standard
 let nightModeDefaults_Key = "nightModeDefaults_Key"
 
 func viewShape(view: UIView) {
-    //but.backgroundColor = color
     view.clipsToBounds = true
     view.layer.cornerRadius = view.frame.height/2
-    // but.layer.shadowRadius
 }
 
 
@@ -44,7 +41,6 @@ func viewShedow(view: UIView) {
     view.layer.shadowOpacity = 1.0
     view.layer.shadowRadius = 0.0
     view.layer.masksToBounds = false
-    // but.layer.cornerRadius = 4.0
 }
 
 func getImage(_ url_str: String, imageView: UIImageView) {
@@ -62,7 +58,6 @@ func getImage(_ url_str: String, imageView: UIImageView) {
             
             if(image != nil)
             {
-                
                 DispatchQueue.main.async(execute: {
                     
                     imageView.image = image

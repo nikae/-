@@ -25,8 +25,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var star4: UIButton!
     @IBOutlet weak var star5: UIButton!
     
-    
-    override func awakeFromNib() {
+     override func awakeFromNib() {
         super.awakeFromNib()
         
         nameLabelCell.adjustsFontSizeToFitWidth = true

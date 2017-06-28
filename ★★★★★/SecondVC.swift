@@ -18,7 +18,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBOutlet weak var serchAction: UIBarButtonItem!
     
     let databaseRef = FIRDatabase.database().reference()
@@ -26,7 +25,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var users = [User]()
     
     var refreshControl: UIRefreshControl!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,8 +209,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.backgroundImmage.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
         }
         
-        
-        
         cell.star1.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star2.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star3.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
@@ -270,6 +266,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
             if (sender.tag == 201) {
+                
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
@@ -574,11 +571,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 AudioServicesPlaySystemSound (sendID)
             })
         }
-
-        alert.addAction(okAndShare)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+            alert.addAction(okAndShare)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
