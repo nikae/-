@@ -24,6 +24,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var star3: UIButton!
     @IBOutlet weak var star4: UIButton!
     @IBOutlet weak var star5: UIButton!
+    @IBOutlet weak var blockHit: UIButton!
     
      override func awakeFromNib() {
         super.awakeFromNib()

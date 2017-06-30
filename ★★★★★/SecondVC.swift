@@ -24,7 +24,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
     
+    var blockedArr = [blockedStruct]()
+    
     var refreshControl: UIRefreshControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,29 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             tableview.addSubview(refreshControl)
         }
+        
+        
+        //MARK --> get blocked users
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            
+            let blockedUsers = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
+           
+            
+            for i in blockedUsers {
+                let blockedUserID = i.value["blockedBy"] as! String
+                let blockedAt = i.value["blockedAt"] as! String
+                
+                self.blockedArr.append(blockedStruct(blockedUserID: blockedUserID, blockedAt: blockedAt))
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        
         
         //MARK: --> Get users from database
         if coordinate1 != nil {
@@ -51,8 +77,19 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let locations = value?["Location"] as? [String : AnyObject] ?? [:]
                 let isActive = value?["isActive"] as? Bool
                 
+               // let blocked = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
+               // let blockedBy = value?["blockedBy"] as? [String : AnyObject] ?? [:]
+                
+                
+                
+                
+                
+                
                 if locations.count != 0 {
-                    if isActive != false {
+                if isActive != false {
+                    
+                    
+
                         var usersCordinate: CLLocation!
                         let latitude = locations["lat"] as! CLLocationDegrees
                         let longitude = locations["long"] as! CLLocationDegrees
@@ -60,25 +97,40 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         
                         let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
                         let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
+                    
+                    if userID != self.uid {
+                        var rArray = [Rating]()
                         
-                        if userID != self.uid {
-                            var rArray = [Rating]()
-                            for i in ratings {
-                                let creator = i.value["creator"] as! String
-                                let createdAt = i.value["createdAt"] as! String
-                                let value = i.value["value"] as! Double
+                      
+                        
+                        for i in ratings {
+                            let creator = i.value["creator"] as! String
+                            let createdAt = i.value["createdAt"] as! String
+                            let value = i.value["value"] as! Double
                                 
-                                rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
-                            }
-                            
-                            if self.users.count < 200 {
-                                self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
-                                self.users = self.users.sorted(by: {$0.distance < $1.distance})
-                            }
-                            self.tableview.reloadData()
+                            rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                         }
-                    }
+                        
+                        
+                        
+                            
+                        if self.users.count < 200 {
+                            self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
+                            for i in self.blockedArr {
+                                for b in self.users {
+                                    if b.userId == i.blockedUserID {
+                                        self.users = self.users.filter { $0.userId != b.userId }
+                                    }
+                                }
+                            }
+                            self.users = self.users.sorted(by: {$0.distance < $1.distance})
+                        }
+                        
+                        self.tableview.reloadData()
                 }
+                    
+            }
+        }
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -111,6 +163,27 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func refresh(sender:AnyObject) {
         users.removeAll()
         
+        //MARK --> get blocked users
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            
+            let blockedUsers = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
+            
+            
+            for i in blockedUsers {
+                let blockedUserID = i.value["blockedBy"] as! String
+                let blockedAt = i.value["blockedAt"] as! String
+                
+                self.blockedArr.append(blockedStruct(blockedUserID: blockedUserID, blockedAt: blockedAt))
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
         if coordinate1 != nil {
             databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
@@ -123,6 +196,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
                 let locations = value?["Location"] as? [String : AnyObject] ?? [:]
                 let isActive = value?["isActive"] as? Bool
+                //let blocked = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
                 
                 if locations.count != 0 {
                     if isActive != false {
@@ -136,6 +210,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         
                         if userID != self.uid {
                             var rArray = [Rating]()
+                            
                             for i in ratings {
                                 let creator = i.value["creator"] as! String
                                 let createdAt = i.value["createdAt"] as! String
@@ -144,8 +219,18 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                                 rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                             }
                             
+                           
+
+                            
                             if self.users.count < 200 {
                                 self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
+                                for i in self.blockedArr {
+                                    for b in self.users {
+                                        if b.userId == i.blockedUserID {
+                                            self.users = self.users.filter { $0.userId != b.userId }
+                                        }
+                                    }
+                                }
                                 self.users = self.users.sorted(by: {$0.distance < $1.distance})
                             }
                             self.tableview.reloadData()
@@ -215,7 +300,46 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.star4.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         cell.star5.addTarget(self, action: #selector(SecondVC.buttonClicked), for: .touchUpInside)
         
+        cell.blockHit.addTarget(self, action: #selector(SecondVC.blockUser), for: .touchUpInside)
+        
         return cell
+    }
+    
+    func blockUser(sender:UIButton) {
+        let center = sender.center
+        let point = sender.superview!.convert(center, to: tableview)
+        let indexPath = tableview.indexPathForRow(at: point)
+        
+        print("Block User: \(self.users[(indexPath?.row)!].name!)")
+        
+        let alert = UIAlertController(title: "Block user!", message: "Do you want to block \(self.users[(indexPath?.row)!].name!)?", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let contact = UIAlertAction(title: "Contact Us", style: .default, handler: { (action: UIAlertAction) in
+            UIApplication.shared.openURL(NSURL(string: "https://5starsapp.com/contact/")! as URL)
+        })
+        let continu = UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction) in
+            
+            let alert = UIAlertController(title: "Confirm", message: "You will never find \(self.users[(indexPath?.row)!].name!), blocking user disables abilety to see users profile from both side and newer can be retrived", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let ok = UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction) in
+            block(blockedUser: (self.users[(indexPath?.row)!].userId)!)
+            blockedUsers(blockedUser: (self.users[(indexPath?.row)!].userId)!)
+                
+            print("\(self.users[(indexPath?.row)!].name!) has been blocked")
+            self.users.remove(at: (indexPath?.row)!)
+            self.tableview.reloadData()
+            })
+            
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        alert.addAction(continu)
+        alert.addAction(contact)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
     }
     
     func buttonClicked(sender:UIButton) {

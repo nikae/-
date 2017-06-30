@@ -71,3 +71,41 @@ func rateStar(value: Double, ratee: String) {
     //databaseRef.child("Users/\(ratee)/ratings").child("\(userID!)").setValue(r)
     databaseRef.child("Users/\(ratee)/ratings").childByAutoId().setValue(r)
 }
+
+//MARK: --> Block User Functions
+
+func block(blockedUser: String){
+    let userID = FIRAuth.auth()?.currentUser?.uid
+    let databaseRef = FIRDatabase.database().reference()
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd.MM.yyyy h:mm a"
+    let result = formatter.string(from: date)
+    let block = ["blockedBy": userID!, "blockedAt": result] as [String : Any]
+    
+    databaseRef.child("Users/\(blockedUser)/blockedBy").childByAutoId().setValue(block)
+}
+
+
+func blockedUsers(blockedUser: String){
+    let userID = FIRAuth.auth()?.currentUser?.uid
+    let databaseRef = FIRDatabase.database().reference()
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd.MM.yyyy h:mm a"
+    let result = formatter.string(from: date)
+    
+    let block = ["blockedBy": blockedUser, "blockedAt": result] as [String : Any]
+    
+    databaseRef.child("Users/\(userID!)/blockedUsers").childByAutoId().setValue(block)
+}
+
+
+
+
+
+
+
+
+
+

@@ -98,6 +98,7 @@ class FirstVC: UIViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+        
         nameLabel.adjustsFontSizeToFitWidth = true
         
         imageView.contentMode = .scaleAspectFill

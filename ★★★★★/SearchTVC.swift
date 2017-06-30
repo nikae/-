@@ -560,6 +560,34 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     }
     
     func filterUsers(userName: String) {
+        
+        var blockedArr = [blockedStruct]()
+        
+        //MARK --> get blocked users
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            
+            let blockedUsers = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
+            
+            
+            for i in blockedUsers {
+                let blockedUserID = i.value["blockedBy"] as! String
+                let blockedAt = i.value["blockedAt"] as! String
+                
+                blockedArr.append(blockedStruct(blockedUserID: blockedUserID, blockedAt: blockedAt))
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        
+        
+        
+        
+        
         databaseRef.child("Users").observe(.childAdded , with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
@@ -570,10 +598,12 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             let rating = value?["rating"] as? Double ?? 5.0
             let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
             let isActive = value?["isActive"] as? Bool
+            //let blocked = value?["blockedUsers"] as? [String : AnyObject] ?? [:]
             
             if userID != self.uid {
                 if isActive != false {
                 var rArray = [Rating]()
+                    
                 for i in ratings {
                     let creator = i.value["creator"] as! String
                     let createdAt = i.value["createdAt"] as! String
@@ -582,10 +612,21 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
                 }
                 
+                    
+                   
+                    
                 if name.lowercased().contains(userName.lowercased()) && name != "" {
                     self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating, distance: 0))
                     
-                    self.tableView.reloadData()
+                    for i in blockedArr {
+                        for b in self.users {
+                            if b.userId == i.blockedUserID {
+                                self.users = self.users.filter { $0.userId != b.userId }
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+         
                 } else {
                     self.tableView.reloadData()
                 }
