@@ -29,3 +29,8 @@ struct blockedStruct {
     var blockedUserID: String!
     var blockedAt: String!
 }
+
+struct BlockedByStruct {
+    var blockedUserID: String!
+    var blockedAt: String!
+}

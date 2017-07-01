@@ -63,17 +63,167 @@
                                     <constraint firstAttribute="width" constant="150" id="zzx-KB-3Rp"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check to agree our terms of use" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMF-TD-KkF">
+                                <rect key="frame" x="100" y="488" width="229" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="M8F-Zc-cSM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGl-c8-adn">
+                                <rect key="frame" x="46" y="487" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="1v5-kQ-DD3"/>
+                                    <constraint firstAttribute="height" constant="30" id="XhM-z7-LMH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="◻︎">
+                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="testButtonHit:" destination="DiP-m3-8Kt" eventType="touchUpInside" id="wGT-mI-iW7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xGl-c8-adn" firstAttribute="leading" secondItem="O8g-el-WMo" secondAttribute="leadingMargin" constant="30" id="6Lm-j9-Xpn"/>
                             <constraint firstItem="G5n-CT-BZP" firstAttribute="top" secondItem="13Y-Nb-x1x" secondAttribute="bottom" constant="50" id="AZK-ur-yCR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wMF-TD-KkF" secondAttribute="trailing" constant="30" id="IaK-qF-cVW"/>
+                            <constraint firstItem="wMF-TD-KkF" firstAttribute="leading" secondItem="xGl-c8-adn" secondAttribute="trailing" constant="8" id="TMV-RF-IYr"/>
+                            <constraint firstItem="qEc-Di-LC0" firstAttribute="top" secondItem="wMF-TD-KkF" secondAttribute="bottom" constant="149" id="Z2W-oB-uWt"/>
                             <constraint firstItem="G5n-CT-BZP" firstAttribute="centerX" secondItem="O8g-el-WMo" secondAttribute="centerX" id="f0Q-uU-kTE"/>
+                            <constraint firstItem="qEc-Di-LC0" firstAttribute="top" secondItem="xGl-c8-adn" secondAttribute="bottom" constant="150" id="qeH-Ff-gm6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="checkBtn" destination="xGl-c8-adn" id="87Q-vo-lRr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrj-Rl-VGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-653.60000000000002" y="90.404797601199405"/>
+        </scene>
+        <!--Privacy PolicyVC-->
+        <scene sceneID="Rky-Ki-6PE">
+            <objects>
+                <viewController storyboardIdentifier="PrivacyPolicyVC" id="e3U-Cp-Wnp" customClass="PrivacyPolicyVC" customModule="_____" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ltD-Cq-qFH"/>
+                        <viewControllerLayoutGuide type="bottom" id="NPO-Pz-sqS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0pl-Ay-Znk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bci-q3-Exl">
+                                <rect key="frame" x="24" y="28" width="343" height="557"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Privacy Policy
+This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.
+
+What personal information do we collect from the people that visit our blog, website or app?
+
+When ordering or registering on our site, as appropriate, you may be asked to enter your name, email address, Profile picture or other details to help you with your experience.
+
+When do we collect information?
+
+We collect information from you when you register on our site or enter information on our site.
+
+
+How do we use your information?
+
+We may use the information we collect from you when you register, make a purchase, sign up for our newsletter, respond to a survey or marketing communication, surf the website, or use certain other site features in the following ways:
+
+      • To personalize your experience and to allow us to deliver the type of content and product offerings in which you are most interested.
+      • To improve our website in order to better serve you.
+
+How do we protect your information?
+
+We do not use vulnerability scanning and/or scanning to PCI standards.
+We only provide articles and information. We never ask for credit card numbers.
+We do not use Malware Scanning.
+
+We do not use an SSL certificate
+         • We do not need an SSL because:
+We dont ask for credit card information.
+
+Do we use 'cookies'?
+
+We do not use cookies for tracking purposes
+
+You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You do this through your browser settings. Since browser is a little different, look at your browser's Help Menu to learn the correct way to modify your cookies.
+
+If you turn cookies off, Some of the features that make your site experience more efficient may not function properly.that make your site experience more efficient and may not function properly.
+
+
+Third-party disclosure
+
+We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.
+
+Third-party links
+
+We do not include or offer third-party products or services on our website.
+
+Google
+
+Google's advertising requirements can be summed up by Google's Advertising Principles. They are put in place to provide a positive experience for users. https://support.google.com/adwordspolicy/answer/1316548?hl=en 
+
+We have not enabled Google AdSense on our site but we may do so in the future.
+
+COPPA (Children Online Privacy Protection Act)
+
+When it comes to the collection of personal information from children under the age of 13 years old, the Children's Online Privacy Protection Act (COPPA) puts parents in control. The Federal Trade Commission, United States' consumer protection agency, enforces the COPPA Rule, which spells out what operators of websites and online services must do to protect children's privacy and safety online.
+
+We do not specifically market to children under the age of 13 years old.
+
+CAN SPAM Act
+
+The CAN-SPAM Act is a law that sets the rules for commercial email, establishes requirements for commercial messages, gives recipients the right to have emails stopped from being sent to them, and spells out tough penalties for violations.
+
+We collect your email address in order to:
+
+To be in accordance with CANSPAM, we agree to the following:
+
+If at any time you would like to unsubscribe from receiving future emails, you can email us at
+and we will promptly remove you from ALL correspondence.
+
+
+Contacting Us
+
+If there are any questions regarding this privacy policy, you may contact us using the information below.  https://5starsapp.com/contact/  Last Edited on 2017-06-29</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHS-c1-yMw">
+                                <rect key="frame" x="36" y="593" width="303" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="⊗">
+                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissHit:" destination="e3U-Cp-Wnp" eventType="touchUpInside" id="g4o-Dg-FZw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WHS-c1-yMw" firstAttribute="top" secondItem="bci-q3-Exl" secondAttribute="bottom" constant="8" id="4sG-Oh-dS7"/>
+                            <constraint firstItem="WHS-c1-yMw" firstAttribute="leading" secondItem="0pl-Ay-Znk" secondAttribute="leadingMargin" constant="20" id="7oW-2z-fpb"/>
+                            <constraint firstItem="bci-q3-Exl" firstAttribute="top" secondItem="ltD-Cq-qFH" secondAttribute="bottom" constant="8" id="Hzx-g1-pIM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WHS-c1-yMw" secondAttribute="trailing" constant="20" id="L3P-Mk-NLf"/>
+                            <constraint firstItem="bci-q3-Exl" firstAttribute="trailing" secondItem="0pl-Ay-Znk" secondAttribute="trailingMargin" constant="8" id="RZe-wi-fdr"/>
+                            <constraint firstItem="WHS-c1-yMw" firstAttribute="top" secondItem="bci-q3-Exl" secondAttribute="bottom" constant="8" id="Vko-CF-hQr"/>
+                            <constraint firstItem="bci-q3-Exl" firstAttribute="leading" secondItem="0pl-Ay-Znk" secondAttribute="leadingMargin" constant="8" id="Wh4-tA-TE8"/>
+                            <constraint firstItem="NPO-Pz-sqS" firstAttribute="top" secondItem="WHS-c1-yMw" secondAttribute="bottom" constant="20" id="yej-xu-h5q"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="512-kw-Uj5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1815.2" y="812.74362818590714"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="ceQ-hI-e8A">
@@ -749,6 +899,126 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SEs-WU-kpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="189" y="1636"/>
+        </scene>
+        <!--License AgreementVC-->
+        <scene sceneID="b8a-mm-y8g">
+            <objects>
+                <viewController storyboardIdentifier="License_AgreementVC" id="znN-H5-4hK" customClass="License_AgreementVC" customModule="_____" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FxZ-vB-HQy"/>
+                        <viewControllerLayoutGuide type="bottom" id="9dr-b5-rcL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Moz-LO-Geu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NDx-z2-0Az">
+                                <rect key="frame" x="24" y="28" width="343" height="557"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">License_AgreementVC 
+This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.
+
+What personal information do we collect from the people that visit our blog, website or app?
+
+When ordering or registering on our site, as appropriate, you may be asked to enter your name, email address, Profile picture or other details to help you with your experience.
+
+When do we collect information?
+
+We collect information from you when you register on our site or enter information on our site.
+
+
+How do we use your information?
+
+We may use the information we collect from you when you register, make a purchase, sign up for our newsletter, respond to a survey or marketing communication, surf the website, or use certain other site features in the following ways:
+
+      • To personalize your experience and to allow us to deliver the type of content and product offerings in which you are most interested.
+      • To improve our website in order to better serve you.
+
+How do we protect your information?
+
+We do not use vulnerability scanning and/or scanning to PCI standards.
+We only provide articles and information. We never ask for credit card numbers.
+We do not use Malware Scanning.
+
+We do not use an SSL certificate
+         • We do not need an SSL because:
+We dont ask for credit card information.
+
+Do we use 'cookies'?
+
+We do not use cookies for tracking purposes
+
+You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You do this through your browser settings. Since browser is a little different, look at your browser's Help Menu to learn the correct way to modify your cookies.
+
+If you turn cookies off, Some of the features that make your site experience more efficient may not function properly.that make your site experience more efficient and may not function properly.
+
+
+Third-party disclosure
+
+We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.
+
+Third-party links
+
+We do not include or offer third-party products or services on our website.
+
+Google
+
+Google's advertising requirements can be summed up by Google's Advertising Principles. They are put in place to provide a positive experience for users. https://support.google.com/adwordspolicy/answer/1316548?hl=en 
+
+We have not enabled Google AdSense on our site but we may do so in the future.
+
+COPPA (Children Online Privacy Protection Act)
+
+When it comes to the collection of personal information from children under the age of 13 years old, the Children's Online Privacy Protection Act (COPPA) puts parents in control. The Federal Trade Commission, United States' consumer protection agency, enforces the COPPA Rule, which spells out what operators of websites and online services must do to protect children's privacy and safety online.
+
+We do not specifically market to children under the age of 13 years old.
+Do we let third-parties, including ad networks or plug-ins collect PII from children under 13?
+
+CAN SPAM Act
+
+The CAN-SPAM Act is a law that sets the rules for commercial email, establishes requirements for commercial messages, gives recipients the right to have emails stopped from being sent to them, and spells out tough penalties for violations.
+
+We collect your email address in order to:
+
+To be in accordance with CANSPAM, we agree to the following:
+
+If at any time you would like to unsubscribe from receiving future emails, you can email us at
+and we will promptly remove you from ALL correspondence.
+
+
+Contacting Us
+
+If there are any questions regarding this privacy policy, you may contact us using the information below.  https://5starsapp.com/contact/  Last Edited on 2017-06-29</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAD-LF-Tsa">
+                                <rect key="frame" x="36" y="593" width="303" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="⊗">
+                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissHit:" destination="znN-H5-4hK" eventType="touchUpInside" id="zvE-oa-oEf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9dr-b5-rcL" firstAttribute="top" secondItem="lAD-LF-Tsa" secondAttribute="bottom" constant="20" id="Aon-0s-NEk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lAD-LF-Tsa" secondAttribute="trailing" constant="20" id="TWZ-n5-YMZ"/>
+                            <constraint firstItem="NDx-z2-0Az" firstAttribute="trailing" secondItem="Moz-LO-Geu" secondAttribute="trailingMargin" constant="8" id="a2c-ft-ywL"/>
+                            <constraint firstItem="lAD-LF-Tsa" firstAttribute="leading" secondItem="Moz-LO-Geu" secondAttribute="leadingMargin" constant="20" id="b0s-id-5im"/>
+                            <constraint firstItem="NDx-z2-0Az" firstAttribute="top" secondItem="FxZ-vB-HQy" secondAttribute="bottom" constant="8" id="bvi-Qc-zqu"/>
+                            <constraint firstItem="NDx-z2-0Az" firstAttribute="leading" secondItem="Moz-LO-Geu" secondAttribute="leadingMargin" constant="8" id="gxI-yp-8as"/>
+                            <constraint firstItem="lAD-LF-Tsa" firstAttribute="top" secondItem="NDx-z2-0Az" secondAttribute="bottom" constant="8" id="jdD-3e-Hog"/>
+                            <constraint firstItem="lAD-LF-Tsa" firstAttribute="top" secondItem="NDx-z2-0Az" secondAttribute="bottom" constant="8" id="mc0-bx-M6p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-CG-v7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2582" y="813"/>
         </scene>
     </scenes>
     <resources>

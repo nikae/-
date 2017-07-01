@@ -128,8 +128,33 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func infoHit(_ sender: UIButton) {
-        UIApplication.shared.openURL(NSURL(string: webLink)! as URL)
+        let alert = UIAlertController(title: "Information and help", message: "please choose following", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let Web = UIAlertAction(title: "Wisit web site", style: .default) { (action: UIAlertAction) in
+            UIApplication.shared.openURL(NSURL(string: webLink)! as URL)
+        }
+        let Contact = UIAlertAction(title: "Contact / Report issue", style: .default) { (action: UIAlertAction) in
+            UIApplication.shared.openURL(NSURL(string: "https://5starsapp.com/contact/")! as URL)
+        }
+        let TermsOfUse = UIAlertAction(title: "User License Agreement", style: .default) { (action: UIAlertAction) in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "License_AgreementVC") as! License_AgreementVC
+            self.present(vc, animated: true, completion: nil)
+        }
+        let privacyPolicy = UIAlertAction(title: "Privacy policy", style: .default) { (action: UIAlertAction) in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PrivacyPolicyVC") as! PrivacyPolicyVC
+            self.present(vc, animated: true, completion: nil)
+        }
+
+        alert.addAction(cancel)
+        alert.addAction(Web)
+        alert.addAction(Contact)
+        alert.addAction(TermsOfUse)
+        alert.addAction(privacyPolicy)
+        present(alert, animated: true, completion: nil)
+        
+        
     }
+    
     
     @IBAction func nightModeHit(_ sender: UIButton) {
         launchBool = !launchBool

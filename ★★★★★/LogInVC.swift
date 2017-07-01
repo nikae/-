@@ -12,6 +12,7 @@ import Firebase
 import CoreLocation
 
 class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
+    @IBOutlet weak var checkBtn: UIButton!
     
     var imgURLString = ""
     var userName = ""
@@ -20,12 +21,14 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     var locationManager = CLLocationManager()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    let loginButton = FBSDKLoginButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let loginButton = FBSDKLoginButton()
+        
         view.addSubview(loginButton)
+        loginButton.isUserInteractionEnabled = false
         
         loginButton.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 50)
         loginButton.center = view.center
@@ -66,15 +69,17 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         }
         
         loginButton.isHidden = true
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .gray
-        self.view.addSubview(activityIndicator)
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.activityIndicatorViewStyle = .gray
+        self.view.addSubview(self.activityIndicator)
         
-        activityIndicator.startAnimating()
+        self.activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        showUserInfo()
+        self.showUserInfo()
+        
+       
     }
     
     func showUserInfo() {
@@ -171,6 +176,54 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
         
         databaseRef.child("Users/\(userId!)").setValue(userData)
         
+    }
+    
+    var launchBool: Bool = false {
+        didSet {
+            if launchBool == true {
+                let alert = UIAlertController(title: "Alert", message: "By clicking \("Agree"), you agree to our User License Agreement and Privacy Policy", preferredStyle: .actionSheet)
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction) in
+                    self.launchBool = false
+                }
+
+                let Agree = UIAlertAction(title: "Agree", style: .default) { (action: UIAlertAction) in
+                    self.checkBtn.setTitle("☑︎", for: .normal)
+                    self.loginButton.isUserInteractionEnabled = true
+                    self.loginButton.backgroundColor = .blue
+                }
+                
+                let privacyPolicy = UIAlertAction(title: "Privacy policy", style: .default) { (action: UIAlertAction) in
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PrivacyPolicyVC") as! PrivacyPolicyVC
+                    self.present(vc, animated: true, completion: nil)
+                    self.launchBool = false
+                }
+                
+                let LicenseAgreement = UIAlertAction(title: "User License Agreement", style: .default) { (action: UIAlertAction) in
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "License_AgreementVC") as! License_AgreementVC
+                    self.present(vc, animated: true, completion: nil)
+                    self.launchBool = false
+                }
+                
+                
+                
+                
+                
+                alert.addAction(cancel)
+                alert.addAction(LicenseAgreement)
+                alert.addAction(privacyPolicy)
+                alert.addAction(Agree)
+                
+                present(alert, animated: true, completion: nil)
+             } else {
+              loginButton.isUserInteractionEnabled = false
+                checkBtn.setTitle("◻︎", for: .normal)
+                loginButton.setTitle("please", for: .normal)
+            }
+        }
+    }
+    
+    @IBAction func testButtonHit(_ sender: UIButton) {
+        launchBool = !launchBool
     }
 }
 
