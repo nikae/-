@@ -316,8 +316,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let point = sender.superview!.convert(center, to: tableview)
         let indexPath = tableview.indexPathForRow(at: point)
         
-        print("Block User: \(self.users[(indexPath?.row)!].name!)")
-        
         let alert = UIAlertController(title: "Block user!", message: "Do you want to block \(self.users[(indexPath?.row)!].name!)?", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let contact = UIAlertAction(title: "Report issue", style: .default, handler: { (action: UIAlertAction) in
@@ -329,12 +327,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let ok = UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction) in
-            block(blockedUser: (self.users[(indexPath?.row)!].userId)!)
-            blockedUsers(blockedUser: (self.users[(indexPath?.row)!].userId)!)
-                
-            print("\(self.users[(indexPath?.row)!].name!) has been blocked")
-            self.users.remove(at: (indexPath?.row)!)
-            self.tableview.reloadData()
+                block(blockedUser: (self.users[(indexPath?.row)!].userId)!)
+                blockedUsers(blockedUser: (self.users[(indexPath?.row)!].userId)!)
+                self.users.remove(at: (indexPath?.row)!)
+                self.tableview.reloadData()
             })
             
             alert.addAction(cancel)

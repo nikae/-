@@ -186,7 +186,7 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     var launchBool: Bool = false {
         didSet {
             if launchBool == true {
-                let alert = UIAlertController(title: "Alert", message: "By clicking \("Agree"), you agree to our User License Agreement and Privacy Policy", preferredStyle: .actionSheet)
+                let alert = UIAlertController(title: "Agreement", message: "By clicking \("Agree"), you agree to our User License Agreement and Privacy Policy", preferredStyle: .actionSheet)
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction) in
                     self.launchBool = false
                 }
@@ -208,10 +208,6 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
                     self.present(vc, animated: true, completion: nil)
                     self.launchBool = false
                 }
-                
-                
-                
-                
                 
                 alert.addAction(cancel)
                 alert.addAction(LicenseAgreement)
