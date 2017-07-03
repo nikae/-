@@ -53,6 +53,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let blockedAt = i.value["blockedAt"] as! String
                 
                 self.blockedArr.append(blockedStruct(blockedUserID: blockedUserID, blockedAt: blockedAt))
+                print(self.blockedArr.count)
             }
             
             for b in blockedBy {
@@ -60,6 +61,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let blockedAt = b.value["blockedAt"] as! String
                 
                 self.blockedByArr.append(BlockedByStruct(blockedUserID: blocker, blockedAt: blockedAt))
+                print(self.blockedByArr.count)
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -101,15 +103,23 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             if self.users.count < 200 {
                                 
                                 self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
+                                
                                 for i in self.blockedArr {
-                                    for c in self.blockedByArr {
-                                        for b in self.users {
-                                            if b.userId == i.blockedUserID || b.userId == c.blockedUserID {
-                                                self.users = self.users.filter { $0.userId != b.userId }
-                                            }
+                                    for b in self.users {
+                                        if b.userId == i.blockedUserID {
+                                            self.users = self.users.filter { $0.userId != b.userId }
                                         }
                                     }
                                 }
+                                
+                                for c in self.blockedByArr {
+                                    for b in self.users {
+                                        if b.userId == c.blockedUserID {
+                                            self.users = self.users.filter { $0.userId != b.userId }
+                                        }
+                                    }
+                                }
+                                
                                 self.users = self.users.sorted(by: {$0.distance < $1.distance})
                             }
                             self.tableview.reloadData()
@@ -210,14 +220,21 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             if self.users.count < 200 {
                                 self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
                                 for i in self.blockedArr {
-                                    for c in self.blockedByArr {
-                                        for b in self.users {
-                                            if b.userId == i.blockedUserID || b.userId == c.blockedUserID {
-                                                self.users = self.users.filter { $0.userId != b.userId }
-                                            }
+                                    for b in self.users {
+                                        if b.userId == i.blockedUserID {
+                                            self.users = self.users.filter { $0.userId != b.userId }
                                         }
                                     }
                                 }
+                                
+                                for c in self.blockedByArr {
+                                    for b in self.users {
+                                        if b.userId == c.blockedUserID {
+                                            self.users = self.users.filter { $0.userId != b.userId }
+                                        }
+                                    }
+                                }
+
                                 self.users = self.users.sorted(by: {$0.distance < $1.distance})
                             }
                             self.tableview.reloadData()
@@ -303,7 +320,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let alert = UIAlertController(title: "Block user!", message: "Do you want to block \(self.users[(indexPath?.row)!].name!)?", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let contact = UIAlertAction(title: "Contact Us", style: .default, handler: { (action: UIAlertAction) in
+        let contact = UIAlertAction(title: "Report issue", style: .default, handler: { (action: UIAlertAction) in
             UIApplication.shared.openURL(NSURL(string: "https://5starsapp.com/contact/")! as URL)
         })
         let continu = UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction) in

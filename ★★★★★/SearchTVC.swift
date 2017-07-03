@@ -615,12 +615,17 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     if name.lowercased().contains(userName.lowercased()) && name != "" {
                         self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt:createdAt, ratings: rArray, rating: rating, distance: 0))
                         for i in blockedArr {
-                            for c in blockedByArr {
-                                for b in self.users {
-                                    if b.userId == i.blockedUserID || b.userId == c.blockedUserID {
-                                        self.users = self.users.filter { $0.userId != b.userId }
-                                        self.tableView.reloadData()
-                                    }
+                            for b in self.users {
+                                if b.userId == i.blockedUserID {
+                                    self.users = self.users.filter { $0.userId != b.userId }
+                                }
+                            }
+                        }
+                        
+                        for c in blockedByArr {
+                            for b in self.users {
+                                if b.userId == c.blockedUserID {
+                                    self.users = self.users.filter { $0.userId != b.userId }
                                 }
                             }
                         }

@@ -11,8 +11,10 @@ import FBSDKLoginKit
 import Firebase
 import CoreLocation
 
-class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
+class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate,UIGestureRecognizerDelegate {
     @IBOutlet weak var checkBtn: UIButton!
+    @IBOutlet weak var agrLabel: UILabel!
+    @IBOutlet var taptap: UITapGestureRecognizer!
     
     var imgURLString = ""
     var userName = ""
@@ -26,6 +28,9 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        taptap.delegate = self
+        
+        agrLabel.adjustsFontSizeToFitWidth = true
         
         view.addSubview(loginButton)
         loginButton.isUserInteractionEnabled = false
@@ -220,6 +225,10 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
                 loginButton.setTitle("please", for: .normal)
             }
         }
+    }
+    @IBAction func tapToAgree(_ sender: UITapGestureRecognizer) {
+        print("tap")
+        launchBool = !launchBool
     }
     
     @IBAction func testButtonHit(_ sender: UIButton) {

@@ -63,14 +63,18 @@
                                     <constraint firstAttribute="width" constant="150" id="zzx-KB-3Rp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check to agree our terms of use" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMF-TD-KkF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check to agree our terms of use" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMF-TD-KkF">
                                 <rect key="frame" x="100" y="488" width="229" height="30"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="M8F-Zc-cSM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="z7C-6p-EbW" appends="YES" id="E3H-Tb-2yh"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGl-c8-adn">
                                 <rect key="frame" x="46" y="487" width="46" height="30"/>
@@ -99,10 +103,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="agrLabel" destination="wMF-TD-KkF" id="gW8-Z4-SaZ"/>
                         <outlet property="checkBtn" destination="xGl-c8-adn" id="87Q-vo-lRr"/>
+                        <outlet property="taptap" destination="z7C-6p-EbW" id="2jH-he-VBp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrj-Rl-VGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="z7C-6p-EbW">
+                    <connections>
+                        <action selector="tapToAgree:" destination="DiP-m3-8Kt" id="Uak-VO-oA0"/>
+                        <outlet property="delegate" destination="DiP-m3-8Kt" id="z63-IH-FZ6"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-653.60000000000002" y="90.404797601199405"/>
         </scene>
