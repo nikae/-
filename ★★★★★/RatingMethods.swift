@@ -36,8 +36,8 @@ func calcAndUpdateRating(uId: String)  {
         }
         
         let result = calcRating(ratings: rDouble)
-        let finalRating = (result * 5)
-        
+        let finalRating = result //(result * 5)
+        print(finalRating)
         databaseRef.child("Users/\(uId)/rating").setValue(finalRating)
         
     }) { (error) in
@@ -53,9 +53,9 @@ func calcRating( ratings: [Double] ) -> Double {
         sum += index
     }
     
-    let count = ratings.count
+   // let count = ratings.count
     
-    return sum / Double(count)
+    return sum /// Double(count)
 }
 
 func rateStar(value: Double, ratee: String) {

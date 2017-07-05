@@ -83,7 +83,8 @@ class FirstVC: UIViewController {
             let rating = value?["rating"] as? Double ?? 5.0
             
             self.nameLabel.text = name
-            self.starsLabel.text = String(format: "%.01f", rating)
+            self.starsLabel.text = "\(Int(rating))★"
+            self.starsLabel.adjustsFontSizeToFitWidth = true
             
             if pictureURL != "" {
                     self.imageView.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
@@ -133,7 +134,7 @@ class FirstVC: UIViewController {
             
             nameLabel.textColor = .white
             starsLabel.textColor = .white
-            starStarLabel.textColor = .white
+            //starStarLabel.textColor = .white
             meniuBtn.setTitleColor(.gray, for: .normal)
             
         } else {
@@ -143,7 +144,7 @@ class FirstVC: UIViewController {
             
             nameLabel.textColor = buttonTextColorDark
             starsLabel.textColor = buttonTextColorDark
-            starStarLabel.textColor = buttonTextColorDark
+            //starStarLabel.textColor = buttonTextColorDark
             meniuBtn.setTitleColor(buttonTextColorDark, for: .normal)
         }
 

@@ -264,7 +264,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             cell.nameLabelCell.textColor = .white
             cell.starsLabelCell.textColor = .white
-            cell.starStarLabel.textColor = .white
+            //cell.starStarLabel.textColor = .white
             
             cell.star1.setTitleColor(.white, for: .normal)
             cell.star2.setTitleColor(.white, for: .normal)
@@ -278,7 +278,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             cell.nameLabelCell.textColor = buttonTextColorDark
             cell.starsLabelCell.textColor = buttonTextColorDark
-            cell.starStarLabel.textColor = buttonTextColorDark
+           // cell.starStarLabel.textColor = buttonTextColorDark
             
             cell.star1.setTitleColor(buttonTextColorDark, for: .normal)
             cell.star2.setTitleColor(buttonTextColorDark, for: .normal)
@@ -288,7 +288,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
                 
         cell.nameLabelCell.text = users[indexPath.row].name
-        cell.starsLabelCell.text = String(format: "%.01f", (users[indexPath.row].rating)!)
+        cell.starsLabelCell.text = "\(Int(users[indexPath.row].rating))★"
+        cell.starsLabelCell.adjustsFontSizeToFitWidth = true
         
         if users[indexPath.row].pictureUrl != "" {
             cell.imageViewCell.sd_setImage(with: URL(string: (users[indexPath.row].pictureUrl)!), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
@@ -382,18 +383,18 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         if isRatedToday != false {
-            let alert = UIAlertController(title: "Already Rated", message: "You already rated \(self.users[(indexPath?.row)!].name!.capitalized) today. Check in tomorrow to rate again.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Already Sent", message: "You already sent ★ to \(self.users[(indexPath?.row)!].name!.capitalized) today. Check in tomorrow to send more.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         } else { 
         
-        let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Send ★s!", message: "You are sending \(star) to \(self.users[(indexPath?.row)!].name!)", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
             if (sender.tag == 201) {
                 
-                rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
                 
@@ -411,7 +412,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 202) {
-                rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                 
@@ -433,7 +434,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 203) {
-                rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 3, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                 
@@ -460,7 +461,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else  if (sender.tag == 204) {
-                rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 4, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                 
@@ -492,7 +493,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else {
-                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 5, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                 
@@ -543,10 +544,10 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let okAndShare = UIAlertAction(title: "Confirm and share", style: .default) { (action: UIAlertAction) in
             
             if (sender.tag == 201) {
-                rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
+                self.share(message: "I sent \(star) to \(self.users[(indexPath?.row)!].name!)", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -561,11 +562,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound(systemSoundID)
                 })
             } else if (sender.tag == 202) {
-                rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
+                self.share(message: "I sent \(star) to \(self.users[(indexPath?.row)!].name!)", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -585,11 +586,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 203) {
-                rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 3, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
+                self.share(message: "I sent \(star) to \(self.users[(indexPath?.row)!].name!)", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -614,11 +615,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else  if (sender.tag == 204) {
-                rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 4, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
+                self.share(message: "I sent \(star) to \(self.users[(indexPath?.row)!].name!)", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -648,11 +649,11 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else {
-                rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
+                rateStar(value: 5, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
                 
-                self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
+                self.share(message: "I sent \(star) to \(self.users[(indexPath?.row)!].name!)", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
                     b1.setTitle("☆", for: .normal)
@@ -735,7 +736,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.users[atIndex].rating = rating
                 
                 
-                let ratingStr = String(format: "%.01f", rating)
+                let ratingStr = "\(Int(rating))"
                 
                 var headers: HTTPHeaders? = HTTPHeaders()
                 let urlstring = "https://fcm.googleapis.com/fcm/send"
@@ -747,8 +748,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let notification: Parameters? = [
                     "to" : "\(token)",
                     "notification" : [
-                        "body" : "You were rated \(star)★. Your current rating is \(String(describing: ratingStr))★.",
-                        "title" : "New Rating!",
+                        "body" : "You just received \(star)★. You have collected a total of \(String(describing: ratingStr))★.",
+                        "title" : "New ★s!",
                         "sound" : "default"
                     ]
                 ]

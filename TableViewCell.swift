@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabelCell: UILabel!
     @IBOutlet weak var starsLabelCell: UILabel!
     
-    @IBOutlet weak var starStarLabel: UILabel!
+   // @IBOutlet weak var starStarLabel: UILabel!
     @IBOutlet weak var backGroundView: UIView!
     
     @IBOutlet weak var backgroundImmage: UIImageView!

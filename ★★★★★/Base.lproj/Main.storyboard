@@ -381,27 +381,6 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                         <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jj-a1-l7Y">
-                                        <rect key="frame" x="146.5" y="460" width="50" height="30"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVX-be-SUb">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kds-R0-SEr">
-                                                <rect key="frame" x="50" y="0.0" width="0.0" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="I4N-Yl-Y6w"/>
-                                            <constraint firstAttribute="height" constant="30" id="pn1-dE-qph"/>
-                                        </constraints>
-                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2p-Je-kCm">
                                         <rect key="frame" x="8" y="8" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -412,62 +391,26 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                             <action selector="logout:" destination="2tp-V0-mOd" eventType="touchUpInside" id="qyn-H9-r1I"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="FNe-wg-rrU">
-                                        <rect key="frame" x="49" y="500" width="245" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" tag="201" contentMode="scaleToFill" horizontalHuggingPriority="249" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9F-hS-YGf">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" tag="202" contentMode="scaleToFill" restorationIdentifier="2" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSI-zn-aNC">
-                                                <rect key="frame" x="49" y="0.0" width="49" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" tag="203" contentMode="scaleToFill" restorationIdentifier="3" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyJ-F1-fZv">
-                                                <rect key="frame" x="98" y="0.0" width="49" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" tag="204" contentMode="scaleToFill" restorationIdentifier="4" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTy-S6-jPp">
-                                                <rect key="frame" x="147" y="0.0" width="49" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" tag="205" contentMode="scaleToFill" restorationIdentifier="5" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-eT-VTJ">
-                                                <rect key="frame" x="196" y="0.0" width="49" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="354" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVX-be-SUb">
+                                        <rect key="frame" x="50" y="448" width="243" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="ATf-zR-3sh"/>
-                                            <constraint firstAttribute="width" constant="245" id="nEg-B5-yZH"/>
+                                            <constraint firstAttribute="height" constant="30" id="j4i-C1-g4C"/>
                                         </constraints>
-                                    </stackView>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="7jj-a1-l7Y" firstAttribute="top" secondItem="Jbb-Nd-sic" secondAttribute="bottom" constant="20" id="0K9-AF-N2O"/>
+                                    <constraint firstItem="wVX-be-SUb" firstAttribute="leading" secondItem="mnC-0O-VHk" secondAttribute="leading" constant="50" id="25B-hv-44i"/>
                                     <constraint firstItem="Jbb-Nd-sic" firstAttribute="centerX" secondItem="mnC-0O-VHk" secondAttribute="centerX" id="H9d-aJ-mol"/>
                                     <constraint firstAttribute="trailing" secondItem="Z2m-B3-Yal" secondAttribute="trailing" constant="8" id="Inh-P4-Gb6"/>
-                                    <constraint firstItem="FNe-wg-rrU" firstAttribute="top" secondItem="7jj-a1-l7Y" secondAttribute="bottom" constant="10" id="N58-S4-bEd"/>
                                     <constraint firstItem="Jbb-Nd-sic" firstAttribute="top" secondItem="Z2m-B3-Yal" secondAttribute="bottom" constant="30" id="VXH-Kc-glS"/>
-                                    <constraint firstItem="7jj-a1-l7Y" firstAttribute="centerX" secondItem="mnC-0O-VHk" secondAttribute="centerX" id="ah4-Lx-bsD"/>
+                                    <constraint firstItem="wVX-be-SUb" firstAttribute="top" secondItem="Jbb-Nd-sic" secondAttribute="bottom" constant="8" id="Wjh-Uq-Oxn"/>
                                     <constraint firstItem="Z2m-B3-Yal" firstAttribute="leading" secondItem="mnC-0O-VHk" secondAttribute="leading" constant="8" id="frb-th-WnR"/>
                                     <constraint firstItem="Jbb-Nd-sic" firstAttribute="centerY" secondItem="mnC-0O-VHk" secondAttribute="centerY" id="pKh-vx-oqN"/>
-                                    <constraint firstItem="FNe-wg-rrU" firstAttribute="centerX" secondItem="mnC-0O-VHk" secondAttribute="centerX" id="vaa-DE-qoI"/>
+                                    <constraint firstAttribute="trailing" secondItem="wVX-be-SUb" secondAttribute="trailing" constant="50" id="vEe-Jq-000"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -483,23 +426,17 @@ If there are any questions regarding this privacy policy, you may contact us usi
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="b1" destination="T9F-hS-YGf" id="fi2-xp-m0O"/>
-                        <outlet property="b2" destination="MSI-zn-aNC" id="Npn-iD-mNg"/>
-                        <outlet property="b3" destination="GyJ-F1-fZv" id="YVn-V5-swC"/>
-                        <outlet property="b4" destination="LTy-S6-jPp" id="eRx-jB-PAB"/>
-                        <outlet property="b5" destination="tx5-eT-VTJ" id="dX0-Lg-9d7"/>
                         <outlet property="backgroundImage" destination="BaA-dq-OG4" id="J6v-h5-8vc"/>
                         <outlet property="backgroundView" destination="mnC-0O-VHk" id="Qo4-1m-0OF"/>
                         <outlet property="imageView" destination="Jbb-Nd-sic" id="f2J-H8-HqN"/>
                         <outlet property="meniuBtn" destination="w2p-Je-kCm" id="IPQ-jk-R6L"/>
                         <outlet property="nameLabel" destination="Z2m-B3-Yal" id="reo-dh-z1A"/>
-                        <outlet property="starStarLabel" destination="kds-R0-SEr" id="Qgp-P6-N9K"/>
                         <outlet property="starsLabel" destination="wVX-be-SUb" id="gej-Cp-k46"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G98-DQ-8g8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-156" y="820"/>
+            <point key="canvasLocation" x="-156" y="819.94002998500753"/>
         </scene>
         <!--SecondVC-->
         <scene sceneID="ZIw-7s-aOe">
@@ -538,7 +475,7 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                                                 <constraint firstAttribute="height" constant="250" id="rcQ-Wv-CQ1"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHX-bS-wCQ">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WHX-bS-wCQ">
                                                             <rect key="frame" x="49" y="367" width="245" height="50"/>
                                                             <subviews>
                                                                 <button opaque="NO" tag="201" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGW-Lv-Mb1">
@@ -582,29 +519,6 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                                                 <constraint firstAttribute="height" constant="50" id="eL4-g6-37g"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wt8-3i-icL">
-                                                            <rect key="frame" x="147" y="63.5" width="50" height="30"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH5-ta-tv7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxb-R4-DYI">
-                                                                    <rect key="frame" x="26" y="0.0" width="24" height="30"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="Re8-rG-WPK"/>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="YvS-CW-VXy"/>
-                                                                <constraint firstAttribute="width" constant="50" id="eOW-Ho-pND"/>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="wFH-1Y-3I3"/>
-                                                            </constraints>
-                                                        </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgH-ql-fRy">
                                                             <rect key="frame" x="46" y="6" width="251" height="50"/>
                                                             <constraints>
@@ -625,20 +539,30 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                                                 <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85324543535" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH5-ta-tv7">
+                                                            <rect key="frame" x="50" y="64" width="243" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="4ap-Tm-4iz"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="wGB-Ei-GOB" firstAttribute="centerY" secondItem="kNS-5W-U0T" secondAttribute="centerY" id="0Dy-Aj-rhN"/>
                                                         <constraint firstAttribute="trailing" secondItem="BgH-ql-fRy" secondAttribute="trailing" constant="46" id="LLw-gf-0T4"/>
                                                         <constraint firstItem="fnn-25-EpH" firstAttribute="top" secondItem="kNS-5W-U0T" secondAttribute="top" constant="8" id="LYL-pt-Gdc"/>
-                                                        <constraint firstItem="wt8-3i-icL" firstAttribute="top" secondItem="BgH-ql-fRy" secondAttribute="bottom" constant="8" id="Q3Z-gY-Xe2"/>
+                                                        <constraint firstItem="TH5-ta-tv7" firstAttribute="leading" secondItem="kNS-5W-U0T" secondAttribute="leading" constant="50" id="PEV-KU-1i9"/>
                                                         <constraint firstItem="WHX-bS-wCQ" firstAttribute="top" secondItem="wGB-Ei-GOB" secondAttribute="bottom" constant="15" id="XOk-be-jbn"/>
                                                         <constraint firstItem="fnn-25-EpH" firstAttribute="leading" secondItem="kNS-5W-U0T" secondAttribute="leading" constant="8" id="Xq1-E2-FUd"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TH5-ta-tv7" secondAttribute="trailing" constant="50" id="ZjH-Rf-P8t"/>
                                                         <constraint firstItem="BgH-ql-fRy" firstAttribute="leading" secondItem="fnn-25-EpH" secondAttribute="trailing" constant="8" id="fry-o6-uDa"/>
-                                                        <constraint firstItem="wt8-3i-icL" firstAttribute="centerX" secondItem="kNS-5W-U0T" secondAttribute="centerX" id="ssL-ub-Md4"/>
+                                                        <constraint firstItem="TH5-ta-tv7" firstAttribute="top" secondItem="BgH-ql-fRy" secondAttribute="bottom" constant="8" symbolic="YES" id="qmc-Ii-1zV"/>
                                                         <constraint firstItem="WHX-bS-wCQ" firstAttribute="centerX" secondItem="kNS-5W-U0T" secondAttribute="centerX" id="v6G-ID-he8"/>
-                                                        <constraint firstItem="wGB-Ei-GOB" firstAttribute="top" secondItem="wt8-3i-icL" secondAttribute="bottom" constant="8" id="x4f-MO-FM5"/>
                                                         <constraint firstItem="wGB-Ei-GOB" firstAttribute="centerX" secondItem="kNS-5W-U0T" secondAttribute="centerX" id="xRw-y6-fU2"/>
+                                                        <constraint firstItem="wGB-Ei-GOB" firstAttribute="top" secondItem="TH5-ta-tv7" secondAttribute="bottom" constant="8" id="yeC-ck-sZx"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -664,7 +588,6 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                             <outlet property="star3" destination="taX-6U-ek2" id="5rL-Ip-eof"/>
                                             <outlet property="star4" destination="T3d-xE-68O" id="ZPA-d0-Uxv"/>
                                             <outlet property="star5" destination="zPV-Ub-r1Q" id="CQu-l7-hzK"/>
-                                            <outlet property="starStarLabel" destination="lxb-R4-DYI" id="qmB-Cv-U1i"/>
                                             <outlet property="starsLabelCell" destination="TH5-ta-tv7" id="e7D-UK-FoG"/>
                                         </connections>
                                     </tableViewCell>
@@ -782,29 +705,6 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                                         <constraint firstAttribute="height" constant="50" id="yEm-eY-no4"/>
                                                     </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Sgx-Fh-nY2">
-                                                    <rect key="frame" x="147" y="88.5" width="50" height="30"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r9-kF-x1D">
-                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1p-yH-547">
-                                                            <rect key="frame" x="26" y="0.0" width="24" height="30"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="ONc-ja-R7B"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="ZYb-ld-2zA"/>
-                                                        <constraint firstAttribute="width" constant="50" id="inu-xK-ol9"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="mAS-h0-ikU"/>
-                                                    </constraints>
-                                                </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNW-vI-fMK">
                                                     <rect key="frame" x="46" y="31" width="251" height="50"/>
                                                     <constraints>
@@ -825,20 +725,30 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                                         <color key="titleColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r9-kF-x1D">
+                                                    <rect key="frame" x="50" y="89" width="243" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="hmi-Cm-5aR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.28235294119999998" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="9r9-kF-x1D" firstAttribute="top" secondItem="fNW-vI-fMK" secondAttribute="bottom" constant="8" symbolic="YES" id="3le-x4-xSb"/>
                                                 <constraint firstItem="Ale-pG-s4h" firstAttribute="top" secondItem="luH-lF-gcc" secondAttribute="bottom" constant="15" id="6ZI-dB-6mt"/>
                                                 <constraint firstItem="tih-Ni-AuU" firstAttribute="top" secondItem="nj9-Jq-uHT" secondAttribute="top" constant="8" id="8wS-LB-JJF"/>
                                                 <constraint firstItem="luH-lF-gcc" firstAttribute="centerY" secondItem="nj9-Jq-uHT" secondAttribute="centerY" id="96a-Bn-0iq"/>
-                                                <constraint firstItem="Sgx-Fh-nY2" firstAttribute="top" secondItem="fNW-vI-fMK" secondAttribute="bottom" constant="8" id="9P0-zm-545"/>
                                                 <constraint firstItem="luH-lF-gcc" firstAttribute="centerX" secondItem="nj9-Jq-uHT" secondAttribute="centerX" id="9uo-hg-8Ey"/>
                                                 <constraint firstItem="fNW-vI-fMK" firstAttribute="leading" secondItem="tih-Ni-AuU" secondAttribute="trailing" constant="8" id="K17-ed-qVo"/>
-                                                <constraint firstItem="luH-lF-gcc" firstAttribute="top" secondItem="Sgx-Fh-nY2" secondAttribute="bottom" constant="8" id="Lc5-kB-UWs"/>
                                                 <constraint firstAttribute="trailing" secondItem="fNW-vI-fMK" secondAttribute="trailing" constant="46" id="Xgp-Wy-Leo"/>
-                                                <constraint firstItem="Sgx-Fh-nY2" firstAttribute="centerX" secondItem="nj9-Jq-uHT" secondAttribute="centerX" id="gJd-Iy-vKT"/>
                                                 <constraint firstItem="Ale-pG-s4h" firstAttribute="centerX" secondItem="nj9-Jq-uHT" secondAttribute="centerX" id="gW5-Qt-s0K"/>
+                                                <constraint firstItem="9r9-kF-x1D" firstAttribute="leading" secondItem="nj9-Jq-uHT" secondAttribute="leading" constant="50" id="iCr-RW-1xu"/>
+                                                <constraint firstItem="luH-lF-gcc" firstAttribute="top" secondItem="9r9-kF-x1D" secondAttribute="bottom" constant="8" id="p0D-xV-MaS"/>
                                                 <constraint firstItem="tih-Ni-AuU" firstAttribute="leading" secondItem="nj9-Jq-uHT" secondAttribute="leading" constant="8" id="rLH-yT-Xdo"/>
+                                                <constraint firstAttribute="trailing" secondItem="9r9-kF-x1D" secondAttribute="trailing" constant="50" id="rrI-iR-YkI"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -864,7 +774,6 @@ If there are any questions regarding this privacy policy, you may contact us usi
                                     <outlet property="star3" destination="SlF-mz-pOP" id="cCO-1I-5qZ"/>
                                     <outlet property="star4" destination="opZ-5L-Rc4" id="v0e-nT-ZAX"/>
                                     <outlet property="star5" destination="Mvw-fg-o9o" id="3Vf-Ad-4Cb"/>
-                                    <outlet property="starStarLabel" destination="G1p-yH-547" id="em2-gx-iBZ"/>
                                     <outlet property="starsLabelCell" destination="9r9-kF-x1D" id="jC1-Uy-qiv"/>
                                 </connections>
                             </tableViewCell>
@@ -927,10 +836,59 @@ If there are any questions regarding this privacy policy, you may contact us usi
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NDx-z2-0Az">
                                 <rect key="frame" x="24" y="28" width="343" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">State of California Rev. 133C774 END USER LICENSE AGREEMENT
-  This End-User License Agreement (this “EULA”) is a legal agreement between you (“Licensee”) and Nikoloz Elashvili (“Licensor”), the author of 5-Stars, including all HTML files, XML files, Java files, graphics files, animation files, data files, technology, development tools, scripts and programs, both in object code and source code (the “Software”), the deliverables provided pursuant to this EULA, which may include associated media, printed materials, and “online” or electronic documentation. By installing, copying, or otherwise using the Software, Licensee agrees to be bound by the terms and conditions set forth in this EULA. If Licensee does not agree to the terms and conditions set forth in this EULA, then Licensee may not download, install, or use the Software. 1. Grant of LicenseA) Scope of License. Subject to the terms of this EULA, Licensor hereby grants to Licensee a royalty-free, non-exclusive license to possess and to use a copy of the Software. The Software is being distributed by:- digital downloadB) Installation and Use. Licensee may install and use an unlimited number of copies of the Software solely for Licensee's personal use. 2. Description of Rights and LimitationsA) Limitations. Licensee and third parties may not reverse engineer, decompile, or disassemble the Software, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding the limitation.B) Separation of Components. The Software is licensed as a single product. Its components may not be separated for use on more than one computer. 3. Title to Software. Licensor represents and warrants that it has the legal right to enter into and perform its obligations under this EULA, and that use by the Licensee of the Software, in accordance with the terms of this EULA, will not infringe upon the intellectual property rights of any third parties. 4. Intellectual Property. All now known or hereafter known tangible and intangible rights, title, interest, copyrights and moral rights in and to the Software, including but not limited to all images, photographs, animations, video, audio, music, text, data, computer code, algorithms, and information, are owned by Licensor. The Software is protected by all applicable copyright laws and international treaties. 5. No Support. Licensor has no obligation to provide support services for the Software.   6. Duration. This EULA is perpetual or until:A) Automatically terminated or suspended if Licensee fails to comply with any of the terms and conditions set forth in this EULA; orB) Terminated or suspended by Licensor, with or without cause.
-In the event this EULA is terminated, you must cease use of the Software and destroy all copies of the Software. 7. Jurisdiction. This EULA shall be deemed to have been made in, and shall be construed pursuant to the laws of the State of California, without regard to conflicts of laws provisions thereof. Any legal action or proceeding relating to this EULA shall be brought exclusively in courts located in Los Angeles, CA, and each party consents to the jurisdiction thereof. The prevailing party in any action to enforce this EULA shall be entitled to recover costs and expenses including, without limitation, attorneys’ fees. This EULA is made within the exclusive jurisdiction of the United States, and its jurisdiction shall supersede any other jurisdiction of either party’s election. 8. Non-Transferable. This EULA is not assignable or transferable by Licensee, and any attempt to do so would be void. 9. Severability. No failure to exercise, and no delay in exercising, on the part of either party, any privilege, any power or any rights hereunder will operate as a waiver thereof, nor will any single or partial exercise of any right or power hereunder preclude further exercise of any other right hereunder. If any provision of this EULA shall be adjudged by any court of competent jurisdiction to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that this EULA shall otherwise remain in full force and effect and enforceable. 10.WARRANTY DISCLAIMER. LICENSOR, AND AUTHOR OF THE SOFTWARE, HEREBY EXPRESSLY DISCLAIM ANY WARRANTY FOR THE SOFTWARE. THE SOFTWARE AND ANY RELATED DOCUMENTATION IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. LICENSEE ACCEPTS ANY AND ALL RISK ARISING OUT OF USE OR PERFORMANCE OF THE SOFTWARE. 11. LIMITATION OF LIABILITY. LICENSOR SHALL NOT BE LIABLE TO LICENSEE, OR ANY OTHER PERSON OR ENTITY CLAIMING THROUGH LICENSEE ANY LOSS OF PROFITS, INCOME, SAVINGS, OR ANY OTHER CONSEQUENTIAL, INCIDENTAL, SPECIAL, PUNITIVE, DIRECT OR INDIRECT DAMAGE, WHETHER ARISING IN CONTRACT, TORT, WARRANTY, OR OTHERWISE. THESE LIMITATIONS SHALL APPLY REGARDLESS OF THE ESSENTIAL PURPOSE OF ANY LIMITED REMEDY. UNDER NO CIRCUMSTANCES SHALL LICENSOR’S AGGREGATE LIABILITY TO LICENSEE, OR ANY OTHER PERSON OR ENTITY CLAIMING THROUGH LICENSEE, EXCEED THE FINANCIAL AMOUNT ACTUALLY PAID BY LICENSEE TO LICENSOR FOR THE SOFTWARE. 12. Entire Agreement. This EULA constitutes the entire agreement between Licensor and Licensee and supersedes all prior understandings of Licensor and Licensee, including any prior representation, statement, condition, or warranty with respect to the subject matter of this EULA. 13. Additional Provisions and/or Disclosures. There is no tolerance for objectionable content or abusive usersEnd User License Agreement (Rev. 133C774)            
-GENERAL INSTRUCTIONS WHAT IS AN END USER LICENSE AGREEMENT?An End User License Agreement is a contract between two parties -- the licensor and the licensee -- for the right to use proprietary software. The licensor or vendor is often an individual or software company who created the software. The licensee is the user who pays a fee to use, download, or install a copy of the software.An End User License Agreement is often known by its abbreviated form EULA. An EULA protects the licensor or copyright owner of the software by prohibiting the licensee from re-selling the software for their own personal gain at your expense. A license essentially gives the user “permission” or a limited right to use the software. WHEN IS IT NEEDED?An End User License Agreement is commonly used when an individual or company gives creates proprietary software and would like to make money by allowing others to use the program in limited ways. If the licensor is worried about their copyright, an EULA prevents others from copying the source code, selling the software as their own, or transferring the software to a non-paying user.Without an End User License Agreement, a software publisher is in many ways agreeing to a free and open- source software license. In these “copyleft” situations, all future versions of the software must continue to be distributed for free. Instead, if the individual or company who created the software wants to earn money, an EULA protects their their source code and specially written program, mobile app, or website from being copied or used without permission. MOST COMMON SITUATIONS· websites mobile apps· software applications· computer programs WHAT SHOULD BE INCLUDED?To be valid, an End User License Agreement must include at least the following:· Disclaimer of Warranties: the software is often provided “as is” and the licensor is not responsible for any problems that may arise from using the software· Governing Law: which state’s laws will apply if there is a dispute or problem· Infringement Acknowledgement: the user is responsible for any legal issues related to copyright infringement· Licensor: name and address of the individual or company who created the software· Licensee: name and address of the user who wants to install or download the software· License Granting: limitations on how the software can be used by the licensee· Limitations of Liability: whether the licensor will be responsible for any damages or problems that arise from using the software· Maintenance and Support: whether the user will be provided support on site or by phone, either 24 hours 7 days per week, quarterly, or annually· Software: name or title of the computer software program created and now licensed· Termination: whether the software developer has the right to end the license if the user violates the EULA or other issues arise· Use Restrictions: the licensee is limited in how they can legally or illegally use the software OTHER NAMESAs a reference, an End User License Agreement is known by other names, which include: Browse Wrap Agreement, Click-Wrap License, EULA, End-Use License Agreement, License Agreement, Licensed Application End-User Agreement, Shrink-Wrap License, Software License Agreement. End User License Agreement (Rev. 133C774)</mutableString>
+                                <string key="text">State of California Rev. 133C774 
+END USER LICENSE AGREEMENT
+
+  This End-User License Agreement (this “EULA”) is a legal agreement between you (“Licensee”) and Nikoloz Elashvili (“Licensor”), the author of 5-Stars, including all HTML files, XML files, Java files, graphics files, animation files, data files, technology, development tools, scripts and programs, both in object code and source code (the “Software”), the deliverables provided pursuant to this EULA, which may include associated media, printed materials, and “online” or electronic documentation. 
+By installing, copying, or otherwise using the Software, Licensee agrees to be bound by the terms and conditions set forth in this EULA. If Licensee does not agree to the terms and conditions set forth in this EULA, then Licensee may not download, install, or use the Software. 
+1. Grant of License
+A) Scope of License. Subject to the terms of this EULA, Licensor hereby grants to Licensee a royalty-free, non-exclusive license to possess and to use a copy of the Software. The Software is being distributed by:
+- digital download
+B) Installation and Use. Licensee may install and use an unlimited number of copies of the Software solely for Licensee's personal use. 
+2. Description of Rights and Limitations
+A) Limitations. Licensee and third parties may not reverse engineer, decompile, or disassemble the Software, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding the limitation.
+B) Separation of Components. The Software is licensed as a single product. Its components may not be separated for use on more than one computer. 
+3. Title to Software. Licensor represents and warrants that it has the legal right to enter into and perform its obligations under this EULA, and that use by the Licensee of the Software, in accordance with the terms of this EULA, will not infringe upon the intellectual property rights of any third parties. 
+4. Intellectual Property. All now known or hereafter known tangible and intangible rights, title, interest, copyrights and moral rights in and to the Software, including but not limited to all images, photographs, animations, video, audio, music, text, data, computer code, algorithms, and information, are owned by Licensor. The Software is protected by all applicable copyright laws and international treaties. 
+5. No Support. Licensor has no obligation to provide support services for the Software.   6. Duration. This EULA is perpetual or until:
+A) Automatically terminated or suspended if Licensee fails to comply with any of the terms and conditions set forth in this EULA; or
+B) Terminated or suspended by Licensor, with or without cause.
+In the event this EULA is terminated, you must cease use of the Software and destroy all copies of the Software.
+ 7. Jurisdiction. This EULA shall be deemed to have been made in, and shall be construed pursuant to the laws of the State of California, without regard to conflicts of laws provisions thereof. Any legal action or proceeding relating to this EULA shall be brought exclusively in courts located in Los Angeles, CA, and each party consents to the jurisdiction thereof. The prevailing party in any action to enforce this EULA shall be entitled to recover costs and expenses including, without limitation, attorneys’ fees. This EULA is made within the exclusive jurisdiction of the United States, and its jurisdiction shall supersede any other jurisdiction of either party’s election.
+ 8. Non-Transferable. This EULA is not assignable or transferable by Licensee, and any attempt to do so would be void.
+ 9. Severability. No failure to exercise, and no delay in exercising, on the part of either party, any privilege, any power or any rights hereunder will operate as a waiver thereof, nor will any single or partial exercise of any right or power hereunder preclude further exercise of any other right hereunder. If any provision of this EULA shall be adjudged by any court of competent jurisdiction to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that this EULA shall otherwise remain in full force and effect and enforceable.
+ 10.WARRANTY DISCLAIMER. LICENSOR, AND AUTHOR OF THE SOFTWARE, HEREBY EXPRESSLY DISCLAIM ANY WARRANTY FOR THE SOFTWARE. THE SOFTWARE AND ANY RELATED DOCUMENTATION IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. LICENSEE ACCEPTS ANY AND ALL RISK ARISING OUT OF USE OR PERFORMANCE OF THE SOFTWARE.
+ 11. LIMITATION OF LIABILITY. LICENSOR SHALL NOT BE LIABLE TO LICENSEE, OR ANY OTHER PERSON OR ENTITY CLAIMING THROUGH LICENSEE ANY LOSS OF PROFITS, INCOME, SAVINGS, OR ANY OTHER CONSEQUENTIAL, INCIDENTAL, SPECIAL, PUNITIVE, DIRECT OR INDIRECT DAMAGE, WHETHER ARISING IN CONTRACT, TORT, WARRANTY, OR OTHERWISE. THESE LIMITATIONS SHALL APPLY REGARDLESS OF THE ESSENTIAL PURPOSE OF ANY LIMITED REMEDY. UNDER NO CIRCUMSTANCES SHALL LICENSOR’S AGGREGATE LIABILITY TO LICENSEE, OR ANY OTHER PERSON OR ENTITY CLAIMING THROUGH LICENSEE, EXCEED THE FINANCIAL AMOUNT ACTUALLY PAID BY LICENSEE TO LICENSOR FOR THE SOFTWARE.
+ 12. Entire Agreement. This EULA constitutes the entire agreement between Licensor and Licensee and supersedes all prior understandings of Licensor and Licensee, including any prior representation, statement, condition, or warranty with respect to the subject matter of this EULA.
+ 13. Additional Provisions and/or Disclosures. There is no tolerance for objectionable content or abusive users
+End User License Agreement (Rev. 133C774)            
+GENERAL INSTRUCTIONS 
+WHAT IS AN END USER LICENSE AGREEMENT?
+An End User License Agreement is a contract between two parties -- the licensor and the licensee -- for the right to use proprietary software. The licensor or vendor is often an individual or software company who created the software. The licensee is the user who pays a fee to use, download, or install a copy of the software.
+An End User License Agreement is often known by its abbreviated form EULA. An EULA protects the licensor or copyright owner of the software by prohibiting the licensee from re-selling the software for their own personal gain at your expense. A license essentially gives the user “permission” or a limited right to use the software. 
+WHEN IS IT NEEDED?
+An End User License Agreement is commonly used when an individual or company gives creates proprietary software and would like to make money by allowing others to use the program in limited ways. If the licensor is worried about their copyright, an EULA prevents others from copying the source code, selling the software as their own, or transferring the software to a non-paying user.
+Without an End User License Agreement, a software publisher is in many ways agreeing to a free and open- source software license. In these “copyleft” situations, all future versions of the software must continue to be distributed for free. Instead, if the individual or company who created the software wants to earn money, an EULA protects their their source code and specially written program, mobile app, or website from being copied or used without permission. 
+MOST COMMON SITUATIONS
+· websites mobile apps
+· software applications
+· computer programs 
+WHAT SHOULD BE INCLUDED?
+To be valid, an End User License Agreement must include at least the following:
+· Disclaimer of Warranties: the software is often provided “as is” and the licensor is not responsible for any problems that may arise from using the software
+· Governing Law: which state’s laws will apply if there is a dispute or problem
+· Infringement Acknowledgement: the user is responsible for any legal issues related to copyright infringement
+· Licensor: name and address of the individual or company who created the software
+· Licensee: name and address of the user who wants to install or download the software
+· License Granting: limitations on how the software can be used by the licensee
+· Limitations of Liability: whether the licensor will be responsible for any damages or problems that arise from using the software
+· Maintenance and Support: whether the user will be provided support on site or by phone, either 24 hours 7 days per week, quarterly, or annually
+· Software: name or title of the computer software program created and now licensed
+· Termination: whether the software developer has the right to end the license if the user violates the EULA or other issues arise
+· Use Restrictions: the licensee is limited in how they can legally or illegally use the software 
+OTHER NAMES
+As a reference, an End User License Agreement is known by other names, which include: Browse Wrap Agreement, Click-Wrap License, EULA, End-Use License Agreement, License Agreement, Licensed Application End-User Agreement, Shrink-Wrap License, Software License Agreement.
+ End User License Agreement (Rev. 133C774)</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
