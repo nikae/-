@@ -113,7 +113,7 @@ class SettingsVC: UIViewController {
             let value = snapshot.value as? NSDictionary
             let rating = value?["rating"] as? Double ?? 5.0
             
-            let message = "I have collected \(Int(rating))★"
+            let message = "My ★★★★★ rating is \( String(format: "%.01f", rating))★."
             if let link = NSURL(string: "\(webLink)")
             {
                 let objectsToShare = [message,link] as [Any]

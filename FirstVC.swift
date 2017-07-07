@@ -83,7 +83,7 @@ class FirstVC: UIViewController {
             let rating = value?["rating"] as? Double ?? 5.0
             
             self.nameLabel.text = name
-            self.starsLabel.text = "\(Int(rating))★"
+            self.starsLabel.text = "\(String(format: "%.01f", rating))★" //"\(Int(rating))★"
             self.starsLabel.adjustsFontSizeToFitWidth = true
             
             if pictureURL != "" {
