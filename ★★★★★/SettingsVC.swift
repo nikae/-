@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
 import Firebase
+import SafariServices
 
 var viewIsDark = Bool()
 
@@ -50,7 +51,6 @@ class SettingsVC: UIViewController {
             logOutBtn.setTitleColor(.white, for: .normal)
             desibleAccountMode.setTitleColor(.white, for: .normal)
             cancelBtn.setTitleColor(.white, for: .normal)
-           
         } else {
             view.backgroundColor = .white
             nightModeBtn.setTitle("Dark Mode", for: .normal)
@@ -70,7 +70,6 @@ class SettingsVC: UIViewController {
                     self.logOutBtn.setTitleColor(.white, for: .normal)
                     self.desibleAccountMode.setTitleColor(.white, for: .normal)
                     self.cancelBtn.setTitleColor(.white, for: .normal)
-                    
                     self.view.backgroundColor = nightModeColor
                     viewIsDark = true
                     self.setNeedsStatusBarAppearanceUpdate()
@@ -90,9 +89,7 @@ class SettingsVC: UIViewController {
                     self.cancelBtn.setTitleColor(buttonTextColorDark, for: .normal)
                     viewIsDark = false
                     self.setNeedsStatusBarAppearanceUpdate()
-
                 })
-                
                 nightModeDefaults.set(true, forKey: nightModeDefaults_Key)
             }
         }
@@ -103,25 +100,20 @@ class SettingsVC: UIViewController {
         print("MemoryWarning")
     }
     
-    
     @IBAction func shareHit(_ sender: Any) {
-       
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
             let value = snapshot.value as? NSDictionary
-            let rating = value?["rating"] as? Double ?? 5.0
             
+            let rating = value?["rating"] as? Double ?? 5.0
             let message = "My ★★★★★ rating is \( String(format: "%.01f", rating))★."
-            if let link = NSURL(string: "\(webLink)")
-            {
+            if let link = NSURL(string: "\(webLink)") {
                 let objectsToShare = [message,link] as [Any]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                 activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
                 self.present(activityVC, animated: true, completion: nil)
             }
-            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -131,10 +123,14 @@ class SettingsVC: UIViewController {
         let alert = UIAlertController(title: "Information and help", message: "please choose following", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let Web = UIAlertAction(title: "Wisit web site", style: .default) { (action: UIAlertAction) in
-            UIApplication.shared.openURL(NSURL(string: webLink)! as URL)
+            let url = URL(string: webLink)
+            let savafiVC = SFSafariViewController(url: url!)
+            self.present(savafiVC, animated: true, completion: nil)
         }
         let Contact = UIAlertAction(title: "Contact / Report issue", style: .default) { (action: UIAlertAction) in
-            UIApplication.shared.openURL(NSURL(string: "https://5starsapp.com/contact/")! as URL)
+            let url = URL(string:"https://5starsapp.com/contact/")
+            let savafiVC = SFSafariViewController(url: url!)
+            self.present(savafiVC, animated: true, completion: nil)
         }
         let TermsOfUse = UIAlertAction(title: "User License Agreement", style: .default) { (action: UIAlertAction) in
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "License_AgreementVC") as! License_AgreementVC
@@ -151,8 +147,6 @@ class SettingsVC: UIViewController {
         alert.addAction(TermsOfUse)
         alert.addAction(privacyPolicy)
         present(alert, animated: true, completion: nil)
-        
-        
     }
     
     
@@ -178,25 +172,19 @@ class SettingsVC: UIViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
         self.present(vc, animated: true, completion: nil)
-            
         }
         
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
-        
     }
     
     @IBAction func desibleAccountHit(_ sender: UIButton) {
-        
         let alert = UIAlertController(title: "Do you want to disable your account?", message: "Disabled accounts cannot be searched or viewed by other users.", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let continu = UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction) in
-            
             let alert = UIAlertController(title: "Disabling your account", message: "Your account will be disabled but can be reactivated by logging in.", preferredStyle: .alert)
-            
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
             let ok = UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction) in
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 let databaseRef = FIRDatabase.database().reference()
@@ -215,7 +203,6 @@ class SettingsVC: UIViewController {
                 
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as! LogInVC
                 self.present(vc, animated: true, completion: nil)
-                
             })
             
             alert.addAction(cancel)

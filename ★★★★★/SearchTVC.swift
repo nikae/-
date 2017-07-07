@@ -29,7 +29,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     }
     
     var searchController: UISearchController!
-    
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
@@ -39,7 +38,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
-            
             let bgView = UIView()
             bgView.backgroundColor = nightModeColor
             self.tableView.backgroundView = bgView
@@ -50,13 +48,12 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
             navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
             dismissbtn.tintColor = .white
-            
         }
         
         self.definesPresentationContext = true
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.searchBar.delegate = self    // this controller is delegate
+        self.searchController.searchBar.delegate = self
         self.searchController!.searchResultsUpdater = self
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.searchBarStyle = .minimal
@@ -71,19 +68,17 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.nameLabelCell.text = users[indexPath.row].name
-        cell.starsLabelCell.text = "\(String(format: "%.01f", (users[indexPath.row].rating)!))★" //"\(Int(users[indexPath.row].rating))★"
+        cell.starsLabelCell.text = "\(String(format: "%.01f", (users[indexPath.row].rating)!))★"
         cell.starsLabelCell.adjustsFontSizeToFitWidth = true
         
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
-            //cell.contentView.backgroundColor = nightModeColor
             cell.backgroundColor = nightModeColor
             cell.backGroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
             cell.imageViewCell!.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
             
             cell.nameLabelCell.textColor = .white
             cell.starsLabelCell.textColor = .white
-            //cell.starStarLabel.textColor = .white
             
             cell.star1.setTitleColor(.white, for: .normal)
             cell.star2.setTitleColor(.white, for: .normal)
@@ -115,7 +110,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
      }
     
     func buttonClicked(sender:UIButton) {
-        
         let center = sender.center
         let point = sender.superview!.convert(center, to: tableView)
         let indexPath = tableView.indexPathForRow(at: point)
@@ -153,16 +147,15 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         if isRatedToday != false {
             let alert = UIAlertController(title: "Already Rated", message: "You already rated \(self.users[(indexPath?.row)!].name!.capitalized) today. Check in tomorrow to rate again.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         } else {
-        
-        let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
+            let alert = UIAlertController(title: "You rated \(self.users[(indexPath?.row)!].name!)", message: "\(star)", preferredStyle: .actionSheet)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let ok = UIAlertAction(title: "Confirm", style: .default) { (action: UIAlertAction) in
             self.searchController.searchBar.isUserInteractionEnabled = false
             if (sender.tag == 201) {
-                
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
@@ -180,7 +173,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 202) {
-                
                 rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
@@ -203,7 +195,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else if (sender.tag == 203) {
-                
                 rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
@@ -231,7 +222,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     AudioServicesPlaySystemSound (systemSoundID)
                 })
             } else  if (sender.tag == 204) {
-                
                 rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
@@ -266,7 +256,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                     
                 })
             } else {
-                
                 rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
@@ -315,13 +304,10 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
             })
         }
         let okAndShare = UIAlertAction(title: "Confirm and share", style: .default) { (action: UIAlertAction) in
-            
-            
             if (sender.tag == 201) {
                 rateStar(value: 0.2, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 1)
-                
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -340,7 +326,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 rateStar(value: 0.4, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 2)
-                
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -364,7 +349,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 rateStar(value: 0.6, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 3)
-                
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -393,7 +377,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 rateStar(value: 0.8, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 4)
-                
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -427,7 +410,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 rateStar(value: 1, ratee: (self.users[(indexPath?.row)!].userId)!)
                 calcAndUpdateRating(uId: (self.users[(indexPath?.row)!].userId)!)
                 self.updateRatingOnCell(atIndex: (indexPath?.row)!, star: 5)
-                
                 self.share(message: "I rate \(self.users[(indexPath?.row)!].name!) \(star) out of ★★★★★", link: "\(webLink)")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
@@ -495,7 +477,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             let databaseRef = FIRDatabase.database().reference()
             databaseRef.child("Users").child((self.users[atIndex].userId)!).observeSingleEvent(of: .value, with: { (snapshot) in
-                
                 let value = snapshot.value as? NSDictionary
                 
                 let rating = value?["rating"] as? Double ?? 0
@@ -537,7 +518,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
                 _ = Alamofire.request( urlstring as URLConvertible, method: .post as HTTPMethod, parameters: notification, encoding: JSONEncoding.default, headers: headers!).responseJSON(completionHandler: { (resp) in
                     print(" resp \(resp)")
                 })
-                
                 self.tableView.reloadData()
             }) { (error) in
                 print(error.localizedDescription)
@@ -562,7 +542,6 @@ class SearchTVC: UITableViewController, UISearchResultsUpdating, UISearchControl
     }
     
     func filterUsers(userName: String) {
-        
         var blockedArr = [blockedStruct]()
         var blockedByArr = [BlockedByStruct]()
         

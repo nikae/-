@@ -14,14 +14,12 @@ import Firebase
 import AVFoundation
 import SDWebImage
 
-
-extension UIImageView
-{
+extension UIImageView {
     func addBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
         
+        blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurEffectView)
     }
@@ -29,12 +27,11 @@ extension UIImageView
     func addDarkBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
         
+        blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurEffectView)
     }
-
 }
 
 class FirstVC: UIViewController {
@@ -58,6 +55,7 @@ class FirstVC: UIViewController {
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
             let value = snapshot.value as? NSDictionary
             let rating = value?["rating"] as? Double ?? 5.0
             
@@ -75,27 +73,24 @@ class FirstVC: UIViewController {
         let uId = FIRAuth.auth()?.currentUser?.uid
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child(uId!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
             let value = snapshot.value as? NSDictionary
-        
+            
             let name = value?["name"] as? String ?? ""
             let pictureURL = value?["pictureURL"] as? String ?? ""
             let rating = value?["rating"] as? Double ?? 5.0
             
             self.nameLabel.text = name
-            self.starsLabel.text = "\(String(format: "%.01f", rating))★" //"\(Int(rating))★"
+            self.starsLabel.text = "\(String(format: "%.01f", rating))★"
             self.starsLabel.adjustsFontSizeToFitWidth = true
             
             if pictureURL != "" {
-                    self.imageView.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
-                    self.backgroundImage.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+                self.imageView.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
+                self.backgroundImage.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "creen Shot 2017-06-15 at 9.35.49 AM"))
                 self.imageView.setShowActivityIndicator(true)
                 self.imageView.setIndicatorStyle(.gray)
-                
             } else {
                 self.imageView.image = UIImage(named: "Screen Shot 2017-06-15 at 9.35.49 AM")
             }
-            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -124,48 +119,38 @@ class FirstVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super .viewWillAppear(animated)
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         if nightBool == false {
-            
             self.view.backgroundColor = nightModeColor
             imageView.layer.borderColor = nightModeColor.withAlphaComponent(0.8).cgColor
             backgroundView.backgroundColor = nightModeColor.withAlphaComponent(0.8)
-            
             nameLabel.textColor = .white
             starsLabel.textColor = .white
-            //starStarLabel.textColor = .white
             meniuBtn.setTitleColor(.gray, for: .normal)
-            
         } else {
             self.view.backgroundColor = .white
             imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
             backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
-            
             nameLabel.textColor = buttonTextColorDark
             starsLabel.textColor = buttonTextColorDark
-            //starStarLabel.textColor = buttonTextColorDark
             meniuBtn.setTitleColor(buttonTextColorDark, for: .normal)
         }
-
     }
     
     func calcRating( ratings: [Double] ) -> Double {
-        
         var sum: Double = 0
         for index in ratings {
             sum += index
         }
-        
         let count = ratings.count
         return sum / Double(count)
     }
     
     func getImage(_ url_str: String, imageView: UIImageView) {
-        
         let url:URL = URL(string: url_str)!
         let session = URLSession.shared
-        
         let task = session.dataTask(with: url, completionHandler: {( data, response, error) in
             if data != nil {
                 let image = UIImage(data: data!)

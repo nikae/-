@@ -13,12 +13,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewCell: UIImageView!
     @IBOutlet weak var nameLabelCell: UILabel!
     @IBOutlet weak var starsLabelCell: UILabel!
-    
-   // @IBOutlet weak var starStarLabel: UILabel!
     @IBOutlet weak var backGroundView: UIView!
-    
     @IBOutlet weak var backgroundImmage: UIImageView!
-    
     @IBOutlet weak var star1: UIButton!
     @IBOutlet weak var star2: UIButton!
     @IBOutlet weak var star3: UIButton!
@@ -32,7 +28,6 @@ class TableViewCell: UITableViewCell {
         nameLabelCell.adjustsFontSizeToFitWidth = true
         
         backgroundImmage.addBlurEffect()
-        
         backgroundImmage!.layer.cornerRadius = 15
         backgroundImmage!.clipsToBounds = true
         
@@ -40,6 +35,7 @@ class TableViewCell: UITableViewCell {
         imageViewCell!.isUserInteractionEnabled = true
         imageViewCell!.layer.cornerRadius = imageViewCell!.frame.height/2
         imageViewCell!.layer.borderWidth = 10
+        
         backGroundView!.clipsToBounds = true
         backGroundView!.isUserInteractionEnabled = true
         backGroundView!.layer.cornerRadius = 15
@@ -49,8 +45,6 @@ class TableViewCell: UITableViewCell {
        
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
-
 }

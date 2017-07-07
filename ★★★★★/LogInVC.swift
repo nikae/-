@@ -234,39 +234,3 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDele
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

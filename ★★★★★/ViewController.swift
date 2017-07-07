@@ -15,11 +15,11 @@ import ImageIO
 class ViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-   
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         
-        if nightBool == false  {
+        if nightBool == false {
             return .lightContent
         } else {
             return .default
@@ -52,7 +52,9 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
+        
         if nightBool == false {
             self.view.backgroundColor = nightModeColor
         } else {
@@ -64,7 +66,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

@@ -23,10 +23,8 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let databaseRef = FIRDatabase.database().reference()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var users = [User]()
-    
     var blockedArr = [blockedStruct]()
     var blockedByArr = [BlockedByStruct]()
-    
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -92,7 +90,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         if userID != self.uid {
                             var rArray = [Rating]()
                             for i in ratings {
-                                
                                 let creator = i.value["creator"] as! String
                                 let createdAt = i.value["createdAt"] as! String
                                 let value = i.value["value"] as! Double
@@ -101,7 +98,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             }
                             
                             if self.users.count < 200 {
-                                
                                 self.users.append(User(userId: userID, name: name, pictureUrl: pictureURL, createdAt: createdAt, ratings: rArray, rating: rating, distance: distanceInMiles))
                                 
                                 for i in self.blockedArr {
@@ -202,7 +198,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         let latitude = locations["lat"] as! CLLocationDegrees
                         let longitude = locations["long"] as! CLLocationDegrees
                         usersCordinate = CLLocation(latitude: latitude, longitude: longitude)
-                        
                         let distanceInMeters = usersCordinate.distance(from: coordinate1) // result is in meters
                         let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
                         
@@ -264,7 +259,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             cell.nameLabelCell.textColor = .white
             cell.starsLabelCell.textColor = .white
-            //cell.starStarLabel.textColor = .white
             
             cell.star1.setTitleColor(.white, for: .normal)
             cell.star2.setTitleColor(.white, for: .normal)
@@ -278,7 +272,6 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             cell.nameLabelCell.textColor = buttonTextColorDark
             cell.starsLabelCell.textColor = buttonTextColorDark
-           // cell.starStarLabel.textColor = buttonTextColorDark
             
             cell.star1.setTitleColor(buttonTextColorDark, for: .normal)
             cell.star2.setTitleColor(buttonTextColorDark, for: .normal)
@@ -288,7 +281,7 @@ class SecondVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
                 
         cell.nameLabelCell.text = users[indexPath.row].name
-        cell.starsLabelCell.text = "\(String(format: "%.01f", (users[indexPath.row].rating)!))★" //"\(Int(users[indexPath.row].rating))★"
+        cell.starsLabelCell.text = "\(String(format: "%.01f", (users[indexPath.row].rating)!))★"
         cell.starsLabelCell.adjustsFontSizeToFitWidth = true
         
         if users[indexPath.row].pictureUrl != "" {

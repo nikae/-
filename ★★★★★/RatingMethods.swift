@@ -11,15 +11,14 @@ import Firebase
 
 
 //MARK -->> :Pull Down ratings from database, calculate and push final rating back {everitime Someone rates}
-
 func calcAndUpdateRating(uId: String)  {
-    
     let databaseRef = FIRDatabase.database().reference()
     databaseRef.child("Users").child(uId).observeSingleEvent(of: .value, with: { (snapshot) in
-        
         let value = snapshot.value as? NSDictionary
         let ratings = value?["ratings"] as? [String : AnyObject] ?? [:]
+        
         var rArray = [Rating]()
+        var rDouble: [Double] = []
         
         for i in ratings {
             let creator = i.value["creator"] as! String
@@ -29,8 +28,6 @@ func calcAndUpdateRating(uId: String)  {
             rArray.append(Rating(creator: creator, createdAt: createdAt, value: value))
         }
         
-        var rDouble: [Double] = []
-        
         for i in rArray {
             rDouble.append(i.value)
         }
@@ -39,7 +36,6 @@ func calcAndUpdateRating(uId: String)  {
         let finalRating = (result * 5)
         print(finalRating)
         databaseRef.child("Users/\(uId)/rating").setValue(finalRating)
-        
     }) { (error) in
         print(error.localizedDescription)
     }
@@ -54,7 +50,6 @@ func calcRating( ratings: [Double] ) -> Double {
     }
     
     let count = ratings.count
-    
     return sum / Double(count)
 }
 
@@ -68,7 +63,6 @@ func rateStar(value: Double, ratee: String) {
     
     let r = ["creator": userID ?? "", "createdAt": result, "value": value] as [String : Any]
     
-    //databaseRef.child("Users/\(ratee)/ratings").child("\(userID!)").setValue(r)
     databaseRef.child("Users/\(ratee)/ratings").childByAutoId().setValue(r)
 }
 

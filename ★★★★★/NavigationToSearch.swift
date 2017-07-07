@@ -9,7 +9,6 @@
 import UIKit
 
 class NavigationToSearch: UINavigationController {
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         let nightBool = nightModeDefaults.value(forKey: nightModeDefaults_Key) as? Bool
         

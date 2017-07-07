@@ -22,7 +22,6 @@ struct User {
     var ratings: [Rating]!
     var rating: Double!
     var distance: Double!
-    //var blockedUsers: [blockedStruct]!
 }
 
 struct blockedStruct {
